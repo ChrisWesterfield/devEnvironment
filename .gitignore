@@ -1,0 +1,7 @@
+vagrant/db/mysqldump.sql.gz
+bin/src/vendor
+vagrant/etc/sites-available/*.vhost
+vagrant/etc/sites-enabled/*.vhost
+vagrant/etc/sites-ssl/*.crt
+vagrant/etc/sites-ssl/*.cnf
+vagrant/etc/sites-ssl/*.key

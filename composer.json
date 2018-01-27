@@ -1,0 +1,31 @@
+{
+  "name": "mjrone/console",
+  "description": "A virtual machine for web projects.",
+  "require": {
+    "php": "^5.6 || ^7.0",
+    "symfony/console": "~3.3|~4.0",
+    "symfony/process": "~3.3|~4.0",
+    "symfony/yaml": "~3.3|~4.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^5.7 || ^6.0"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Chris Westerfield",
+      "email": "chris@mjr.one"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "MjrOne\\Vagrant\\": "bin/src/"
+    }
+  },
+  "bin": [
+    "bin/vm"
+  ],
+  "config": {
+    "vendor-dir": "bin/src/vendor"
+  }
+}
