@@ -1,0 +1,944 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<database name="application" type="MySQL - 5.5.5-10.1.26-MariaDB-0+deb9u1">
+   <tables>
+      <table name="division" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT">
+            <child column="parent_id" foreignKey="FK_10174714727ACA70" implied="false" onDeleteCascade="false" table="division"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="log_created_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_10174714D40407ED" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="log_updated_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_101747141CE8DE5A" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="tenant_id" nullable="false" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_101747149033212A" implied="false" onDeleteCascade="false" table="tenants"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="4" name="parent_id" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_10174714727ACA70" implied="false" onDeleteCascade="false" table="division"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="5" name="settings_id" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_1017471459949888" implied="false" onDeleteCascade="false" table="division_settings"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="6" name="name" nullable="false" remarks="" size="80" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="7" name="description" nullable="true" remarks="" size="2147483647" type="LONGTEXT"/>
+         <column autoUpdated="false" digits="0" id="8" name="active" nullable="false" remarks="" size="0" type="BIT"/>
+         <column autoUpdated="false" digits="0" id="9" name="deletedAt" nullable="true" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="10" name="created" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="11" name="updated" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="12" name="tree_path" nullable="true" remarks="" size="3000" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="13" name="tree_level" nullable="true" remarks="" size="10" type="INT"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="IDX_101747141CE8DE5A" unique="false">
+            <column ascending="true" name="log_updated_by"/>
+         </index>
+         <index name="IDX_1017471459949888" unique="false">
+            <column ascending="true" name="settings_id"/>
+         </index>
+         <index name="IDX_10174714727ACA70" unique="false">
+            <column ascending="true" name="parent_id"/>
+         </index>
+         <index name="IDX_101747149033212A" unique="false">
+            <column ascending="true" name="tenant_id"/>
+         </index>
+         <index name="IDX_10174714D40407ED" unique="false">
+            <column ascending="true" name="log_created_by"/>
+         </index>
+      </table>
+      <table name="division_settings" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT">
+            <child column="settings_id" foreignKey="FK_1017471459949888" implied="false" onDeleteCascade="false" table="division"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="performance_class_id" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_B85E9DF7611D6F12" implied="false" onDeleteCascade="false" table="performance_class"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="log_created_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_B85E9DF7D40407ED" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="log_updated_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_B85E9DF71CE8DE5A" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="4" name="min_age" nullable="true" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="5" name="max_age" nullable="true" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="6" name="max_participents" nullable="true" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="7" name="sex" nullable="true" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="8" name="number_of_dances" nullable="true" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="9" name="created" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="10" name="updated" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="IDX_B85E9DF71CE8DE5A" unique="false">
+            <column ascending="true" name="log_updated_by"/>
+         </index>
+         <index name="IDX_B85E9DF7611D6F12" unique="false">
+            <column ascending="true" name="performance_class_id"/>
+         </index>
+         <index name="IDX_B85E9DF7D40407ED" unique="false">
+            <column ascending="true" name="log_created_by"/>
+         </index>
+      </table>
+      <table name="eav_attribute" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT">
+            <child column="attribute_id" foreignKey="FK_CBBA92FFB6E62EFA" implied="false" onDeleteCascade="false" table="eav_option"/>
+            <child column="attribute_id" foreignKey="FK_4589807AB6E62EFA" implied="false" onDeleteCascade="false" table="eav_value"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="log_created_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_EDA4B188D40407ED" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="log_updated_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_EDA4B1881CE8DE5A" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="property_type_id" nullable="false" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_EDA4B1889C81C6EB" implied="false" onDeleteCascade="false" table="system_property_type"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="4" name="group_id" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_EDA4B188FE54D947" implied="false" onDeleteCascade="false" table="eav_group"/>
+         </column>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="5" name="active" nullable="false" remarks="" size="0" type="BIT"/>
+         <column autoUpdated="false" digits="0" id="6" name="created" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="7" name="updated" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="8" name="deletedAt" nullable="true" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="9" name="name" nullable="false" remarks="" size="100" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="10" name="description" nullable="true" remarks="" size="2147483647" type="LONGTEXT"/>
+         <column autoUpdated="false" digits="0" id="11" name="unit" nullable="true" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="12" name="required" nullable="false" remarks="" size="0" type="BIT"/>
+         <column autoUpdated="false" digits="0" id="13" name="order_index" nullable="true" remarks="" size="255" type="VARCHAR"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="IDX_EDA4B1881CE8DE5A" unique="false">
+            <column ascending="true" name="log_updated_by"/>
+         </index>
+         <index name="IDX_EDA4B1889C81C6EB" unique="false">
+            <column ascending="true" name="property_type_id"/>
+         </index>
+         <index name="IDX_EDA4B188D40407ED" unique="false">
+            <column ascending="true" name="log_created_by"/>
+         </index>
+         <index name="IDX_EDA4B188FE54D947" unique="false">
+            <column ascending="true" name="group_id"/>
+         </index>
+      </table>
+      <table name="eav_group" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT">
+            <child column="group_id" foreignKey="FK_EDA4B188FE54D947" implied="false" onDeleteCascade="false" table="eav_attribute"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="log_created_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_353E9C8BD40407ED" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="log_updated_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_353E9C8B1CE8DE5A" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="3" name="active" nullable="false" remarks="" size="0" type="BIT"/>
+         <column autoUpdated="false" digits="0" id="4" name="created" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="5" name="updated" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="6" name="deletedAt" nullable="true" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="7" name="name" nullable="false" remarks="" size="100" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="8" name="description" nullable="true" remarks="" size="2147483647" type="LONGTEXT"/>
+         <column autoUpdated="false" digits="0" id="9" name="class_name" nullable="false" remarks="" size="2500" type="VARCHAR"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="IDX_353E9C8B1CE8DE5A" unique="false">
+            <column ascending="true" name="log_updated_by"/>
+         </index>
+         <index name="IDX_353E9C8BD40407ED" unique="false">
+            <column ascending="true" name="log_created_by"/>
+         </index>
+      </table>
+      <table name="eav_option" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="1" name="log_created_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_CBBA92FFD40407ED" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="log_updated_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_CBBA92FF1CE8DE5A" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="attribute_id" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_CBBA92FFB6E62EFA" implied="false" onDeleteCascade="false" table="eav_attribute"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="4" name="created" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="5" name="updated" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="6" name="name" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="7" name="value" nullable="false" remarks="" size="2147483647" type="LONGTEXT"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="IDX_CBBA92FF1CE8DE5A" unique="false">
+            <column ascending="true" name="log_updated_by"/>
+         </index>
+         <index name="IDX_CBBA92FFB6E62EFA" unique="false">
+            <column ascending="true" name="attribute_id"/>
+         </index>
+         <index name="IDX_CBBA92FFD40407ED" unique="false">
+            <column ascending="true" name="log_created_by"/>
+         </index>
+      </table>
+      <table name="eav_value" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="1" name="log_created_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_4589807AD40407ED" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="log_updated_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_4589807A1CE8DE5A" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="attribute_id" nullable="false" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_4589807AB6E62EFA" implied="false" onDeleteCascade="false" table="eav_attribute"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="4" name="created" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="5" name="updated" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="6" name="value" nullable="true" remarks="" size="2147483647" type="LONGTEXT"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="IDX_4589807A1CE8DE5A" unique="false">
+            <column ascending="true" name="log_updated_by"/>
+         </index>
+         <index name="IDX_4589807AB6E62EFA" unique="false">
+            <column ascending="true" name="attribute_id"/>
+         </index>
+         <index name="IDX_4589807AD40407ED" unique="false">
+            <column ascending="true" name="log_created_by"/>
+         </index>
+      </table>
+      <table name="email_log" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT">
+            <child column="log" foreignKey="FK_F91D03768F3F68C5" implied="false" onDeleteCascade="false" table="email_log_attachments"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="log_created_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_6FB4883D40407ED" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="log_updated_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_6FB48831CE8DE5A" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="tenant_id" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_6FB48839033212A" implied="false" onDeleteCascade="false" table="tenants"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="4" name="created" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="5" name="updated" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="6" name="subject" nullable="false" remarks="" size="2147483647" type="LONGTEXT"/>
+         <column autoUpdated="false" digits="0" id="7" name="html" nullable="true" remarks="" size="2147483647" type="LONGTEXT"/>
+         <column autoUpdated="false" digits="0" id="8" name="text" nullable="true" remarks="" size="2147483647" type="LONGTEXT"/>
+         <column autoUpdated="false" digits="0" id="9" name="email_to" nullable="false" remarks="(DC2Type:array)" size="2147483647" type="LONGTEXT"/>
+         <column autoUpdated="false" digits="0" id="10" name="email_bcc" nullable="true" remarks="(DC2Type:array)" size="2147483647" type="LONGTEXT"/>
+         <column autoUpdated="false" digits="0" id="11" name="email_cc" nullable="true" remarks="(DC2Type:array)" size="2147483647" type="LONGTEXT"/>
+         <column autoUpdated="false" digits="0" id="12" name="email_from" nullable="false" remarks="(DC2Type:array)" size="2147483647" type="LONGTEXT"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="IDX_6FB48831CE8DE5A" unique="false">
+            <column ascending="true" name="log_updated_by"/>
+         </index>
+         <index name="IDX_6FB48839033212A" unique="false">
+            <column ascending="true" name="tenant_id"/>
+         </index>
+         <index name="IDX_6FB4883D40407ED" unique="false">
+            <column ascending="true" name="log_created_by"/>
+         </index>
+      </table>
+      <table name="email_log_attachments" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="1" name="log" nullable="false" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_F91D03768F3F68C5" implied="false" onDeleteCascade="false" table="email_log"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="file_name" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="3" name="file_type" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="4" name="data" nullable="false" remarks="" size="255" type="VARBINARY"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="IDX_F91D03768F3F68C5" unique="false">
+            <column ascending="true" name="log"/>
+         </index>
+      </table>
+      <table name="email_template_attachments" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="1" name="log" nullable="false" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_8255B9348F3F68C5" implied="false" onDeleteCascade="false" table="email_template_log"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="file_name" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="3" name="file_type" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="4" name="data" nullable="false" remarks="" size="255" type="VARBINARY"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="IDX_8255B9348F3F68C5" unique="false">
+            <column ascending="true" name="log"/>
+         </index>
+      </table>
+      <table name="email_template_log" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT">
+            <child column="log" foreignKey="FK_8255B9348F3F68C5" implied="false" onDeleteCascade="false" table="email_template_attachments"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="log_created_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_744707B4D40407ED" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="log_updated_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_744707B41CE8DE5A" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="tenant_id" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_744707B49033212A" implied="false" onDeleteCascade="false" table="tenants"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="4" name="created" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="5" name="updated" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="6" name="subject" nullable="false" remarks="" size="2147483647" type="LONGTEXT"/>
+         <column autoUpdated="false" digits="0" id="7" name="html" nullable="true" remarks="" size="2147483647" type="LONGTEXT"/>
+         <column autoUpdated="false" digits="0" id="8" name="text" nullable="true" remarks="" size="2147483647" type="LONGTEXT"/>
+         <column autoUpdated="false" digits="0" id="9" name="email_to" nullable="false" remarks="(DC2Type:array)" size="2147483647" type="LONGTEXT"/>
+         <column autoUpdated="false" digits="0" id="10" name="email_bcc" nullable="true" remarks="(DC2Type:array)" size="2147483647" type="LONGTEXT"/>
+         <column autoUpdated="false" digits="0" id="11" name="email_cc" nullable="true" remarks="(DC2Type:array)" size="2147483647" type="LONGTEXT"/>
+         <column autoUpdated="false" digits="0" id="12" name="email_from" nullable="false" remarks="(DC2Type:array)" size="2147483647" type="LONGTEXT"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="IDX_744707B41CE8DE5A" unique="false">
+            <column ascending="true" name="log_updated_by"/>
+         </index>
+         <index name="IDX_744707B49033212A" unique="false">
+            <column ascending="true" name="tenant_id"/>
+         </index>
+         <index name="IDX_744707B4D40407ED" unique="false">
+            <column ascending="true" name="log_created_by"/>
+         </index>
+      </table>
+      <table name="event" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="1" name="log_created_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_3BAE0AA7D40407ED" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="log_updated_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_3BAE0AA71CE8DE5A" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="created" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="4" name="updated" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="5" name="deletedAt" nullable="true" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="6" name="name" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="7" name="active" nullable="false" remarks="" size="0" type="BIT"/>
+         <column autoUpdated="false" digits="0" id="8" name="description" nullable="true" remarks="" size="2147483647" type="LONGTEXT"/>
+         <column autoUpdated="false" digits="0" id="9" name="page" nullable="true" remarks="" size="2147483647" type="LONGTEXT"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="IDX_3BAE0AA71CE8DE5A" unique="false">
+            <column ascending="true" name="log_updated_by"/>
+         </index>
+         <index name="IDX_3BAE0AA7D40407ED" unique="false">
+            <column ascending="true" name="log_created_by"/>
+         </index>
+      </table>
+      <table name="ext_log_entries" numRows="1" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="1" name="action" nullable="false" remarks="" size="8" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="2" name="logged_at" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="3" name="object_id" nullable="true" remarks="" size="64" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="4" name="object_class" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="5" name="version" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="6" name="data" nullable="true" remarks="(DC2Type:array)" size="2147483647" type="LONGTEXT"/>
+         <column autoUpdated="false" digits="0" id="7" name="username" nullable="true" remarks="" size="255" type="VARCHAR"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="log_class_lookup_idx" unique="false">
+            <column ascending="true" name="object_class"/>
+         </index>
+         <index name="log_date_lookup_idx" unique="false">
+            <column ascending="true" name="logged_at"/>
+         </index>
+         <index name="log_user_lookup_idx" unique="false">
+            <column ascending="true" name="username"/>
+         </index>
+         <index name="log_version_lookup_idx" unique="false">
+            <column ascending="true" name="object_id"/>
+            <column ascending="true" name="object_class"/>
+            <column ascending="true" name="version"/>
+         </index>
+      </table>
+      <table name="ext_translations" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="1" name="locale" nullable="false" remarks="" size="8" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="2" name="object_class" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="3" name="field" nullable="false" remarks="" size="32" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="4" name="foreign_key" nullable="false" remarks="" size="64" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="5" name="content" nullable="true" remarks="" size="2147483647" type="LONGTEXT"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="lookup_unique_idx" unique="true">
+            <column ascending="true" name="locale"/>
+            <column ascending="true" name="object_class"/>
+            <column ascending="true" name="field"/>
+            <column ascending="true" name="foreign_key"/>
+         </index>
+         <index name="translations_lookup_idx" unique="false">
+            <column ascending="true" name="locale"/>
+            <column ascending="true" name="object_class"/>
+            <column ascending="true" name="foreign_key"/>
+         </index>
+      </table>
+      <table name="map_performance_class_type" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="performance_class_id" nullable="false" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_EF719320611D6F12" implied="false" onDeleteCascade="false" table="performance_class"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="type_id" nullable="false" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_EF719320C54C8C93" implied="false" onDeleteCascade="false" table="system_property_type"/>
+         </column>
+         <primaryKey column="performance_class_id" sequenceNumberInPK="1"/>
+         <primaryKey column="type_id" sequenceNumberInPK="2"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="performance_class_id"/>
+            <column ascending="true" name="type_id"/>
+         </index>
+         <index name="IDX_EF719320611D6F12" unique="false">
+            <column ascending="true" name="performance_class_id"/>
+         </index>
+         <index name="IDX_EF719320C54C8C93" unique="false">
+            <column ascending="true" name="type_id"/>
+         </index>
+      </table>
+      <table name="map_user_number" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="contact_number_id" nullable="false" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_146F562B5E50FD6B" implied="false" onDeleteCascade="true" table="user_number"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="user_id" nullable="false" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_146F562BA76ED395" implied="false" onDeleteCascade="true" table="user"/>
+         </column>
+         <primaryKey column="contact_number_id" sequenceNumberInPK="1"/>
+         <primaryKey column="user_id" sequenceNumberInPK="2"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="contact_number_id"/>
+            <column ascending="true" name="user_id"/>
+         </index>
+         <index name="IDX_146F562B5E50FD6B" unique="false">
+            <column ascending="true" name="contact_number_id"/>
+         </index>
+         <index name="IDX_146F562BA76ED395" unique="false">
+            <column ascending="true" name="user_id"/>
+         </index>
+      </table>
+      <table name="map_user_tenant" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="user_id" nullable="false" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_CCA68D1DA76ED395" implied="false" onDeleteCascade="true" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="tenant_id" nullable="false" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_CCA68D1D9033212A" implied="false" onDeleteCascade="true" table="tenants"/>
+         </column>
+         <primaryKey column="tenant_id" sequenceNumberInPK="1"/>
+         <primaryKey column="user_id" sequenceNumberInPK="2"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="user_id"/>
+            <column ascending="true" name="tenant_id"/>
+         </index>
+         <index name="IDX_CCA68D1D9033212A" unique="false">
+            <column ascending="true" name="tenant_id"/>
+         </index>
+         <index name="IDX_CCA68D1DA76ED395" unique="false">
+            <column ascending="true" name="user_id"/>
+         </index>
+      </table>
+      <table name="migration_versions" numRows="5" remarks="" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="version" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <primaryKey column="version" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="version"/>
+         </index>
+      </table>
+      <table name="performance_class" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT">
+            <child column="performance_class_id" foreignKey="FK_B85E9DF7611D6F12" implied="false" onDeleteCascade="false" table="division_settings"/>
+            <child column="performance_class_id" foreignKey="FK_EF719320611D6F12" implied="false" onDeleteCascade="false" table="map_performance_class_type"/>
+            <child column="performance_class_id" foreignKey="FK_C4E0A61F611D6F12" implied="false" onDeleteCascade="false" table="team"/>
+            <child column="performance_class_id" foreignKey="FK_8D93D649611D6F12" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="log_created_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_B5EBAE00D40407ED" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="log_updated_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_B5EBAE001CE8DE5A" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="3" name="active" nullable="false" remarks="" size="0" type="BIT"/>
+         <column autoUpdated="false" digits="0" id="4" name="deletedAt" nullable="true" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="5" name="name" nullable="false" remarks="" size="100" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="6" name="created" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="7" name="updated" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="IDX_B5EBAE001CE8DE5A" unique="false">
+            <column ascending="true" name="log_updated_by"/>
+         </index>
+         <index name="IDX_B5EBAE00D40407ED" unique="false">
+            <column ascending="true" name="log_created_by"/>
+         </index>
+      </table>
+      <table name="support_message" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="1" name="ticket_id" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_B883883700047D2" implied="false" onDeleteCascade="true" table="support_ticket"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="user_id" nullable="false" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_B883883A76ED395" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="message" nullable="true" remarks="" size="2147483647" type="LONGTEXT"/>
+         <column autoUpdated="false" digits="0" id="4" name="status" nullable="false" remarks="" size="5" type="SMALLINT"/>
+         <column autoUpdated="false" digits="0" id="5" name="priority" nullable="false" remarks="" size="5" type="SMALLINT"/>
+         <column autoUpdated="false" digits="0" id="6" name="created_at" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="IDX_B883883700047D2" unique="false">
+            <column ascending="true" name="ticket_id"/>
+         </index>
+         <index name="IDX_B883883A76ED395" unique="false">
+            <column ascending="true" name="user_id"/>
+         </index>
+      </table>
+      <table name="support_ticket" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT">
+            <child column="ticket_id" foreignKey="FK_B883883700047D2" implied="false" onDeleteCascade="true" table="support_message"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="user_created_id" nullable="false" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_1F5A4D53F987D8A8" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="last_user_id" nullable="false" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_1F5A4D53C1E2EFDD" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="last_message" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="4" name="subject" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="5" name="status" nullable="false" remarks="" size="5" type="SMALLINT"/>
+         <column autoUpdated="false" digits="0" id="6" name="priority" nullable="false" remarks="" size="5" type="SMALLINT"/>
+         <column autoUpdated="false" digits="0" id="7" name="created_at" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="IDX_1F5A4D53C1E2EFDD" unique="false">
+            <column ascending="true" name="last_user_id"/>
+         </index>
+         <index name="IDX_1F5A4D53F987D8A8" unique="false">
+            <column ascending="true" name="user_created_id"/>
+         </index>
+      </table>
+      <table name="system_config" numRows="2" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="1" name="log_created_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_C4049ABDD40407ED" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="log_updated_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_C4049ABD1CE8DE5A" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="tenant_id" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_C4049ABD9033212A" implied="false" onDeleteCascade="false" table="tenants"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="4" name="created" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="5" name="updated" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="6" name="key" nullable="false" remarks="" size="100" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="7" name="value" nullable="true" remarks="" size="2147483647" type="LONGTEXT"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="IDX_C4049ABD1CE8DE5A" unique="false">
+            <column ascending="true" name="log_updated_by"/>
+         </index>
+         <index name="IDX_C4049ABD9033212A" unique="false">
+            <column ascending="true" name="tenant_id"/>
+         </index>
+         <index name="IDX_C4049ABDD40407ED" unique="false">
+            <column ascending="true" name="log_created_by"/>
+         </index>
+      </table>
+      <table name="system_job" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT">
+            <child column="original_job_id" foreignKey="FK_36604A23589C6D79" implied="false" onDeleteCascade="false" table="system_job"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="original_job_id" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_36604A23589C6D79" implied="false" onDeleteCascade="false" table="system_job"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="queue" nullable="false" remarks="" size="50" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="3" name="priority" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" digits="0" id="4" name="created_at" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="5" name="started_at" nullable="true" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="6" name="checked_at" nullable="true" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="7" name="worker_name" nullable="true" remarks="" size="50" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="8" name="execute_after" nullable="true" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="9" name="command" nullable="false" remarks="" size="2147483647" type="LONGTEXT"/>
+         <column autoUpdated="false" digits="0" id="10" name="arguments" nullable="true" remarks="" size="2147483647" type="LONGTEXT"/>
+         <column autoUpdated="false" digits="0" id="11" name="stack_trace" nullable="true" remarks="" size="2147483647" type="LONGTEXT"/>
+         <column autoUpdated="false" digits="0" id="12" name="run_time" nullable="true" remarks="" size="5" type="SMALLINT UNSIGNED"/>
+         <column autoUpdated="false" digits="0" id="13" name="memory_usage" nullable="true" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" digits="0" id="14" name="memory_usage_real" nullable="true" remarks="" size="10" type="INT UNSIGNED"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="IDX_36604A23589C6D79" unique="false">
+            <column ascending="true" name="original_job_id"/>
+         </index>
+      </table>
+      <table name="system_property_type" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT">
+            <child column="property_type_id" foreignKey="FK_EDA4B1889C81C6EB" implied="false" onDeleteCascade="false" table="eav_attribute"/>
+            <child column="type_id" foreignKey="FK_EF719320C54C8C93" implied="false" onDeleteCascade="false" table="map_performance_class_type"/>
+            <child column="type_id" foreignKey="FK_5543718BC54C8C93" implied="false" onDeleteCascade="false" table="user_address"/>
+            <child column="type_id" foreignKey="FK_F3C20469C54C8C93" implied="false" onDeleteCascade="false" table="user_number"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="log_created_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_ED64A786D40407ED" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="log_updated_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_ED64A7861CE8DE5A" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="3" name="active" nullable="false" remarks="" size="0" type="BIT"/>
+         <column autoUpdated="false" digits="0" id="4" name="created" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="5" name="updated" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="6" name="deletedAt" nullable="true" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="7" name="name" nullable="false" remarks="" size="80" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="8" name="class_implements" nullable="false" remarks="" size="400" type="VARCHAR"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="IDX_ED64A7861CE8DE5A" unique="false">
+            <column ascending="true" name="log_updated_by"/>
+         </index>
+         <index name="IDX_ED64A786D40407ED" unique="false">
+            <column ascending="true" name="log_created_by"/>
+         </index>
+      </table>
+      <table name="team" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT">
+            <child column="team_id" foreignKey="FK_BAD9A3C8296CD8AE" implied="false" onDeleteCascade="false" table="team_members"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="log_created_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_C4E0A61FD40407ED" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="log_updated_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_C4E0A61F1CE8DE5A" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="performance_class_id" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_C4E0A61F611D6F12" implied="false" onDeleteCascade="false" table="performance_class"/>
+         </column>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="4" name="active" nullable="false" remarks="" size="0" type="BIT"/>
+         <column autoUpdated="false" digits="0" id="5" name="created" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="6" name="updated" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="7" name="deletedAt" nullable="true" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="8" name="name" nullable="false" remarks="" size="100" type="VARCHAR"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="IDX_C4E0A61F1CE8DE5A" unique="false">
+            <column ascending="true" name="log_updated_by"/>
+         </index>
+         <index name="IDX_C4E0A61F611D6F12" unique="false">
+            <column ascending="true" name="performance_class_id"/>
+         </index>
+         <index name="IDX_C4E0A61FD40407ED" unique="false">
+            <column ascending="true" name="log_created_by"/>
+         </index>
+      </table>
+      <table name="team_members" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="1" name="team_id" nullable="false" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_BAD9A3C8296CD8AE" implied="false" onDeleteCascade="false" table="team"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="user_id" nullable="false" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_BAD9A3C8A76ED395" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="team_leader" nullable="false" remarks="" size="0" type="BIT"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="IDX_BAD9A3C8296CD8AE" unique="false">
+            <column ascending="true" name="team_id"/>
+         </index>
+         <index name="IDX_BAD9A3C8A76ED395" unique="false">
+            <column ascending="true" name="user_id"/>
+         </index>
+      </table>
+      <table name="tenant_note" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="1" name="log_created_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_85D2A0C7D40407ED" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="log_updated_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_85D2A0C71CE8DE5A" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="tenant_id" nullable="false" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_85D2A0C79033212A" implied="false" onDeleteCascade="false" table="tenants"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="4" name="created" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="5" name="updated" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="6" name="deletedAt" nullable="true" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="7" name="subject" nullable="false" remarks="" size="100" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="8" name="note" nullable="false" remarks="" size="2147483647" type="LONGTEXT"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="IDX_85D2A0C71CE8DE5A" unique="false">
+            <column ascending="true" name="log_updated_by"/>
+         </index>
+         <index name="IDX_85D2A0C79033212A" unique="false">
+            <column ascending="true" name="tenant_id"/>
+         </index>
+         <index name="IDX_85D2A0C7D40407ED" unique="false">
+            <column ascending="true" name="log_created_by"/>
+         </index>
+      </table>
+      <table name="tenants" numRows="2" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT">
+            <child column="tenant_id" foreignKey="FK_101747149033212A" implied="false" onDeleteCascade="false" table="division"/>
+            <child column="tenant_id" foreignKey="FK_6FB48839033212A" implied="false" onDeleteCascade="false" table="email_log"/>
+            <child column="tenant_id" foreignKey="FK_744707B49033212A" implied="false" onDeleteCascade="false" table="email_template_log"/>
+            <child column="tenant_id" foreignKey="FK_CCA68D1D9033212A" implied="false" onDeleteCascade="true" table="map_user_tenant"/>
+            <child column="tenant_id" foreignKey="FK_C4049ABD9033212A" implied="false" onDeleteCascade="false" table="system_config"/>
+            <child column="tenant_id" foreignKey="FK_85D2A0C79033212A" implied="false" onDeleteCascade="false" table="tenant_note"/>
+            <child column="tenant_id" foreignKey="FK_F3C204699033212A" implied="false" onDeleteCascade="false" table="user_number"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="log_created_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_B8FC96BBD40407ED" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="log_updated_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_B8FC96BB1CE8DE5A" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="3" name="active" nullable="false" remarks="" size="0" type="BIT"/>
+         <column autoUpdated="false" digits="0" id="4" name="created" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="5" name="updated" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="6" name="deletedAt" nullable="true" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="7" name="name" nullable="false" remarks="" size="100" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="8" name="description" nullable="true" remarks="" size="2147483647" type="LONGTEXT"/>
+         <column autoUpdated="false" digits="0" id="9" name="expiration_date" nullable="true" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="10" name="url" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="11" name="default_tenant" nullable="false" remarks="" size="0" type="BIT"/>
+         <column autoUpdated="false" digits="0" id="12" name="theme" nullable="false" remarks="" size="40" type="VARCHAR"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="IDX_B8FC96BB1CE8DE5A" unique="false">
+            <column ascending="true" name="log_updated_by"/>
+         </index>
+         <index name="IDX_B8FC96BBD40407ED" unique="false">
+            <column ascending="true" name="log_created_by"/>
+         </index>
+      </table>
+      <table name="user" numRows="3" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT">
+            <child column="log_created_by" foreignKey="FK_10174714D40407ED" implied="false" onDeleteCascade="false" table="division"/>
+            <child column="log_updated_by" foreignKey="FK_101747141CE8DE5A" implied="false" onDeleteCascade="false" table="division"/>
+            <child column="log_created_by" foreignKey="FK_B85E9DF7D40407ED" implied="false" onDeleteCascade="false" table="division_settings"/>
+            <child column="log_updated_by" foreignKey="FK_B85E9DF71CE8DE5A" implied="false" onDeleteCascade="false" table="division_settings"/>
+            <child column="log_created_by" foreignKey="FK_EDA4B188D40407ED" implied="false" onDeleteCascade="false" table="eav_attribute"/>
+            <child column="log_updated_by" foreignKey="FK_EDA4B1881CE8DE5A" implied="false" onDeleteCascade="false" table="eav_attribute"/>
+            <child column="log_created_by" foreignKey="FK_353E9C8BD40407ED" implied="false" onDeleteCascade="false" table="eav_group"/>
+            <child column="log_updated_by" foreignKey="FK_353E9C8B1CE8DE5A" implied="false" onDeleteCascade="false" table="eav_group"/>
+            <child column="log_created_by" foreignKey="FK_CBBA92FFD40407ED" implied="false" onDeleteCascade="false" table="eav_option"/>
+            <child column="log_updated_by" foreignKey="FK_CBBA92FF1CE8DE5A" implied="false" onDeleteCascade="false" table="eav_option"/>
+            <child column="log_created_by" foreignKey="FK_4589807AD40407ED" implied="false" onDeleteCascade="false" table="eav_value"/>
+            <child column="log_updated_by" foreignKey="FK_4589807A1CE8DE5A" implied="false" onDeleteCascade="false" table="eav_value"/>
+            <child column="log_created_by" foreignKey="FK_6FB4883D40407ED" implied="false" onDeleteCascade="false" table="email_log"/>
+            <child column="log_updated_by" foreignKey="FK_6FB48831CE8DE5A" implied="false" onDeleteCascade="false" table="email_log"/>
+            <child column="log_created_by" foreignKey="FK_744707B4D40407ED" implied="false" onDeleteCascade="false" table="email_template_log"/>
+            <child column="log_updated_by" foreignKey="FK_744707B41CE8DE5A" implied="false" onDeleteCascade="false" table="email_template_log"/>
+            <child column="log_created_by" foreignKey="FK_3BAE0AA7D40407ED" implied="false" onDeleteCascade="false" table="event"/>
+            <child column="log_updated_by" foreignKey="FK_3BAE0AA71CE8DE5A" implied="false" onDeleteCascade="false" table="event"/>
+            <child column="user_id" foreignKey="FK_146F562BA76ED395" implied="false" onDeleteCascade="true" table="map_user_number"/>
+            <child column="user_id" foreignKey="FK_CCA68D1DA76ED395" implied="false" onDeleteCascade="true" table="map_user_tenant"/>
+            <child column="log_created_by" foreignKey="FK_B5EBAE00D40407ED" implied="false" onDeleteCascade="false" table="performance_class"/>
+            <child column="log_updated_by" foreignKey="FK_B5EBAE001CE8DE5A" implied="false" onDeleteCascade="false" table="performance_class"/>
+            <child column="user_id" foreignKey="FK_B883883A76ED395" implied="false" onDeleteCascade="false" table="support_message"/>
+            <child column="last_user_id" foreignKey="FK_1F5A4D53C1E2EFDD" implied="false" onDeleteCascade="false" table="support_ticket"/>
+            <child column="user_created_id" foreignKey="FK_1F5A4D53F987D8A8" implied="false" onDeleteCascade="false" table="support_ticket"/>
+            <child column="log_created_by" foreignKey="FK_C4049ABDD40407ED" implied="false" onDeleteCascade="false" table="system_config"/>
+            <child column="log_updated_by" foreignKey="FK_C4049ABD1CE8DE5A" implied="false" onDeleteCascade="false" table="system_config"/>
+            <child column="log_created_by" foreignKey="FK_ED64A786D40407ED" implied="false" onDeleteCascade="false" table="system_property_type"/>
+            <child column="log_updated_by" foreignKey="FK_ED64A7861CE8DE5A" implied="false" onDeleteCascade="false" table="system_property_type"/>
+            <child column="log_created_by" foreignKey="FK_C4E0A61FD40407ED" implied="false" onDeleteCascade="false" table="team"/>
+            <child column="log_updated_by" foreignKey="FK_C4E0A61F1CE8DE5A" implied="false" onDeleteCascade="false" table="team"/>
+            <child column="user_id" foreignKey="FK_BAD9A3C8A76ED395" implied="false" onDeleteCascade="false" table="team_members"/>
+            <child column="log_created_by" foreignKey="FK_85D2A0C7D40407ED" implied="false" onDeleteCascade="false" table="tenant_note"/>
+            <child column="log_updated_by" foreignKey="FK_85D2A0C71CE8DE5A" implied="false" onDeleteCascade="false" table="tenant_note"/>
+            <child column="log_created_by" foreignKey="FK_B8FC96BBD40407ED" implied="false" onDeleteCascade="false" table="tenants"/>
+            <child column="log_updated_by" foreignKey="FK_B8FC96BB1CE8DE5A" implied="false" onDeleteCascade="false" table="tenants"/>
+            <child column="log_created_by" foreignKey="FK_8D93D649D40407ED" implied="false" onDeleteCascade="false" table="user"/>
+            <child column="log_updated_by" foreignKey="FK_8D93D6491CE8DE5A" implied="false" onDeleteCascade="false" table="user"/>
+            <child column="log_created_by" foreignKey="FK_5543718BD40407ED" implied="false" onDeleteCascade="false" table="user_address"/>
+            <child column="log_updated_by" foreignKey="FK_5543718B1CE8DE5A" implied="false" onDeleteCascade="false" table="user_address"/>
+            <child column="log_created_by" foreignKey="FK_F3C20469D40407ED" implied="false" onDeleteCascade="false" table="user_number"/>
+            <child column="log_updated_by" foreignKey="FK_F3C204691CE8DE5A" implied="false" onDeleteCascade="false" table="user_number"/>
+            <child column="log_created_by" foreignKey="FK_5C844C5D40407ED" implied="false" onDeleteCascade="false" table="user_settings"/>
+            <child column="log_updated_by" foreignKey="FK_5C844C51CE8DE5A" implied="false" onDeleteCascade="false" table="user_settings"/>
+            <child column="user_id" foreignKey="FK_5C844C5A76ED395" implied="false" onDeleteCascade="false" table="user_settings"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="log_created_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_8D93D649D40407ED" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="log_updated_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_8D93D6491CE8DE5A" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="address_id" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_8D93D649F5B7AF75" implied="false" onDeleteCascade="false" table="user_address"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="4" name="performance_class_id" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_8D93D649611D6F12" implied="false" onDeleteCascade="false" table="performance_class"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="5" name="email" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="6" name="role" nullable="false" remarks="(DC2Type:array)" size="255" type="TINYTEXT"/>
+         <column autoUpdated="false" digits="0" id="7" name="password" nullable="true" remarks="" size="2147483647" type="LONGTEXT"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="8" name="active" nullable="false" remarks="" size="0" type="BIT"/>
+         <column autoUpdated="false" digits="0" id="9" name="last_login" nullable="true" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="10" name="expiration_date" nullable="true" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="11" name="credentials_expiration_date" nullable="true" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="12" name="created" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="13" name="updated" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="14" name="deletedAt" nullable="true" remarks="" size="19" type="DATETIME"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="IDX_8D93D6491CE8DE5A" unique="false">
+            <column ascending="true" name="log_updated_by"/>
+         </index>
+         <index name="IDX_8D93D649611D6F12" unique="false">
+            <column ascending="true" name="performance_class_id"/>
+         </index>
+         <index name="IDX_8D93D649D40407ED" unique="false">
+            <column ascending="true" name="log_created_by"/>
+         </index>
+         <index name="IDX_8D93D649F5B7AF75" unique="false">
+            <column ascending="true" name="address_id"/>
+         </index>
+         <index name="UNIQ_8D93D649E7927C74" unique="true">
+            <column ascending="true" name="email"/>
+         </index>
+      </table>
+      <table name="user_address" numRows="3" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT">
+            <child column="address_id" foreignKey="FK_8D93D649F5B7AF75" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="type_id" nullable="false" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_5543718BC54C8C93" implied="false" onDeleteCascade="false" table="system_property_type"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="log_created_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_5543718BD40407ED" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="log_updated_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_5543718B1CE8DE5A" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="4" name="deletedAt" nullable="true" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="5" name="created" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="6" name="updated" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="7" name="first_name" nullable="false" remarks="" size="100" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="8" name="last_name" nullable="false" remarks="" size="100" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="9" name="address_1" nullable="true" remarks="" size="80" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="10" name="address_2" nullable="true" remarks="" size="80" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="11" name="address_3" nullable="true" remarks="" size="80" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="12" name="post_box" nullable="true" remarks="" size="80" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="13" name="zip_code" nullable="true" remarks="" size="10" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="14" name="city" nullable="true" remarks="" size="80" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="15" name="state" nullable="true" remarks="" size="80" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="16" name="country" nullable="true" remarks="" size="80" type="VARCHAR"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="IDX_5543718B1CE8DE5A" unique="false">
+            <column ascending="true" name="log_updated_by"/>
+         </index>
+         <index name="IDX_5543718BC54C8C93" unique="false">
+            <column ascending="true" name="type_id"/>
+         </index>
+         <index name="IDX_5543718BD40407ED" unique="false">
+            <column ascending="true" name="log_created_by"/>
+         </index>
+      </table>
+      <table name="user_number" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT">
+            <child column="contact_number_id" foreignKey="FK_146F562B5E50FD6B" implied="false" onDeleteCascade="true" table="map_user_number"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="tenant_id" nullable="false" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_F3C204699033212A" implied="false" onDeleteCascade="false" table="tenants"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="type_id" nullable="false" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_F3C20469C54C8C93" implied="false" onDeleteCascade="false" table="system_property_type"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="log_created_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_F3C20469D40407ED" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="4" name="log_updated_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_F3C204691CE8DE5A" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="5" name="number" nullable="false" remarks="" size="100" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="6" name="deletedAt" nullable="true" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="7" name="created" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="8" name="updated" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="IDX_F3C204691CE8DE5A" unique="false">
+            <column ascending="true" name="log_updated_by"/>
+         </index>
+         <index name="IDX_F3C204699033212A" unique="false">
+            <column ascending="true" name="tenant_id"/>
+         </index>
+         <index name="IDX_F3C20469C54C8C93" unique="false">
+            <column ascending="true" name="type_id"/>
+         </index>
+         <index name="IDX_F3C20469D40407ED" unique="false">
+            <column ascending="true" name="log_created_by"/>
+         </index>
+      </table>
+      <table name="user_settings" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="1" name="user_id" nullable="false" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_5C844C5A76ED395" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="log_created_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_5C844C5D40407ED" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="log_updated_by" nullable="true" remarks="" size="10" type="INT">
+            <parent column="id" foreignKey="FK_5C844C51CE8DE5A" implied="false" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="4" name="password_change_required" nullable="false" remarks="" size="0" type="BIT"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="5" name="support_emailer" nullable="false" remarks="" size="0" type="BIT"/>
+         <column autoUpdated="false" defaultValue="de" digits="0" id="6" name="translation" nullable="false" remarks="" size="32" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="7" name="created" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="8" name="updated" nullable="false" remarks="" size="19" type="DATETIME"/>
+         <column autoUpdated="false" digits="0" id="9" name="token" nullable="true" remarks="" size="32" type="VARCHAR"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="IDX_5C844C51CE8DE5A" unique="false">
+            <column ascending="true" name="log_updated_by"/>
+         </index>
+         <index name="IDX_5C844C5D40407ED" unique="false">
+            <column ascending="true" name="log_created_by"/>
+         </index>
+         <index name="UNIQ_5C844C5A76ED395" unique="true">
+            <column ascending="true" name="user_id"/>
+         </index>
+      </table>
+   </tables>
+</database>
