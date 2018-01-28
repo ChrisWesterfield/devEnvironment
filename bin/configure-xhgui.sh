@@ -8,7 +8,7 @@ fi
 
 if [ ! -f /home/vagrant/.profiler ]
 then
-    source /vagrant/bin/install-profiler.sh
+    source "/vagrant/bin/install-profiler.sh"
 fi
 
 touch /home/vagrant/.xhgui

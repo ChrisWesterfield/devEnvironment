@@ -5,3 +5,5 @@ vagrant/etc/sites-enabled/*.vhost
 vagrant/etc/sites-ssl/*.crt
 vagrant/etc/sites-ssl/*.cnf
 vagrant/etc/sites-ssl/*.key
+config.yaml
+.DS_Store

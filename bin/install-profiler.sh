@@ -9,7 +9,8 @@ fi
 touch /home/vagrant/.profiler
 
 if [ ! -f /home/vagrant/.mongo ]
-    source /vagrant/bin/install-mongo.sh
+then
+    source "/vagrant/bin/install-mongo.sh"
 fi
 
 sudo apt-get install php5.6-xhprof

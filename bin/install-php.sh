@@ -45,3 +45,4 @@ if [ -d /etc/php/7.2/fpm/conf.d/ ]; then
 ln -s /vagrant/etc/php/xdebug.ini /etc/php/7.2/fpm/conf.d/20-xdebug.ini
 fi
 
+sudo update-alternatives --set php /usr/bin/php7.2

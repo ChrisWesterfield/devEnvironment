@@ -24,7 +24,5 @@ sudo apt-get install -y  \
     iftop \
     ufw
 
-
-
 sudo add-apt-repository ppa:ondrej/php
 sudo apt-get update

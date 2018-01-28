@@ -4,8 +4,8 @@ CFLAGS =  -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g
 CPP =	cc -E
 LINK =	$(CC)
 
-NGX_PERL_CFLAGS = -pipe -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g -D_REENTRANT -D_GNU_SOURCE -DDEBIAN -fwrapv -fno-strict-aliasing -pipe -I/usr/local/include -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -I/usr/lib/x86_64-linux-gnu/perl/5.24/CORE
-NGX_PM_CFLAGS = -D_REENTRANT -D_GNU_SOURCE -DDEBIAN -fwrapv -fno-strict-aliasing -pipe -I/usr/local/include -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -I/usr/lib/x86_64-linux-gnu/perl/5.24/CORE
+NGX_PERL_CFLAGS = -pipe -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g -D_REENTRANT -D_GNU_SOURCE -DDEBIAN -fwrapv -fno-strict-aliasing -pipe -I/usr/local/include -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -I/usr/lib/x86_64-linux-gnu/perl/5.22/CORE
+NGX_PM_CFLAGS = -D_REENTRANT -D_GNU_SOURCE -DDEBIAN -fwrapv -fno-strict-aliasing -pipe -I/usr/local/include -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -I/usr/lib/x86_64-linux-gnu/perl/5.22/CORE
 NGX_PM_LDFLAGS = -shared -L/usr/local/lib -fstack-protector-strong
 
 ALL_INCS = -I src/core \
@@ -442,7 +442,7 @@ objs/nginx:	objs/src/core/nginx.o \
 	objs/src/misc/ngx_google_perftools_module.o \
 	objs/ngx_modules.o \
 	-ldl -lpthread -lpthread -lcrypt -lpcre -lssl -lcrypto -ldl -lz -lxml2 -lxslt -lexslt -lGeoIP -lprofiler \
-	-Wl,-E -fstack-protector-strong -L/usr/local/lib -L/usr/lib/x86_64-linux-gnu/perl/5.24/CORE -lperl -ldl -lm -lpthread -lc -lcrypt \
+	-Wl,-E -fstack-protector-strong -L/usr/local/lib -L/usr/lib/x86_64-linux-gnu/perl/5.22/CORE -lperl -ldl -lm -lpthread -lc -lcrypt \
 	-Wl,-E
 	
 
@@ -1485,7 +1485,7 @@ objs/ngx_http_headers_more_filter_module.so:	objs/addon/src/ngx_http_headers_mor
 	objs/addon/src/ngx_http_headers_more_headers_in.o \
 	objs/addon/src/ngx_http_headers_more_util.o \
 	objs/ngx_http_headers_more_filter_module_modules.o \
-	-Wl,-E -fstack-protector-strong -L/usr/local/lib -L/usr/lib/x86_64-linux-gnu/perl/5.24/CORE -lperl -ldl -lm -lpthread -lc -lcrypt \
+	-Wl,-E -fstack-protector-strong -L/usr/local/lib -L/usr/lib/x86_64-linux-gnu/perl/5.22/CORE -lperl -ldl -lm -lpthread -lc -lcrypt \
 	-shared
 
 
@@ -1548,7 +1548,7 @@ objs/ngx_http_naxsi_module.so:	objs/addon/naxsi_src/naxsi_runtime.o \
 	objs/addon/libinjection/libinjection_xss.o \
 	objs/addon/libinjection/libinjection_html5.o \
 	objs/ngx_http_naxsi_module_modules.o \
-	-Wl,-E -fstack-protector-strong -L/usr/local/lib -L/usr/lib/x86_64-linux-gnu/perl/5.24/CORE -lperl -ldl -lm -lpthread -lc -lcrypt \
+	-Wl,-E -fstack-protector-strong -L/usr/local/lib -L/usr/lib/x86_64-linux-gnu/perl/5.22/CORE -lperl -ldl -lm -lpthread -lc -lcrypt \
 	-shared
 
 
@@ -1630,7 +1630,7 @@ objs/ngx_http_uploadprogress_module.so:	objs/addon/nginx-upload-progress-module-
 	$(LINK) -o objs/ngx_http_uploadprogress_module.so \
 	objs/addon/nginx-upload-progress-module-master/ngx_http_uploadprogress_module.o \
 	objs/ngx_http_uploadprogress_module_modules.o \
-	-Wl,-E -fstack-protector-strong -L/usr/local/lib -L/usr/lib/x86_64-linux-gnu/perl/5.24/CORE -lperl -ldl -lm -lpthread -lc -lcrypt \
+	-Wl,-E -fstack-protector-strong -L/usr/local/lib -L/usr/lib/x86_64-linux-gnu/perl/5.22/CORE -lperl -ldl -lm -lpthread -lc -lcrypt \
 	-shared
 
 
@@ -1664,7 +1664,7 @@ objs/ngx_http_accounting_module.so:	objs/addon/src/ngx_http_accounting_hash.o \
 	objs/addon/src/ngx_http_accounting_status_code.o \
 	objs/addon/src/ngx_http_accounting_worker_process.o \
 	objs/ngx_http_accounting_module_modules.o \
-	-Wl,-E -fstack-protector-strong -L/usr/local/lib -L/usr/lib/x86_64-linux-gnu/perl/5.24/CORE -lperl -ldl -lm -lpthread -lc -lcrypt \
+	-Wl,-E -fstack-protector-strong -L/usr/local/lib -L/usr/lib/x86_64-linux-gnu/perl/5.22/CORE -lperl -ldl -lm -lpthread -lc -lcrypt \
 	-shared
 
 
@@ -1738,7 +1738,7 @@ objs/ngx_http_vhost_traffic_status_module.so:	objs/addon/src/ngx_http_vhost_traf
 	objs/addon/src/ngx_http_vhost_traffic_status_set.o \
 	objs/addon/src/ngx_http_vhost_traffic_status_dump.o \
 	objs/ngx_http_vhost_traffic_status_module_modules.o \
-	-Wl,-E -fstack-protector-strong -L/usr/local/lib -L/usr/lib/x86_64-linux-gnu/perl/5.24/CORE -lperl -ldl -lm -lpthread -lc -lcrypt \
+	-Wl,-E -fstack-protector-strong -L/usr/local/lib -L/usr/lib/x86_64-linux-gnu/perl/5.22/CORE -lperl -ldl -lm -lpthread -lc -lcrypt \
 	-shared
 
 
@@ -1834,7 +1834,7 @@ objs/ngx_http_graphite_module.so:	objs/addon/src/ngx_http_graphite_module.o \
 	$(LINK) -o objs/ngx_http_graphite_module.so \
 	objs/addon/src/ngx_http_graphite_module.o \
 	objs/ngx_http_graphite_module_modules.o \
-	-Wl,-E -fstack-protector-strong -L/usr/local/lib -L/usr/lib/x86_64-linux-gnu/perl/5.24/CORE -lperl -ldl -lm -lpthread -lc -lcrypt \
+	-Wl,-E -fstack-protector-strong -L/usr/local/lib -L/usr/lib/x86_64-linux-gnu/perl/5.22/CORE -lperl -ldl -lm -lpthread -lc -lcrypt \
 	-shared
 
 
@@ -1884,7 +1884,7 @@ objs/ngx_mail_module.so:	objs/src/mail/ngx_mail.o \
 	objs/src/mail/ngx_mail_auth_http_module.o \
 	objs/src/mail/ngx_mail_proxy_module.o \
 	objs/ngx_mail_module_modules.o \
-	-Wl,-E -fstack-protector-strong -L/usr/local/lib -L/usr/lib/x86_64-linux-gnu/perl/5.24/CORE -lperl -ldl -lm -lpthread -lc -lcrypt \
+	-Wl,-E -fstack-protector-strong -L/usr/local/lib -L/usr/lib/x86_64-linux-gnu/perl/5.22/CORE -lperl -ldl -lm -lpthread -lc -lcrypt \
 	-shared
 
 
@@ -2032,7 +2032,7 @@ objs/ngx_stream_module.so:	objs/src/stream/ngx_stream.o \
 	objs/src/stream/ngx_stream_upstream_least_conn_module.o \
 	objs/src/stream/ngx_stream_upstream_zone_module.o \
 	objs/ngx_stream_module_modules.o \
-	-Wl,-E -fstack-protector-strong -L/usr/local/lib -L/usr/lib/x86_64-linux-gnu/perl/5.24/CORE -lperl -ldl -lm -lpthread -lc -lcrypt \
+	-Wl,-E -fstack-protector-strong -L/usr/local/lib -L/usr/lib/x86_64-linux-gnu/perl/5.22/CORE -lperl -ldl -lm -lpthread -lc -lcrypt \
 	-shared
 
 

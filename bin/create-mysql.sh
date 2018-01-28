@@ -3,9 +3,10 @@ export DEBIAN_FRONTEND=noninteractive
 
 cat > /root/.my.cnf << EOF
 [client]
-user = vagrant
+user = root
+port = 3306
 password = 123
-host = localhost
+host = 127.0.0.1
 EOF
 
 cp /root/.my.cnf /home/vagrant/.my.cnf

@@ -6,6 +6,7 @@ then
     echo "NGINX already installed."
     exit 0
 fi
+touch /home/vagrant/.nginx
 sudo apt-get install -y \
     libxml2-dev \
     libxslt1-dev  \

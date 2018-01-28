@@ -15,3 +15,6 @@ alias l='ls -la'
 export PATH=$PATH:$HOME/bin:/vagrant/bin
 
 cat /vagrant/motd
+
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8

@@ -4,14 +4,15 @@ class VagrantVM
         ENV['VAGRANT_DEFAULT_PROVIDER'] = settings["provider"] ||= "virtualbox"
 
         # Configure Local Variable To Access Scripts From Remote Location
-        scriptDir = /vagrant/bin
+
+        scriptDir = File.dirname(__FILE__)
 
         # Allow SSH Agent Forward from The Box
         config.ssh.forward_agent = true
 
         # Configure The Box
         config.vm.define settings["name"] ||= settings["name"]
-        config.vm.box = settings["box"] ||= "bento/ubuntu-17.10"
+        config.vm.box = settings["box"] ||= "bento/ubuntu-16.04"
         config.vm.box_version = settings["version"] ||= ">= 4.0.0"
         config.vm.hostname = settings["hostname"] ||= settings["name"]
 
@@ -81,13 +82,6 @@ class VagrantVM
 
         # Default Port Forwarding
         default_ports = {
-            80 => 8000,
-            443 => 44300,
-            3306 => 33060,
-            4040 => 4040,
-            5432 => 54320,
-            8025 => 8025,
-            27017 => 27017
         }
 
         # Use Default Port Forwarding Unless Overridden
@@ -136,20 +130,15 @@ class VagrantVM
             end
         end
 
-        #Configure Language
+        # Configure to use bash instead of sh
         config.vm.provision "shell" do |s|
             s.privileged = true
-            s.inline = "export LC_ALL=en_US.UTF-8 >> /etc/profile"
-        end
-        config.vm.provision "shell" do |s|
-            s.privileged = true
-            s.inline = "export LANG=en_US.UTF-8 >> /etc/profile"
+            s.inline = "echo \"dash dash/sh boolean false\" | sudo debconf-set-selections && sudo dpkg-reconfigure -f noninteractive dash"
         end
 
         #Configure BASHRC
         config.vm.provision "shell" do |s|
-            s.privileged = false
-            s.inline = "echo "source /vagrant/.bash_profile" >> /home/vagrant/.bashrc"
+            s.path = scriptDir + "/configure.profile.sh"
         end
 
         # Copy User Files Over to VM
@@ -234,7 +223,7 @@ class VagrantVM
         if settings.has_key?("php71") && settings["php71"]
             config.vm.provision "shell" do |s|
                 s.name = "Installing PHP 7.1"
-                s.path = scriptDir + "/install-phhp7.1.sh"
+                s.path = scriptDir + "/install-php7.1.sh"
             end
         end
         config.vm.provision "shell" do |s|
@@ -249,60 +238,62 @@ class VagrantVM
         if settings.include? 'sites'
             settings["sites"].each do |site|
 
-                # Create SSL certificate
-                config.vm.provision "shell" do |s|
-                    s.name = "Creating Certificate: " + site["map"]
-                    s.path = scriptDir + "/create-certificate.sh"
-                    s.args = [site["map"]]
-                end
-
-                type = site["type"] ||= "laravel"
-
-                if (type == "symfony")
-                    type = "symfony2"
-                end
-
-                config.vm.provision "shell" do |s|
-                    s.name = "Creating Site: " + site["map"]
-                    if site.include? 'params'
-                        params = "("
-                        site["params"].each do |param|
-                            params += " [" + param["key"] + "]=" + param["value"]
-                        end
-                        params += " )"
+                if (site.has_key?("type") && site['type'] != "ignore")
+                    # Create SSL certificate
+                    config.vm.provision "shell" do |s|
+                        s.name = "Creating Certificate: " + site["map"]
+                        s.path = scriptDir + "/create-certificate.sh"
+                        s.args = [site["map"]]
                     end
-                    s.path = scriptDir + "/serve-#{type}.sh"
-                    s.args = [site["map"], site["to"], site["port"] ||= "80", site["ssl"] ||= "443", site["php"] ||= "7.2", params ||= "", site["zray"] ||= "false"]
 
-                    if site["zray"] == 'true'
+                    type = site["type"] ||= "laravel"
+
+                    if (type == "symfony")
+                        type = "symfony2"
+                    end
+
+                    config.vm.provision "shell" do |s|
+                        s.name = "Creating Site: " + site["map"]
+                        if site.include? 'params'
+                            params = "("
+                            site["params"].each do |param|
+                                params += " [" + param["key"] + "]=" + param["value"]
+                            end
+                            params += " )"
+                        end
+                        s.path = scriptDir + "/serve-#{type}.sh"
+                        s.args = [site["map"], site["to"], site["port"] ||= "80", site["ssl"] ||= "443", site["php"] ||= "7.2", params ||= "", site["zray"] ||= "false"]
+
+                        if site["zray"] == 'true'
+                            config.vm.provision "shell" do |s|
+                                s.inline = "ln -sf /opt/zray/gui/public " + site["to"] + "/ZendServer"
+                            end
+                        else
+                            config.vm.provision "shell" do |s|
+                                s.inline = "rm -rf " + site["to"] + "/ZendServer"
+                            end
+                        end
+                    end
+
+                    # Configure The Cron Schedule
+                    if (site.has_key?("schedule"))
                         config.vm.provision "shell" do |s|
-                            s.inline = "ln -sf /opt/zray/gui/public " + site["to"] + "/ZendServer"
+                            s.name = "Creating Schedule"
+
+                            if (site["schedule"])
+                                s.path = scriptDir + "/cron-schedule.sh"
+                                s.args = [site["map"].tr('^A-Za-z0-9', ''), site["to"]]
+                            else
+                                s.inline = "rm -f /etc/cron.d/$1"
+                                s.args = [site["map"].tr('^A-Za-z0-9', '')]
+                            end
                         end
                     else
                         config.vm.provision "shell" do |s|
-                            s.inline = "rm -rf " + site["to"] + "/ZendServer"
-                        end
-                    end
-                end
-
-                # Configure The Cron Schedule
-                if (site.has_key?("schedule"))
-                    config.vm.provision "shell" do |s|
-                        s.name = "Creating Schedule"
-
-                        if (site["schedule"])
-                            s.path = scriptDir + "/cron-schedule.sh"
-                            s.args = [site["map"].tr('^A-Za-z0-9', ''), site["to"]]
-                        else
+                            s.name = "Checking for old Schedule"
                             s.inline = "rm -f /etc/cron.d/$1"
                             s.args = [site["map"].tr('^A-Za-z0-9', '')]
                         end
-                    end
-                else
-                    config.vm.provision "shell" do |s|
-                        s.name = "Checking for old Schedule"
-                        s.inline = "rm -f /etc/cron.d/$1"
-                        s.args = [site["map"].tr('^A-Za-z0-9', '')]
                     end
                 end
             end
@@ -444,34 +435,46 @@ class VagrantVM
         # Configure All Of The Configured Databases
         if settings.has_key?("databases")
             settings["databases"].each do |db|
-                config.vm.provision "shell" do |s|
-                    s.name = "Creating MySQL Database: " + db
-                    s.path = scriptDir + "/create-mysql.sh"
-                    s.args = [db]
-                end
-
-                config.vm.provision "shell" do |s|
-                    s.name = "Creating Postgres Database: " + db
-                    s.path = scriptDir + "/create-postgres.sh"
-                    s.args = [db]
-                end
-
-                if settings.has_key?("mongodb") && settings["mongodb"]
+                if db["type"] == "mysql"
                     config.vm.provision "shell" do |s|
-                        s.name = "Creating Mongo Database: " + db
-                        s.path = scriptDir + "/create-mongo.sh"
-                        s.args = [db]
+                        s.name = "Creating MySQL Database: " + db["name"]
+                        s.path = scriptDir + "/create-mysql.sh"
+                        s.args = [db["name"]]
+                    end
+                end
+
+                #config.vm.provision "shell" do |s|
+                #    s.name = "Creating Postgres Database: " + db["name"]
+                #    s.path = scriptDir + "/create-postgres.sh"
+                #    s.args = [db["name"]]
+                #end
+
+                if db["type"] == "mongodb"
+                    if settings.has_key?("mongodb") && settings["mongodb"]
+                        config.vm.provision "shell" do |s|
+                            s.name = "Creating Mongo Database: " + db["name"]
+                            s.path = scriptDir + "/create-mongo.sh"
+                            s.args = [db["name"]]
+                        end
                     end
                 end
 
                 if settings.has_key?("couchdb") && settings["couchdb"]
-                    config.vm.provision "shell" do |s|
-                        s.name = "Creating Couch Database: " + db
-                        s.path = scriptDir + "/create-couch.sh"
-                        s.args = [db]
+                    if db["type"] == "couchdb"
+                        config.vm.provision "shell" do |s|
+                            s.name = "Creating Couch Database: " + db["name"]
+                            s.path = scriptDir + "/create-couch.sh"
+                            s.args = [db["name"]]
+                        end
                     end
                 end
             end
+        end
+
+        #Install Composer
+        config.vm.provision "shell" do |s|
+            s.path = scriptDir + "/install-composer.sh"
+            s.privileged = true
         end
 
         # Update Composer On Every Provision
@@ -494,11 +497,17 @@ class VagrantVM
             end
         end
 
-        # Add config file for ngrok
-        config.vm.provision "shell" do |s|
-            s.path = scriptDir + "/create-ngrok.sh"
-            s.args = [settings["ip"]]
-            s.privileged = false
+        if settings.has_key?("ngrok") && settings["ngrok"]
+            # Add config file for ngrok
+            config.vm.provision "shell" do |s|
+                s.path = scriptDir + "/create-ngrok.sh"
+                s.args = [settings["ip"]]
+                s.privileged = false
+            end
+            config.vm.provision "shell" do |s|
+                s.path = scriptDir + "/install-ngrok.sh"
+                s.privileged = true
+            end
         end
 
         # Install Profiler If Necessary
@@ -732,6 +741,41 @@ class VagrantVM
                 s.name = "Creating Certificate: " + "statsd."+settings["name"]
                 s.path = scriptDir + "/create-certificate.sh"
                 s.args = ["statsd."+settings["name"]]
+            end
+        end
+
+        if settings.has_key?("sqlite") && settings["sqlite"]
+            config.vm.provision "shell" do |s|
+                s.name = "Installing sqlite"
+                s.path = scriptDir + "/install-sqllite.sh"
+            end
+        end
+
+        if settings.has_key?("sqlite") && settings["beanstalkd"]
+            config.vm.provision "shell" do |s|
+                s.name = "Installing beanstalkd"
+                s.path = scriptDir + "/install-beanstalkd.sh"
+            end
+        end
+
+        if settings.has_key?("ohmyzsh") && settings["ohmyzsh"]
+            config.vm.provision "shell" do |s|
+                s.name = "Installing Oh My ZSH"
+                s.path = scriptDir + "/install-oh-my-zsh.sh"
+            end
+        end
+
+        if settings.has_key?("postgresql") && settings["postgresql"]
+            config.vm.provision "shell" do |s|
+                s.name = "Installing postgresql"
+                s.path = scriptDir + "/install-postgresql.sh"
+            end
+        end
+
+        if settings.has_key?("sqlite") && settings["zray"]
+            config.vm.provision "shell" do |s|
+                s.name = "Installing zray"
+                s.path = scriptDir + "/install-zray.sh"
             end
         end
     end

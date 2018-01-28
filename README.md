@@ -18,6 +18,7 @@ Configure config.yaml according your requirements
 Add the IP Address to pa.ssh.sh or vb.ssh.sh,
 if you have an unixoed system or accessing the environment with an Cygwin bash
 
+
 ### 3. run vagrant up
 
 $# vagrant up
@@ -48,5 +49,80 @@ Other Virtualisation Software or Windows
 
 vagrant(.exe) ssh
 
+## List of Options
+
+### Install Mailhog
+mailhog: true
+### Install nodejs
+nodejs: true
+### Install PHP 5.6
+php56: true
+### Install PHP 7.0
+php70: true
+### Install PHP 7.1
+php71: true
+### Install Redis
+redis: true
+### Install Memcached
+memcache: true
+### Install Java Open JDK 8 (JRE + JDK)
+java: true
+### Install Ant
+ant: true
+### Install supervisorD
+supervisor: true
+### Install PHP My Admin (enable it)
+phpma: true
+### Install Profiler (xhprof/tideways profiler)
+profiler: true
+### Install xhgui for xhprof/tideways Profiler
+xhgui: true
+### Install MariaDB
+mariadb: true
+### Install Master/Slave Config
+mariadbMultiMaster: true
+mariadbMultiMasterCount: 2
+
+this configures 1 Master 2 Slaves
+### Install elasticsearch
+elasticsearch: true
+
+or
+
+elasticsearch: 5
+
+or
+
+elasticsearch: 6
+### Install kibana
+kibana: true
+### Install logstash
+logstash: true
+### Install couchdb
+couchdb: true
+### Install mongodb
+mongodb: true
+### Install rabbitmq
+rabbitmq: true
+### Install cockpit
+cockpit: true
+### Install statsd
+statsd: true
+### Install PostgreSQL
+postgresql:true
+### Install Zend Z-Ray Standalone
+zray: true
+### Install SqLite
+sqlite: true
+### Install Oh My ZSH
+ohmyzsh: true
+### Install beanstalkd
+beanstalkd: true
+### Install ngrok:
+ngrok: true
+
 ## Known Issues
 
+## Missing Software Packages
+* Build Server
+* errbit

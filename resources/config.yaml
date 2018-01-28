@@ -17,3 +17,23 @@ databases:
     - application
 
 name: vm.test
+
+sites:
+    - map: profiler.registration.test
+      type: ignore
+    - map: pma.registration.test
+      type: ignore
+    - map: info.registration.test
+      type: ignore
+    - map: rabbit.registration.test
+      type: ignore
+    - map: search.registration.test
+      type: ignore
+    - map: kibana.registration.test
+      type: ignore
+    - map: mail.registration.test
+      type: ignore
+    - map: cockpit.registration.test
+      type: ignore
+    - map: ui.registration.test
+      type: ignore
