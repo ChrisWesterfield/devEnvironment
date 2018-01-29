@@ -29,7 +29,7 @@ block="server {
     location = /robots.txt  { access_log off; log_not_found off; }
 
     access_log off;
-    error_log  /vagrant/log/nginx/$1-error.log error;
+    error_log  /vagrant/log/$1-error.log error;
 
     sendfile off;
 
@@ -41,8 +41,8 @@ block="server {
 
     $paramsTXT
 
-    ssl_certificate     /vagrant/etc/nginx/ssl/$1.crt;
-    ssl_certificate_key /vagrant/etc/nginx/ssl/$1.key;
+    ssl_certificate     /vagrant/etc/nginx/ssl/site/$1.crt;
+    ssl_certificate_key /vagrant/etc/nginx/ssl/site/$1.key;
 }
 "
 

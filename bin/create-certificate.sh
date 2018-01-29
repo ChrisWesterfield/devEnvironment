@@ -5,16 +5,25 @@ mkdir /etc/nginx/ssl 2>/dev/null
 
 PATH_SSL="/vagrant/etc/nginx/ssl"
 
+if [ ! -d "$PATH_SSL/ca" ]
+then
+    mkdir   "$PATH_SSL/ca"
+fi
+if [ ! -d "$PATH_SSL/site" ]
+then
+    mkdir   "$PATH_SSL/site"
+fi
+
 # Path to the custom Vagrant $(hostname) Root CA certificate.
-PATH_ROOT_CNF="${PATH_SSL}/ca.vagrant.$(hostname).cnf"
-PATH_ROOT_CRT="${PATH_SSL}/ca.vagrant.$(hostname).crt"
-PATH_ROOT_KEY="${PATH_SSL}/ca.vagrant.$(hostname).key"
+PATH_ROOT_CNF="${PATH_SSL}/ca/vagrant.cnf"
+PATH_ROOT_CRT="${PATH_SSL}/ca/vagrant.crt"
+PATH_ROOT_KEY="${PATH_SSL}/ca/vagrant.key"
 
 # Path to the custom site certificate.
-PATH_CNF="${PATH_SSL}/${1}.cnf"
-PATH_CRT="${PATH_SSL}/${1}.crt"
-PATH_CSR="${PATH_SSL}/${1}.csr"
-PATH_KEY="${PATH_SSL}/${1}.key"
+PATH_CNF="${PATH_SSL}/site/${1}.cnf"
+PATH_CRT="${PATH_SSL}/site/${1}.crt"
+PATH_CSR="${PATH_SSL}/site/${1}.csr"
+PATH_KEY="${PATH_SSL}/site/${1}.key"
 
 BASE_CNF="
     [ ca ]
@@ -76,9 +85,9 @@ then
     cnf="
         ${BASE_CNF}
         [ req_distinguished_name ]
-        O  = Vagrant
-        C  = UN
-        CN = vagrant $(hostname) Root CA
+        O  = mjrOne
+        C  = DE
+        CN = mjr!one $(hostname) Root CA
     "
     echo "$cnf" > $PATH_ROOT_CNF
 
@@ -100,8 +109,8 @@ then
     cnf="
         ${BASE_CNF}
         [ req_distinguished_name ]
-        O  = Vagrant
-        C  = UN
+        O  = mjrOne
+        C  = DE
         CN = $1
 
         [ alternate_names ]

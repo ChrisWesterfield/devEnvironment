@@ -18,6 +18,7 @@ Configure config.yaml according your requirements
 Add the IP Address to pa.ssh.sh or vb.ssh.sh,
 if you have an unixoed system or accessing the environment with an Cygwin bash
 
+You need to select and PHP and NGINX Server bevor starting vagrant up or systems will fail!
 
 ### 3. run vagrant up
 
@@ -39,11 +40,11 @@ Unixoed/Cygwin Bash
 
 Virtual Box:
 
-$# ./vb.ssh.sh
+$# ./bin/vb.ssh.sh
 
 Parallels:
 
-$# ./pa.ssh.sh
+$# ./bin/pa.ssh.sh
 
 Other Virtualisation Software or Windows
 
@@ -61,6 +62,10 @@ php56: true
 php70: true
 ### Install PHP 7.1
 php71: true
+### Install PHP 7.2
+php72: true
+### Install PHP Tools for Development (should be enabled on last run if futher php tools are required)
+php: true
 ### Install Redis
 redis: true
 ### Install Memcached
@@ -120,9 +125,18 @@ ohmyzsh: true
 beanstalkd: true
 ### Install ngrok:
 ngrok: true
+### Install Jenkins
+jenkins: true
+### Install PHP QA Tools
+qatools: true
+### Install Blackfire
+blackfire: true
+### Install nginx
+nginx: true
+### Install Apache2
+apache2: true
 
 ## Known Issues
 
 ## Missing Software Packages
-* Build Server
 * errbit

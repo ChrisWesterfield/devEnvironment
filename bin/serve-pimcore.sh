@@ -57,8 +57,8 @@ blockssl="<IfModule mod_ssl.c>
         CustomLog \${APACHE_LOG_DIR}/$1-access.log combined
 
         SSLEngine on
-        SSLCertificateFile      /vagrant/etc/nginx/ssl/$1.crt
-        SSLCertificateKeyFile   /vagrant/etc/nginx/ssl/$1.key
+        SSLCertificateFile      /vagrant/etc/nginx/ssl/site/$1.crt
+        SSLCertificateKeyFile   /vagrant/etc/nginx/ssl/site/$1.key
 
         <FilesMatch \"\.(cgi|shtml|phtml|php)$\">
             SSLOptions +StdEnvVars

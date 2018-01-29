@@ -17,7 +17,7 @@ apt-get update
 apt-get install -y apache2 libapache2-mod-php"$5"
 sed -i "s/www-data/vagrant/" /etc/apache2/envvars
 
-block="<VirtualHost *:$3>
+block="<VirtualHost *:81>
     # The ServerName directive sets the request scheme, hostname and port that
     # the server uses to identify itself. This is used when creating
     # redirection URLs. In the context of virtual hosts, the ServerName
@@ -158,7 +158,6 @@ blockssl="<IfModule mod_ssl.c>
 "
 
 echo "$blockssl" > "/etc/apache2/sites-available/$1-ssl.conf"
-ln -fs "/etc/apache2/sites-available/$1-ssl.conf" "/etc/apache2/sites-enabled/$1-ssl.conf"
 
 a2dissite 000-default
 

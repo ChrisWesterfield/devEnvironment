@@ -20,6 +20,8 @@ location /ZendServer {
 else configureZray=""
 fi
 
+phpV="${5//.}"
+
 block="server {
     listen ${3:-80};
     listen ${4:-443} ssl http2;
@@ -40,7 +42,7 @@ block="server {
     error_page 500 /assets/error-500.html;
 
     access_log off;
-    error_log  /vagrant/log/nginx/$1-error.log error;
+    error_log  /vagrant/log/$1-error.log error;
     sendfile off;
     
     location ^~ /assets/ {
@@ -52,7 +54,7 @@ block="server {
 
     location ~ /framework/.*(main|rpc|tiny_mce_gzip)\.php$ {
         fastcgi_keep_conn on;
-        fastcgi_pass   unix:/var/run/php/php$5-fpm.sock;
+        fastcgi_pass 127.0.0.1:90$phpV;
         fastcgi_index  index.php;
         fastcgi_param  SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
         include        fastcgi_params;
@@ -99,7 +101,7 @@ block="server {
 
     location ~ \.php$ {
         fastcgi_keep_conn on;
-        fastcgi_pass   unix:/var/run/php/php$5-fpm.sock;
+        fastcgi_pass 127.0.0.1:90$phpV;
         fastcgi_index  index.php;
         fastcgi_param  SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
         include        fastcgi_params;
@@ -111,8 +113,8 @@ block="server {
 
     $configureZray
 
-    ssl_certificate     /vagrant/etc/nginx/ssl/$1.crt;
-    ssl_certificate_key /vagrant/etc/nginx/ssl/$1.key;
+    ssl_certificate     /vagrant/etc/nginx/ssl/site/$1.crt;
+    ssl_certificate_key /vagrant/etc/nginx/ssl/site/$1.key;
 }
 "
 

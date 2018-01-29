@@ -1,39 +1,90 @@
 ---
+#VM Settings
 ip: 192.168.100.42
 memory: 2048
 cpus: 1
 provider: virtualbox
+
+# Authorisation
 authorize: ~/.ssh/id_rsa.pub
 keys:
     - ~/.ssh/id_rsa
 
+#Folders
 folders:
-    - map: ./application
-      to: /application
+#    - map: ./application
+#      to: /application
     - map: ./vagrant
       to: /vagrant
 
-databases:
-    - application
+#Database
+#databases:
+#    - name: application
+#      type: mysql
 
+#server name
 name: vm.test
 
+#Sites
 sites:
-    - map: profiler.registration.test
+    - map: vm
       type: ignore
-    - map: pma.registration.test
+      function: startpage
+      desc: "Startpage"
+    - map: profiler.vm
       type: ignore
-    - map: info.registration.test
+      function: profiler
+      desc: "Profiler Server"
+    - map: pma.vm
       type: ignore
-    - map: rabbit.registration.test
+      function: pma
+      desc: "PHP MyAdmin Server"
+    - map: rabbit.vm
       type: ignore
-    - map: search.registration.test
+      function: rabbit
+      desc: "Rabbit MQ Server"
+    - map: search.vm
       type: ignore
-    - map: kibana.registration.test
+      function: search
+      desc: "Elastic Search Server"
+    - map: kibana.vm
       type: ignore
-    - map: mail.registration.test
+      function: kibana
+      desc: "Kibana Server"
+    - map: mail.vm
       type: ignore
-    - map: cockpit.registration.test
+      function: mail
+      desc: "Mail Server"
+    - map: cockpit.vm
       type: ignore
-    - map: ui.registration.test
+      function: cockpit
+      desc: "Cockpit"
+    - map: ui.vm
       type: ignore
+      function: ui
+      desc: "Docker UI Server"
+    - map: build.vm
+      type: ignore
+      function: build
+      desc: "Build Server"
+    - map: info72.vm
+      type: ignore
+      function: phpinfo
+      desc: "PHP Info 7.2"
+    - map: info71.vm
+      type: ignore
+      function: phpinfo
+      desc: "PHP Info 7.1"
+    - map: info70.vm
+      type: ignore
+      function: phpinfo
+      desc: "PHP Info 7.0"
+    - map: info56.vm
+      type: ignore
+      function: phpinfo
+      desc: "PHP Info 5.6"
+
+#Features
+php72: true
+php: true
+nginx: true

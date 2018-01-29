@@ -4,7 +4,7 @@ export DEBIAN_FRONTEND=noninteractive
 block="server {
     listen ${3:-80};
     listen ${4:-443} ssl;
-    server_name .$1;
+    server_name $1;
 
     location / {
         proxy_set_header X-Real-IP \$remote_addr;
@@ -17,10 +17,10 @@ block="server {
     }
 
     access_log off;
-    error_log  /vagrant/log/nginx/$1-error.log error;
+    error_log  /vagrant/log/$1-error.log error;
 
-    ssl_certificate     /vagrant/etc/nginx/ssl/$1.crt;
-    ssl_certificate_key /vagrant/etc/nginx/ssl/$1.key;
+    ssl_certificate     /vagrant/etc/nginx/ssl/site/$1.crt;
+    ssl_certificate_key /vagrant/etc/nginx/ssl/site/$1.key;
 }
 "
 

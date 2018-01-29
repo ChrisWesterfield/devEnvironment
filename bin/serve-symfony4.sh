@@ -1,6 +1,16 @@
 #!/usr/bin/env bash
 export DEBIAN_FRONTEND=noninteractive
 
+declare -A params=$6     # Create an associative array
+paramsTXT=""
+if [ -n "$6" ]; then
+   for element in "${!params[@]}"
+   do
+      paramsTXT="${paramsTXT}
+      fastcgi_param ${element} ${params[$element]};"
+   done
+fi
+
 if [ "$7" = "true" ] && [ "$5" = "7.2" ]
 then configureZray="
 location /ZendServer {
@@ -9,6 +19,8 @@ location /ZendServer {
 "
 else configureZray=""
 fi
+
+phpV="${5//.}"
 
 block="server {
     listen ${3:-80};
@@ -28,7 +40,7 @@ block="server {
     location = /robots.txt  { access_log off; log_not_found off; }
 
     access_log off;
-    error_log  /vagrant/log/nginx/$1-ssl-error.log error;
+    error_log  /vagrant/log/$1-ssl-error.log error;
 
     sendfile off;
 
@@ -40,6 +52,7 @@ block="server {
         fastcgi_pass unix:/var/run/php/php$5-fpm.sock;
         include fastcgi_params;
         fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
+        $paramsTXT
 
         fastcgi_intercept_errors off;
         fastcgi_buffer_size 16k;
@@ -52,8 +65,8 @@ block="server {
 
     $configureZray
 
-    ssl_certificate     /vagrant/etc/nginx/ssl/$1.crt;
-    ssl_certificate_key /vagrant/etc/nginx/ssl/$1.key;
+    ssl_certificate     /vagrant/etc/nginx/ssl/site/$1.crt;
+    ssl_certificate_key /vagrant/etc/nginx/ssl/site/$1.key;
 }
 "
 

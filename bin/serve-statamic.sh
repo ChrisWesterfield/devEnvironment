@@ -20,6 +20,8 @@ location /ZendServer {
 else configureZray=""
 fi
 
+phpV="${5//.}"
+
 block="server {
     listen ${3:-80};
     listen ${4:-443} ssl http2;
@@ -39,7 +41,7 @@ block="server {
     location = /robots.txt  { access_log off; log_not_found off; }
 
     access_log off;
-    error_log  /vagrant/log/nginx/$1-error.log error;
+    error_log  /vagrant/log/$1-error.log error;
 
     sendfile off;
 
@@ -47,7 +49,7 @@ block="server {
 
     location ~ \.php$ {
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
-        fastcgi_pass unix:/var/run/php/php$5-fpm.sock;
+        fastcgi_pass 127.0.0.1:90$phpV;
         fastcgi_index index.php;
         include fastcgi_params;
         fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
@@ -67,8 +69,8 @@ block="server {
 
     $configureZray
 
-    ssl_certificate     /vagrant/etc/nginx/ssl/$1.crt;
-    ssl_certificate_key /vagrant/etc/nginx/ssl/$1.key;
+    ssl_certificate     /vagrant/etc/nginx/ssl/site/$1.crt;
+    ssl_certificate_key /vagrant/etc/nginx/ssl/site/$1.key;
 }
 "
 

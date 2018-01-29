@@ -1,11 +1,6 @@
 #!/usr/bin/env bash
 export DEBIAN_FRONTEND=noninteractive
 
-if [ ! -f /home/vagrant/.maria ]
-then
-    source /vagrant/bin/install-maria.sh
-fi
-
 
 if [ -f /home/vagrant/.mariaMultiMaster ]
 then
@@ -16,6 +11,7 @@ touch /home/vagrant/.mariaMultiMaster
 
 DB=${1:-2};
 
+echo DB > /home/vagrant/.mariaMultiMasterSlaves
 
 sudo service mysql stop
 
