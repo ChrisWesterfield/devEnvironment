@@ -2,258 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e3adc232-3677-4884-bafa-cf15c85ee48d" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bin/console" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change beforePath="$PROJECT_DIR$/after.sh" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/aliases" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/bin/clear-variables.sh" afterPath="$PROJECT_DIR$/bin/clear-variables.sh" />
-      <change beforePath="$PROJECT_DIR$/bin/configure-masterSlave.sh" afterPath="$PROJECT_DIR$/bin/configure-masterSlave.sh" />
-      <change beforePath="$PROJECT_DIR$/bin/configure-xhgui.sh" afterPath="$PROJECT_DIR$/bin/configure-xhgui.sh" />
-      <change beforePath="$PROJECT_DIR$/bin/configure.profile.sh" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/bin/create-certificate.sh" afterPath="$PROJECT_DIR$/bin/create-certificate.sh" />
-      <change beforePath="$PROJECT_DIR$/bin/init.bat" afterPath="$PROJECT_DIR$/bin/init.bat" />
-      <change beforePath="$PROJECT_DIR$/bin/init.sh" afterPath="$PROJECT_DIR$/bin/init.sh" />
-      <change beforePath="$PROJECT_DIR$/bin/install-profiler.sh" afterPath="$PROJECT_DIR$/bin/install-profiler.sh" />
-      <change beforePath="$PROJECT_DIR$/bin/prepare.sh" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/bin/serve-apache.sh" afterPath="$PROJECT_DIR$/bin/serve-apache.sh" />
-      <change beforePath="$PROJECT_DIR$/bin/serve-elgg.sh" afterPath="$PROJECT_DIR$/bin/serve-elgg.sh" />
-      <change beforePath="$PROJECT_DIR$/bin/serve-laravel.sh" afterPath="$PROJECT_DIR$/bin/serve-laravel.sh" />
-      <change beforePath="$PROJECT_DIR$/bin/serve-pimcore.sh" afterPath="$PROJECT_DIR$/bin/serve-pimcore.sh" />
-      <change beforePath="$PROJECT_DIR$/bin/serve-proxy.sh" afterPath="$PROJECT_DIR$/bin/serve-proxy.sh" />
-      <change beforePath="$PROJECT_DIR$/bin/serve-silverstripe.sh" afterPath="$PROJECT_DIR$/bin/serve-silverstripe.sh" />
-      <change beforePath="$PROJECT_DIR$/bin/serve-spa.sh" afterPath="$PROJECT_DIR$/bin/serve-spa.sh" />
-      <change beforePath="$PROJECT_DIR$/bin/serve-statamic.sh" afterPath="$PROJECT_DIR$/bin/serve-statamic.sh" />
-      <change beforePath="$PROJECT_DIR$/bin/serve-symfony2.sh" afterPath="$PROJECT_DIR$/bin/serve-symfony2.sh" />
-      <change beforePath="$PROJECT_DIR$/bin/serve-symfony4.sh" afterPath="$PROJECT_DIR$/bin/serve-symfony4.sh" />
-      <change beforePath="$PROJECT_DIR$/bin/serve.grafana.sh" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/bin/serve.pma.sh" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/bin/serve.xhgui.sh" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/bin/vagrant.rb" afterPath="$PROJECT_DIR$/bin/vagrant.rb" />
-      <change beforePath="$PROJECT_DIR$/pa.ssh.sh" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/resources/aliases" afterPath="$PROJECT_DIR$/resources/aliases" />
-      <change beforePath="$PROJECT_DIR$/resources/config.yaml" afterPath="$PROJECT_DIR$/resources/config.yaml" />
-      <change beforePath="$PROJECT_DIR$/vagrant/.bash_profile" afterPath="$PROJECT_DIR$/vagrant/.bash_profile" />
-      <change beforePath="$PROJECT_DIR$/vagrant/bin/restartPhp.sh" afterPath="$PROJECT_DIR$/vagrant/bin/restartPhp.sh" />
-      <change beforePath="$PROJECT_DIR$/vagrant/bin/restartWeb.sh" afterPath="$PROJECT_DIR$/vagrant/bin/restartWeb.sh" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/fpm-pool.d/app.php7.2.conf" afterPath="$PROJECT_DIR$/vagrant/etc/fpm-pool.d/app.php7.2.conf" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/fpm-pool.d/phpmyadmin.php7.2.conf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/graphite/supervisor.gunicorn.conf" afterPath="$PROJECT_DIR$/vagrant/etc/graphite/supervisor.gunicorn.conf" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d/accounting.module" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d/fastcgi.conf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d/graphite.conf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d/graphite.module" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d/gzip.conf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d/httpheader.module" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d/log.conf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d/logformat.conf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d/main.conf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d/proxy.conf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d/ssl.conf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d/uploadprogress.module" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d/vts.conf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d/vts.module" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/nginx.conf" afterPath="$PROJECT_DIR$/vagrant/etc/nginx/nginx.conf" />
-      <change beforePath="$PROJECT_DIR$/vagrant/src/nginx/nginx-1.13.4/objs/autoconf.err" afterPath="$PROJECT_DIR$/vagrant/src/nginx/nginx-1.13.4/objs/autoconf.err" />
-      <change beforePath="$PROJECT_DIR$/vagrant/src/nginx/nginx-1.13.4/objs/src/http/modules/perl/Makefile" afterPath="$PROJECT_DIR$/vagrant/src/nginx/nginx-1.13.4/objs/src/http/modules/perl/Makefile" />
-      <change beforePath="$PROJECT_DIR$/vagrant/src/nginx/nginx-1.13.4/objs/src/http/modules/perl/blib/man3/nginx.3pm" afterPath="$PROJECT_DIR$/vagrant/src/nginx/nginx-1.13.4/objs/src/http/modules/perl/blib/man3/nginx.3pm" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/css/bootstrap-theme.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/css/bootstrap-theme.css.map" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/css/bootstrap-theme.min.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/css/bootstrap-theme.min.css.map" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/css/bootstrap.css" afterPath="$PROJECT_DIR$/vagrant/system/css/bootstrap.css" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/css/bootstrap.css.map" afterPath="$PROJECT_DIR$/vagrant/system/css/bootstrap.css.map" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/vagrant/system/css/bootstrap.min.css" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/css/bootstrap.min.css.map" afterPath="$PROJECT_DIR$/vagrant/system/css/bootstrap.min.css.map" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/css/styles.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/fonts/glyphicons-halflings-regular.eot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/fonts/glyphicons-halflings-regular.svg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/fonts/glyphicons-halflings-regular.ttf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/fonts/glyphicons-halflings-regular.woff" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/fonts/glyphicons-halflings-regular.woff2" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/images/background.jpg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/images/logo.jpg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/index.php" afterPath="$PROJECT_DIR$/vagrant/system/index.php" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/js/bootstrap.js" afterPath="$PROJECT_DIR$/vagrant/system/js/bootstrap.js" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/js/bootstrap.min.js" afterPath="$PROJECT_DIR$/vagrant/system/js/bootstrap.min.js" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/js/jquery.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/js/npm.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/phpinfo.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/anomalies.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/application.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/columns.byAuto.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/columns.byColumn.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/columns.byDefault.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/columns.byNulls.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/columns.bySize.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/columns.byTable.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/columns.byType.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/constraints.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/deletionOrder.txt" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/division.1degree.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/division.1degree.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/division.2degrees.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/division.2degrees.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/division_settings.1degree.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/division_settings.1degree.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/division_settings.2degrees.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/division_settings.2degrees.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/eav_attribute.1degree.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/eav_attribute.1degree.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/eav_attribute.2degrees.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/eav_attribute.2degrees.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/eav_group.1degree.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/eav_group.1degree.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/eav_group.2degrees.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/eav_group.2degrees.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/eav_option.1degree.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/eav_option.1degree.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/eav_option.2degrees.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/eav_option.2degrees.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/eav_value.1degree.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/eav_value.1degree.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/eav_value.2degrees.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/eav_value.2degrees.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/email_log.1degree.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/email_log.1degree.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/email_log.2degrees.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/email_log.2degrees.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/email_log_attachments.1degree.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/email_log_attachments.1degree.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/email_log_attachments.2degrees.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/email_log_attachments.2degrees.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/email_template_attachments.1degree.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/email_template_attachments.1degree.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/email_template_attachments.2degrees.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/email_template_attachments.2degrees.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/email_template_log.1degree.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/email_template_log.1degree.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/email_template_log.2degrees.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/email_template_log.2degrees.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/event.1degree.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/event.1degree.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/event.2degrees.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/event.2degrees.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/map_performance_class_type.1degree.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/map_performance_class_type.1degree.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/map_performance_class_type.2degrees.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/map_performance_class_type.2degrees.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/map_user_number.1degree.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/map_user_number.1degree.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/map_user_number.2degrees.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/map_user_number.2degrees.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/map_user_tenant.1degree.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/map_user_tenant.1degree.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/map_user_tenant.2degrees.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/map_user_tenant.2degrees.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/performance_class.1degree.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/performance_class.1degree.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/performance_class.2degrees.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/performance_class.2degrees.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/summary/ext_log_entries.1degree.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/summary/ext_log_entries.1degree.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/summary/ext_translations.1degree.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/summary/ext_translations.1degree.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/summary/migration_versions.1degree.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/summary/migration_versions.1degree.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/summary/relationships.real.compact.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/summary/relationships.real.compact.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/summary/relationships.real.large.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/summary/relationships.real.large.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/support_message.1degree.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/support_message.1degree.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/support_message.2degrees.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/support_message.2degrees.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/support_ticket.1degree.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/support_ticket.1degree.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/support_ticket.2degrees.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/support_ticket.2degrees.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/system_config.1degree.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/system_config.1degree.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/system_config.2degrees.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/system_config.2degrees.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/system_job.1degree.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/system_job.1degree.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/system_property_type.1degree.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/system_property_type.1degree.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/system_property_type.2degrees.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/system_property_type.2degrees.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/team.1degree.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/team.1degree.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/team.2degrees.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/team.2degrees.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/team_members.1degree.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/team_members.1degree.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/team_members.2degrees.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/team_members.2degrees.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/tenant_note.1degree.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/tenant_note.1degree.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/tenant_note.2degrees.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/tenant_note.2degrees.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/tenants.1degree.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/tenants.1degree.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/tenants.2degrees.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/tenants.2degrees.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/user.1degree.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/user.1degree.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/user.2degrees.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/user.2degrees.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/user_address.1degree.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/user_address.1degree.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/user_address.2degrees.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/user_address.2degrees.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/user_number.1degree.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/user_number.1degree.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/user_number.2degrees.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/user_number.2degrees.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/user_settings.1degree.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/user_settings.1degree.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/user_settings.2degrees.dot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/diagrams/user_settings.2degrees.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/images/background.gif" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/images/tabLeft.gif" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/images/tabRight.gif" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/index.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/insertionOrder.txt" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/jquery.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/relationships.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/schemaSpy.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/schemaSpy.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/tables/division.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/tables/division_settings.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/tables/eav_attribute.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/tables/eav_group.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/tables/eav_option.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/tables/eav_value.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/tables/email_log.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/tables/email_log_attachments.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/tables/email_template_attachments.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/tables/email_template_log.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/tables/event.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/tables/ext_log_entries.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/tables/ext_translations.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/tables/map_performance_class_type.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/tables/map_user_number.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/tables/map_user_tenant.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/tables/migration_versions.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/tables/performance_class.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/tables/support_message.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/tables/support_ticket.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/tables/system_config.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/tables/system_job.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/tables/system_property_type.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/tables/team.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/tables/team_members.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/tables/tenant_note.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/tables/tenants.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/tables/user.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/tables/user_address.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/tables/user_number.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/tables/user_settings.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/schema/utilities.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/services.php" afterPath="$PROJECT_DIR$/vagrant/system/services.php" />
-      <change beforePath="$PROJECT_DIR$/vagrant/system/status.php" afterPath="$PROJECT_DIR$/vagrant/system/status.php" />
-      <change beforePath="$PROJECT_DIR$/vb.ssh.sh" afterPath="" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -267,11 +17,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="136">
               <caret line="8" column="9" lean-forward="false" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="console" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/bin/console">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="5" column="12" lean-forward="false" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MakeCommand.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bin/src/MakeCommand.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="10" lean-forward="false" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -322,7 +92,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/vagrant/bin/configure-masterSlave.sh" />
         <option value="$PROJECT_DIR$/vagrant/bin/configure-pma.sh" />
         <option value="$PROJECT_DIR$/vagrant/bin/configure-xhgui.sh" />
         <option value="$PROJECT_DIR$/vagrant/bin/create-certificate.sh" />
@@ -373,6 +142,7 @@
         <option value="$PROJECT_DIR$/vb.ssh.sh" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/bin/console" />
       </list>
     </option>
   </component>
@@ -413,6 +183,11 @@
             <path>
               <item name="Vagrant" type="b2602c69:ProjectViewProjectNode" />
               <item name="Vagrant" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Vagrant" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Vagrant" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="bin" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="Vagrant" type="b2602c69:ProjectViewProjectNode" />
@@ -505,12 +280,12 @@
       <updated>1517075327723</updated>
       <workItem from="1517075329044" duration="5258000" />
       <workItem from="1517081589826" duration="10389000" />
-      <workItem from="1517231387670" duration="36000" />
+      <workItem from="1517231387670" duration="403000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15683000" />
+    <option name="totallyTimeSpent" value="16050000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -559,8 +334,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vagrant/bin/install-elasticsearch5.sh" />
-    <entry file="file://$PROJECT_DIR$/vagrant/bin/install-elasticsearch6.sh" />
     <entry file="file://$PROJECT_DIR$/vagrant/bin/install-java.sh" />
     <entry file="file://$PROJECT_DIR$/vagrant/bin/install-kibana.sh" />
     <entry file="file://$PROJECT_DIR$/vagrant/bin/install-logstash.sh" />
@@ -724,6 +497,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="9" lean-forward="false" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bin/src/MakeCommand.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="10" lean-forward="false" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bin/console">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="12" lean-forward="false" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
           <folding />
         </state>
       </provider>
