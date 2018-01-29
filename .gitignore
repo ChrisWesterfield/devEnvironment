@@ -8,3 +8,4 @@ vagrant/etc/sites-ssl/*.key
 vagrant/log/*.log
 config.yaml
 .DS_Store
+vagrant/config.json

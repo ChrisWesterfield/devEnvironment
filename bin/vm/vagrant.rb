@@ -998,7 +998,7 @@ class VagrantVM
         end
 
         config.vm.provision "shell" do |s|
-            s.inline = "/vagrant/bin/change-home.sh"
+            s.inline = "/vagrant/bin/chown-home.sh"
             s.privileged = false
         end
 
