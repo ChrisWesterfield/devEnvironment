@@ -318,7 +318,7 @@ class VagrantVM
                         end
                     end
 
-                    if site.type == "apache"
+                    if site["type"] == "apache"
                         config.vm.provision "shell" do |s|
                             s.path = scriptDir + "/serve-proxy.sh"
                             s.args = [
@@ -980,6 +980,13 @@ class VagrantVM
             config.vm.provision "shell" do |s|
                 s.name = "Installing WebDriver"
                 s.path = scriptDir + "/install-webdriver.sh"
+            end
+        end
+
+        if settings.has_key?("yarn") && settings["yarn"] == true
+            config.vm.provision "shell" do |s|
+                s.name = "Installing Yarn"
+                s.path = scriptDir + "/install-yarn.sh"
             end
         end
 

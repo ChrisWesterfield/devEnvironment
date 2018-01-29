@@ -34,7 +34,18 @@ composer install
 
 (Windows Seperate approach required regarding php and composer)
 
-### 5. enter vagrant environment
+### 5. install root certificate (into Environment)
+
+#### Windows
+./bin/addCA.win.bat
+
+#### Linux
+./bin/addCA.linux.sh
+
+#### MacOSX
+./bin/addCA.mac.sh
+
+### 6. enter vagrant environment
 
 Unixoed/Cygwin Bash
 
@@ -135,8 +146,10 @@ blackfire: true
 nginx: true
 ### Install Apache2
 apache2: true
+### Yarn JS Tools
+yarn: true
 
 ## Known Issues
 
-## Missing Software Packages
-* errbit
+## Untestet
+Apache
