@@ -221,3 +221,26 @@ function dbimport() {
 
     echo "Done."
 }
+
+function mongoexport() {
+    outputdir="/vagrant/db/mongo"
+    if [ ! -d $outputdir ]
+    then mkdir $outputdir
+    fi
+
+    /usr/bin/env mongodump --out $outputdir
+
+    echo "Done."
+}
+
+function mongoimport() {
+    recoverdir="/vagrant/db/mongo"
+    if [ ! -d $outputdir ]
+    then
+        echo "no directory found"
+        exit 0
+    fi
+    /usr/bin/env mongorestore $recoverdir
+
+    echo "Done."
+}

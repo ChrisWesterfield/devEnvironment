@@ -223,8 +223,13 @@ class VagrantVM
 
         #Install PHP
         if settings.has_key?("apache2") && settings["apache2"] == true
+            apache2php="7.2"
+            if settings.has_key?("apache2")
+                apache2php=settings["apache2php"]
+            end
             config.vm.provision "shell" do |s|
                 s.path = scriptDir + "/install-apache2.sh"
+                s.args = [ apache2php ]
             end
         end
 
@@ -464,7 +469,7 @@ class VagrantVM
         end
 
         # Install MongoDB If Necessary
-        if settings.has_key?("mongodb") && settings["mongodb"] == true
+        if (settings.has_key?("mongodb") && settings["mongodb"] == true) || (settings.has_key?("xhgui") && settings["xhgui"] == true)
             config.vm.provision "shell" do |s|
                 s.path = scriptDir + "/install-mongo.sh"
             end
