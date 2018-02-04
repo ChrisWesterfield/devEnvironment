@@ -6,7 +6,7 @@ $json = json_decode($files, true);
 $host = '';
 foreach($json['sites'] as $site)
 {
-    if($site['function'] === 'startpage')
+    if(array_key_exists('function', $site) && $site['function'] === 'startpage')
     {
         $host = '//'.$site['map'].'/';
     }

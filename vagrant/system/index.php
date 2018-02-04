@@ -1,5 +1,7 @@
 <!doctype html>
 <?php
+ini_set('display_errors', 1);
+ini_set('error_reporting', E_ALL);
 $files = file_get_contents('/vagrant/config.json');
 $json = json_decode($files, true);
 ?>
@@ -41,11 +43,10 @@ $json = json_decode($files, true);
                     </ul>
                 </div>
             </nav>
-
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
                     <?php
-                        include('./status.php');
+                        include('status.php');
                         $ss = new    ServerStatus();
                         $cfg['host'] = '127.0.0.1';
                         $skip = 0;

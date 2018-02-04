@@ -60,3 +60,4 @@
         echo '<li class="nav-item"><a target="'. ($app['function'] === 'phpinfo'?'_self':'_blank').'" href="//'.$app['map'].'">'.(isset($app['desc'])?$app['desc']:$app['map']).'</a></li>';
     }
     ?>
+    <li class="nav-item"><a href="sys/">PHP Sys Info</a></li>

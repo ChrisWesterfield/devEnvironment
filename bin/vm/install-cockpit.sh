@@ -7,8 +7,10 @@ then
 fi
 
 touch /home/vagrant/.cockpit
-sudo add-apt-repository ppa:cockpit-project/cockpit -y
-sudo echo "deb http://ppa.launchpad.net/cockpit-project/cockpit/ubuntu xenial main" > /etc/apt/sources.list.d/cockpit-project-ubuntu-cockpit-yakkety.list
-sudo apt-get update
-sudo apt-get install cockpit -y
-sudo apt-get install cockpit-bridge cockpit-docker cockpit-ws  cockpit-system -y
+add-apt-repository ppa:cockpit-project/cockpit -y
+echo "deb http://ppa.launchpad.net/cockpit-project/cockpit/ubuntu xenial main" > /etc/apt/sources.list.d/cockpit-project-ubuntu-cockpit-yakkety.list
+apt-get update
+apt-get install cockpit -y
+apt-get install cockpit-bridge cockpit-ws  cockpit-system -y
+
+service cockpit restart

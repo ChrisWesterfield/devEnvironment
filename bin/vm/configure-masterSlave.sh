@@ -51,8 +51,10 @@ sudo -u mysql mkdir /var/log/mysql/1
 sudo touch /var/log/mysql/1/mysqld.log
 sudo chmod o-r /var/log/mysql/1/mysqld.log
 mysql_install_db --user=mysql --datadir=/var/lib/mysql/1/
+sleep 10
 sudo systemctl start mysqld@1
-sudo systemctl disable mysqld
+sleep 10
+sudo systemctl disable mysql
 sudo systemctl enable mysqld@1
 mysqladmin -u root password 123 -h 127.0.0.1 -P 3306
 mysql -uroot -p123 -h 127.0.0.1 -P 3306 -e "GRANT ALL PRIVILEGES ON *.* TO root@'%' IDENTIFIED BY '123';"
@@ -60,8 +62,8 @@ MasterPosition=$(mysql -u root -p123 -h 127.0.0.1 -P 3306 -e "show master status
 
 for (( c=0; c<$DB ; c++ ))
 do
-    FIG=c + 1;
-    PORT=3306+c;
+    FIG=$((c+2));
+    PORT=$((3307 + $c));
     sudo echo "[mysqld$FIG]" > "/etc/mysql/mariadb.conf.d/mysqld$FIG.cnf"
     sudo echo "bind-address = 127.0.0.1" >> "/etc/mysql/mariadb.conf.d/mysqld$FIG.cnf"
     sudo echo "server_id=$FIG" >> "/etc/mysql/mariadb.conf.d/mysqld$FIG.cnf"
@@ -81,7 +83,9 @@ do
     sudo touch /var/log/mysql/$FIG/mysqld.log
     sudo chmod o-r /var/log/mysql/$FIG/mysqld.log
     mysql_install_db --user=mysql --datadir=/var/lib/mysql/$FIG/
+    sleep 10
     sudo systemctl start mysqld@$FIG
+    sleep 10
     sudo systemctl enable mysqld@$FIG
     mysqladmin -u root password 123 -h 127.0.0.1 -P $PORT
     mysql -uroot -p123 -h 127.0.0.1 -P $PORT -e "GRANT ALL PRIVILEGES ON *.* TO root@'%' IDENTIFIED BY '123';"

@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
 export DEBIAN_FRONTEND=noninteractive
 
+listenHttp=""
+if $5 == 1
+then
+    listenHttp="listen ${3:-80};"
+fi
+
 block="server {
-    listen ${3:-80};
+    $listenHttp
     listen ${4:-443} ssl;
     server_name $1;
 

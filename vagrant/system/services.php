@@ -46,7 +46,6 @@ if(file_exists($masterHome.'maria'))
     $tmp[] = [];
     $tmp[] = [];
 }
-
 if(file_exists($masterHome.'nginx'))
 {
     $tmp[] = [
@@ -236,12 +235,7 @@ if(file_exists($masterHome.'mongo'))
         'description' => 'Mongo DB Server for xhprof',
         'db'          => false,
     ];
-    $tmp[] = [
-        'name'        => 'MongoDB',
-        'port'        => '28017',
-        'description' => 'Mongo DB Server for xhprof',
-        'db'          => false,
-    ];
+    $tmp[] = [];
     $tmp[] = [];
     $tmp[] = [];
 }
@@ -281,7 +275,7 @@ if(file_exists($masterHome.'cockpit'))
 {
     $tmp[] = [
         'name'        => 'Cockpit',
-        'port'        => '9999',
+        'port'        => '9090',
         'description' => 'Cockpit Server',
         'db'          => false,
     ];

@@ -31,7 +31,7 @@ rm -rf /etc/mysql
 # Add Maria PPA
 
 sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
-sudo add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://ftp.osuosl.org/pub/mariadb/repo/10.2/ubuntu xenial main'
+sudo add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://ftp.heanet.ie/mirrors/mariadb/repo/10.2/ubuntu xenial main'
 apt-get update
 
 # Set The Automated Root Password
@@ -50,11 +50,11 @@ apt-get install -y mariadb-server
 
 sed -i '/^bind-address/s/bind-address.*=.*/bind-address = 0.0.0.0/' /etc/mysql/my.cnf
 
-mysql --user="root" --password="secret" -e "GRANT ALL ON *.* TO root@'0.0.0.0' IDENTIFIED BY 'secret' WITH GRANT OPTION;"
+mysql --user="root" --password="123" -e "GRANT ALL ON *.* TO root@'0.0.0.0' IDENTIFIED BY '123' WITH GRANT OPTION;"
 service mysql restart
 
-mysql --user="root" --password="secret" -e "CREATE USER 'application'@'0.0.0.0' IDENTIFIED BY '123';"
-mysql --user="root" --password="secret" -e "GRANT ALL ON *.* TO 'application'@'0.0.0.0' IDENTIFIED BY '123' WITH GRANT OPTION;"
-mysql --user="root" --password="secret" -e "GRANT ALL ON *.* TO 'application'@'%' IDENTIFIED BY '123' WITH GRANT OPTION;"
-mysql --user="root" --password="secret" -e "FLUSH PRIVILEGES;"
+mysql --user="root" --password="123" -e "CREATE USER 'application'@'0.0.0.0' IDENTIFIED BY '123';"
+mysql --user="root" --password="123" -e "GRANT ALL ON *.* TO 'application'@'0.0.0.0' IDENTIFIED BY '123' WITH GRANT OPTION;"
+mysql --user="root" --password="123" -e "GRANT ALL ON *.* TO 'application'@'%' IDENTIFIED BY '123' WITH GRANT OPTION;"
+mysql --user="root" --password="123" -e "FLUSH PRIVILEGES;"
 service mysql restart

@@ -15,7 +15,7 @@ vagrantYamlPath = confDir + "/config.yaml"
 afterScriptPath = confDir + "/after.sh"
 aliasesPath = confDir + "/aliases"
 
-require File.expand_path(File.dirname(__FILE__) + '/bin/vagrant.rb')
+require File.expand_path(File.dirname(__FILE__) + '/bin/vm/vagrant.rb')
 
 Vagrant.require_version '>= 1.9.0'
 

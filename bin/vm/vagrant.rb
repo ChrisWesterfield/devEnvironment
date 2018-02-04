@@ -287,6 +287,13 @@ class VagrantVM
             settings["sites"].each do |site|
 
                 if (site.has_key?("type") && site['type'] != "ignore")
+
+                    if (settings.has_key?("serverHttp") && settings["serverHttp"] == true) or (site.has_key?("serverHttp") && site["serverHttp"] == true)
+                        http = 1
+                    else
+                        http = 0
+                    end
+
                     # Create SSL certificate
                     config.vm.provision "shell" do |s|
                         s.name = "Creating Certificate: " + site["map"]
@@ -310,7 +317,7 @@ class VagrantVM
                             params += " )"
                         end
                         s.path = scriptDir + "/serve-#{type}.sh"
-                        s.args = [site["map"], site["to"], site["port"] ||= "80", site["ssl"] ||= "443", site["php"] ||= "7.2", params ||= "", site["zray"] ||= "false"]
+                        s.args = [site["map"], site["to"], site["port"] ||= "80", site["ssl"] ||= "443", site["php"] ||= "7.2", params ||= "", site["zray"] ||= "false", http]
 
                         if site["zray"] == 'true'
                             config.vm.provision "shell" do |s|
@@ -330,7 +337,8 @@ class VagrantVM
                                 site["map"],
                                 "81",
                                 "80",
-                                "443"
+                                "443",
+                                http
                             ]
                         end
                     end
@@ -464,7 +472,8 @@ class VagrantVM
         # Install MariaDB If Necessary
         if settings.has_key?("mariadb") && settings["mariadb"] == true && settings.has_key?("mariadbMultiMaster") && settings["mariadbMultiMaster"] == true && settings.has_key?("mariadbMultiMasterCount")
             config.vm.provision "shell" do |s|
-                s.path = scriptDir + "/configure-masterSlave.sh " + settings["mariadbMultiMasterCount"]
+                s.path = scriptDir + "/configure-masterSlave.sh"
+                s.args = [settings["mariadbMultiMasterCount"]]
             end
         end
 
@@ -642,7 +651,7 @@ class VagrantVM
         if settings.has_key?("memcache") && settings["memcache"] == true
             config.vm.provision "shell" do |s|
                 s.name = "Installing Memcached"
-                s.path = scriptDir + "/install-memcache.sh"
+                s.path = scriptDir + "/install-memcached.sh"
             end
         end
 
@@ -782,19 +791,27 @@ class VagrantVM
             end
         end
 
-        config.vm.provision "shell" do |s|
-            s.path = scriptDir + "/serve-statamic.sh"
-            s.args = [
-                siteInfo72,
-                "/vagrant/system/php72",
-                "80",
-                "443",
-                "7.2"
-            ]
+        if settings.has_key?("php72") && settings["php72"] == true
+            config.vm.provision "shell" do |s|
+                s.path = scriptDir + "/serve-statamic.sh"
+                s.args = [
+                    siteInfo72,
+                    "/vagrant/system/php72",
+                    "80",
+                    "443",
+                    "7.2"
+                ]
+            end
             config.vm.provision "shell" do |s|
                 s.name = "Creating Certificate: " + siteInfo72
                 s.path = scriptDir + "/create-certificate.sh"
                 s.args = [siteInfo72]
+            end
+        else
+            config.vm.provision "shell" do |s|
+                s.inline = "sudo systemctl"
+                s.privileged = true
+                s.args["disable", "php7.2-fpm"]
             end
         end
         if settings.has_key?("php71") && settings["php71"] == true
@@ -807,11 +824,17 @@ class VagrantVM
                     "443",
                     "7.1"
                 ]
-                config.vm.provision "shell" do |s|
-                    s.name = "Creating Certificate: " + siteInfo71
-                    s.path = scriptDir + "/create-certificate.sh"
-                    s.args = [siteInfo71]
-                end
+            end
+            config.vm.provision "shell" do |s|
+                s.name = "Creating Certificate: " + siteInfo71
+                s.path = scriptDir + "/create-certificate.sh"
+                s.args = [siteInfo71]
+            end
+        else
+            config.vm.provision "shell" do |s|
+                s.inline = "sudo systemctl"
+                s.privileged = true
+                s.args = ["disable", "php7.1-fpm"]
             end
         end
 
@@ -825,11 +848,17 @@ class VagrantVM
                     "443",
                     "7.0"
                 ]
-                config.vm.provision "shell" do |s|
-                    s.name = "Creating Certificate: " + siteInfo70
-                    s.path = scriptDir + "/create-certificate.sh"
-                    s.args = [siteInfo70]
-                end
+            end
+            config.vm.provision "shell" do |s|
+                s.name = "Creating Certificate: " + siteInfo70
+                s.path = scriptDir + "/create-certificate.sh"
+                s.args = [siteInfo70]
+            end
+        else
+            config.vm.provision "shell" do |s|
+                s.inline = "sudo systemctl"
+                s.privileged = true
+                s.args = ["disable", "php7.0-fpm"]
             end
         end
 
@@ -843,11 +872,17 @@ class VagrantVM
                     "443",
                     "5.6"
                 ]
-                config.vm.provision "shell" do |s|
-                    s.name = "Creating Certificate: " + siteInfo56
-                    s.path = scriptDir + "/create-certificate.sh"
-                    s.args = [siteInfo56]
-                end
+            end
+            config.vm.provision "shell" do |s|
+                s.name = "Creating Certificate: " + siteInfo56
+                s.path = scriptDir + "/create-certificate.sh"
+                s.args = [siteInfo56]
+            end
+        else
+            config.vm.provision "shell" do |s|
+                s.inline = "sudo systemctl"
+                s.privileged = true
+                s.args = ["disable", "php5.6-fpm"]
             end
         end
 
@@ -1011,6 +1046,8 @@ class VagrantVM
             s.inline = "/vagrant/bin/restartWeb.sh"
             s.privileged = false
         end
+
+
 
     end
 end

@@ -148,6 +148,18 @@ nginx: true
 apache2: true
 ### Yarn JS Tools
 yarn: true
+### Serve Pages as http
+to allow pages to be sent also by http or not:
+
+either Site configuration:
+
+serverHttp: true
+
+global Configuration
+
+serverHttp: true
+
+**if this option is enabled an entry for http transfer will be added and the http port not ignored in the settings!**
 
 ## Known Issues
 

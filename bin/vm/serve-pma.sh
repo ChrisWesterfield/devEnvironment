@@ -13,8 +13,14 @@ fi
 
 phpV="${4//.}"
 
+listenHttp=""
+if $6 == 1
+then
+    listenHttp="listen ${3:-80};"
+fi
+
 block="server {
-    listen ${2:-80};
+    $listenHttp
     listen ${3:-443} ssl http2;
     server_name $1;
 	root /vagrant/phpmyadmin;

@@ -11,8 +11,14 @@ if [ -n "$6" ]; then
    done
 fi
 
+listenHttp=""
+if $7 == 1
+then
+    listenHttp="listen ${3:-80};"
+fi
+
 block="server {
-    listen ${3:-80};
+    $listenHttp
     listen ${4:-443} ssl http2;
     server_name $1;
     root \"$2\";
