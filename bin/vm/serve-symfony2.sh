@@ -86,10 +86,10 @@ block="server {
 
     $configureZray
 
-    ssl_certificate     /vagrant/etc/nginx/ssl/site/$1.crt;
-    ssl_certificate_key /vagrant/etc/nginx/ssl/site/$1.key;
+    ssl_certificate     /vagrant/etc/ssl/site/$1.crt;
+    ssl_certificate_key /vagrant/etc/ssl/site/$1.key;
 }
 "
 
-echo "$block" > "/vagrant/etc/nginx/sites-available/$1.vhost"
-ln -fs "/vagrant/etc/nginx/sites-available/$1.vhost" "/vagrant/etc/nginx/sites-enabled/$1.vhost"
+echo "$block" > "/etc/nginx/sites-available/$1.vhost"
+ln -fs "/etc/nginx/sites-available/$1.vhost" "/etc/nginx/sites-enabled/$1.vhost"

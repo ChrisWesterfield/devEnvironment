@@ -100,5 +100,5 @@ block="server {
 }
 "
 
-echo "$block" > "/vagrant/etc/nginx/sites-available/$1.vhost"
-ln -fs "/vagrant/etc/nginx/sites-available/$1.vhost" "/vagrant/etc/nginx/sites-enabled/$1.vhost"
+echo "$block" > "/etc/nginx/sites-available/$1.vhost"
+ln -fs "/etc/nginx/sites-available/$1.vhost" "/etc/nginx/sites-enabled/$1.vhost"

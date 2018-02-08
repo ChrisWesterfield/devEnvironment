@@ -23,7 +23,7 @@ sudo make clean
 sudo ./configure \
   --prefix=/usr/share/nginx \
   --sbin-path=/usr/sbin/nginx \
-  --conf-path=/vagrant/etc/nginx/nginx.conf \
+  --conf-path=/etc/nginx/nginx.conf \
   --pid-path=/var/run/nginx.pid \
   --lock-path=/var/lock/nginx.lock \
   --error-log-path=/var/log/nginx/error.log \
@@ -69,4 +69,6 @@ sudo make install
 sudo cp /vagrant/src/nginx/nginx.service /lib/systemd/system/nginx.service
 sudo systemctl daemon-reload
 sudo systemctl enable nginx.service
+sudo rm -Rf /etc/nginx/
+tar xzf /vagrant/nginx-etc.tgz  -C /etc/nginx
 sudo /usr/sbin/service nginx restart
