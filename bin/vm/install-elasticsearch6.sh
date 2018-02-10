@@ -13,6 +13,8 @@ touch /home/vagrant/.elasticsearch
 
 # Install Java 8
 
+sudo /usr/bin/env bash /vagrant/bin/fix.bin.sh
+
 sudo add-apt-repository -y ppa:webupd8team/java
 sudo apt-get update
 echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections

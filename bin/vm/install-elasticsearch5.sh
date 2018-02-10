@@ -10,6 +10,7 @@ then
 fi
 
 touch /home/vagrant/.elasticsearch
+sudo /usr/bin/env bash /vagrant/bin/fix.bin.sh
 
 # Install Java 8
 
