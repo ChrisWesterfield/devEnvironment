@@ -33,6 +33,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         abort "vagrant settings file not found in #{confDir}"
     end
 
+    VagrantVM.install(config, settings)
     VagrantVM.configure(config, settings)
 
     if File.exist? afterScriptPath then
@@ -55,6 +56,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     config.trigger.after :up do
         info "Starting Environment"
-        run_remote "bash /vagrant/bin/startTasks.sh"
+        run_remote "/usr/bin/env sudo resolvconf -u"
+        run_remote "/usr/bin/env bash /vagrant/bin/startTasks.sh"
+        run_remote "/usr/bin/env bash /vagrant/bin/fix.dns.sh"
     end
 end

@@ -1,69 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e3adc232-3677-4884-bafa-cf15c85ee48d" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/bin/vm/clear-nginx.sh" afterPath="$PROJECT_DIR$/bin/vm/clear-nginx.sh" />
-      <change beforePath="$PROJECT_DIR$/bin/vm/create-certificate.sh" afterPath="$PROJECT_DIR$/bin/vm/create-certificate.sh" />
-      <change beforePath="$PROJECT_DIR$/bin/vm/install-nginx.sh" afterPath="$PROJECT_DIR$/bin/vm/install-nginx.sh" />
-      <change beforePath="$PROJECT_DIR$/bin/vm/serve-elgg.sh" afterPath="$PROJECT_DIR$/bin/vm/serve-elgg.sh" />
-      <change beforePath="$PROJECT_DIR$/bin/vm/serve-grafana.sh" afterPath="$PROJECT_DIR$/bin/vm/serve-grafana.sh" />
-      <change beforePath="$PROJECT_DIR$/bin/vm/serve-laravel.sh" afterPath="$PROJECT_DIR$/bin/vm/serve-laravel.sh" />
-      <change beforePath="$PROJECT_DIR$/bin/vm/serve-pma.sh" afterPath="$PROJECT_DIR$/bin/vm/serve-pma.sh" />
-      <change beforePath="$PROJECT_DIR$/bin/vm/serve-proxy.sh" afterPath="$PROJECT_DIR$/bin/vm/serve-proxy.sh" />
-      <change beforePath="$PROJECT_DIR$/bin/vm/serve-silverstripe.sh" afterPath="$PROJECT_DIR$/bin/vm/serve-silverstripe.sh" />
-      <change beforePath="$PROJECT_DIR$/bin/vm/serve-spa.sh" afterPath="$PROJECT_DIR$/bin/vm/serve-spa.sh" />
-      <change beforePath="$PROJECT_DIR$/bin/vm/serve-statamic.sh" afterPath="$PROJECT_DIR$/bin/vm/serve-statamic.sh" />
-      <change beforePath="$PROJECT_DIR$/bin/vm/serve-symfony2.sh" afterPath="$PROJECT_DIR$/bin/vm/serve-symfony2.sh" />
-      <change beforePath="$PROJECT_DIR$/bin/vm/serve-symfony4.sh" afterPath="$PROJECT_DIR$/bin/vm/serve-symfony4.sh" />
-      <change beforePath="$PROJECT_DIR$/bin/vm/serve-xhgui.sh" afterPath="$PROJECT_DIR$/bin/vm/serve-xhgui.sh" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d-available/accounting.module" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d-available/fastcgi.conf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d-available/graphite.conf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d-available/graphite.module" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d-available/gzip.conf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d-available/httpheader.module" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d-available/log.conf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d-available/logformat.conf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d-available/main.conf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d-available/proxy.conf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d-available/ssl.conf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d-available/uploadprogress.module" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d-available/vts.conf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d-available/vts.module" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d-enabled/accounting.module" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d-enabled/fastcgi.conf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d-enabled/graphite.conf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d-enabled/graphite.module" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d-enabled/gzip.conf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d-enabled/httpheader.module" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d-enabled/log.conf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d-enabled/logformat.conf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d-enabled/main.conf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d-enabled/proxy.conf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d-enabled/ssl.conf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d-enabled/uploadprogress.module" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d-enabled/vts.conf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/conf.d-enabled/vts.module" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/fastcgi.conf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/fastcgi.conf.default" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/fastcgi_params" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/fastcgi_params.default" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/koi-utf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/koi-win" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/mime.types" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/mime.types.default" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/nginx.conf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/nginx.conf.default" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/scgi_params" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/scgi_params.default" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/sites-available/.gitkeep" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/sites-enabled/.gitkeep" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/ssl/.gitkeep" afterPath="$PROJECT_DIR$/vagrant/etc/ssl/.gitkeep" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/uwsgi_params" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/uwsgi_params.default" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vagrant/etc/nginx/win-utf" afterPath="" />
-    </list>
+    <list default="true" id="e3adc232-3677-4884-bafa-cf15c85ee48d" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -79,8 +17,8 @@
       <file leaf-file-name="install-nginx.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bin/vm/install-nginx.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="884">
-              <caret line="74" column="0" lean-forward="true" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+            <state relative-caret-position="1258">
+              <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -99,7 +37,7 @@
       <file leaf-file-name="serve-elgg.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bin/vm/serve-elgg.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="799">
+            <state relative-caret-position="1734">
               <caret line="102" column="17" lean-forward="false" selection-start-line="102" selection-start-column="17" selection-end-line="102" selection-end-column="17" />
               <folding />
             </state>
@@ -109,8 +47,8 @@
       <file leaf-file-name="serve-laravel.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bin/vm/serve-laravel.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="55" column="0" lean-forward="true" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+            <state relative-caret-position="935">
+              <caret line="55" column="0" lean-forward="false" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -119,28 +57,28 @@
       <file leaf-file-name="vagrant.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bin/vm/vagrant.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-737">
+            <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="create-certificate.sh" pinned="false" current-in-tab="false">
+      <file leaf-file-name="create-certificate.sh" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bin/vm/create-certificate.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1326">
+            <state relative-caret-position="85">
               <caret line="5" column="22" lean-forward="false" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="serve-pma.sh" pinned="false" current-in-tab="true">
+      <file leaf-file-name="serve-pma.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bin/vm/serve-pma.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="700">
-              <caret line="61" column="24" lean-forward="true" selection-start-line="61" selection-start-column="24" selection-end-line="61" selection-end-column="41" />
+            <state relative-caret-position="666">
+              <caret line="41" column="10" lean-forward="true" selection-start-line="41" selection-start-column="10" selection-end-line="41" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -149,7 +87,7 @@
       <file leaf-file-name="serve-grafana.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bin/vm/serve-grafana.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="816">
+            <state relative-caret-position="901">
               <caret line="53" column="46" lean-forward="false" selection-start-line="53" selection-start-column="46" selection-end-line="53" selection-end-column="46" />
               <folding />
             </state>
@@ -267,11 +205,11 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds">
-    <option name="x" value="640" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="335" />
     <option name="y" value="22" />
-    <option name="width" value="1920" />
-    <option name="height" value="1058" />
+    <option name="width" value="2225" />
+    <option name="height" value="1230" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -289,8 +227,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -318,6 +254,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -367,11 +305,12 @@
       <workItem from="1517081589826" duration="10389000" />
       <workItem from="1517231387670" duration="403000" />
       <workItem from="1518102682626" duration="383000" />
+      <workItem from="1518178371286" duration="474000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16433000" />
+    <option name="totallyTimeSpent" value="16907000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -383,27 +322,27 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="640" y="22" width="1920" height="1058" extended-state="0" />
+    <frame x="0" y="22" width="2560" height="1418" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967892" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18423855" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13860206" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967892" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -558,7 +497,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="10" lean-forward="false" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -566,7 +504,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="9" lean-forward="false" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -574,14 +511,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="12" lean-forward="false" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bin/vm/install-nginx.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="884">
-          <caret line="74" column="0" lean-forward="true" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+        <state relative-caret-position="1258">
+          <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -596,7 +532,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bin/vm/serve-grafana.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
+        <state relative-caret-position="901">
           <caret line="53" column="46" lean-forward="false" selection-start-line="53" selection-start-column="46" selection-end-line="53" selection-end-column="46" />
           <folding />
         </state>
@@ -604,7 +540,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bin/vm/serve-elgg.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="799">
+        <state relative-caret-position="1734">
           <caret line="102" column="17" lean-forward="false" selection-start-line="102" selection-start-column="17" selection-end-line="102" selection-end-column="17" />
           <folding />
         </state>
@@ -612,15 +548,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bin/vm/serve-laravel.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="55" column="0" lean-forward="true" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+        <state relative-caret-position="935">
+          <caret line="55" column="0" lean-forward="false" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bin/vm/vagrant.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-737">
+        <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -628,7 +564,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bin/vm/create-certificate.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1326">
+        <state relative-caret-position="85">
           <caret line="5" column="22" lean-forward="false" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
           <folding />
         </state>
@@ -636,8 +572,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bin/vm/serve-pma.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="700">
-          <caret line="61" column="24" lean-forward="true" selection-start-line="61" selection-start-column="24" selection-end-line="61" selection-end-column="41" />
+        <state relative-caret-position="666">
+          <caret line="41" column="10" lean-forward="true" selection-start-line="41" selection-start-column="10" selection-end-line="41" selection-end-column="10" />
           <folding />
         </state>
       </provider>

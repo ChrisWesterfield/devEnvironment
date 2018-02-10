@@ -3,7 +3,13 @@ export DEBIAN_FRONTEND=noninteractive
 
 mkdir /etc/nginx/ssl 2>/dev/null
 
-PATH_SSL="/vagrant/etc/ssl"
+PATH_SSL="/etc/ssl"
+
+if [ ! -d "$PATH_SSL" ]
+then
+    mkdir   "$PATH_SSL"
+fi
+
 
 if [ ! -d "$PATH_SSL/ca" ]
 then

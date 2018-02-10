@@ -1,6 +1,6 @@
 require 'json'
 class VagrantVM
-    def VagrantVM.configure(config, settings)
+    def VagrantVM.install(config, settings)
         # Set The VM Provider
         ENV['VAGRANT_DEFAULT_PROVIDER'] = settings["provider"] ||= "virtualbox"
 
@@ -209,11 +209,6 @@ class VagrantVM
             s.path = scriptDir + "/prepare-vm.sh"
         end
 
-        #Install and Compile nginx
-        config.vm.provision "shell" do |s|
-            s.path = scriptDir + "/clear-nginx.sh"
-        end
-
         # Install All The Configured Nginx Sites
         if settings.has_key?("nginx") && settings["nginx"] == true
             config.vm.provision "shell" do |s|
@@ -280,136 +275,6 @@ class VagrantVM
             config.vm.provision "shell" do |s|
                 s.name = "Installing Blackfire"
                 s.path = scriptDir + "/install-blackfire.sh"
-            end
-        end
-
-        if settings.include? 'sites'
-            settings["sites"].each do |site|
-
-                if (site.has_key?("type") && site['type'] != "ignore")
-
-                    if (settings.has_key?("serverHttp") && settings["serverHttp"] == true) or (site.has_key?("serverHttp") && site["serverHttp"] == true)
-                        http = 1
-                    else
-                        http = 0
-                    end
-
-                    # Create SSL certificate
-                    config.vm.provision "shell" do |s|
-                        s.name = "Creating Certificate: " + site["map"]
-                        s.path = scriptDir + "/create-certificate.sh"
-                        s.args = [site["map"]]
-                    end
-
-                    type = site["type"] ||= "laravel"
-
-                    if (type == "symfony")
-                        type = "symfony2"
-                    end
-
-                    config.vm.provision "shell" do |s|
-                        s.name = "Creating Site: " + site["map"]
-                        if site.include? 'params'
-                            params = "("
-                            site["params"].each do |param|
-                                params += " [" + param["key"] + "]=" + param["value"]
-                            end
-                            params += " )"
-                        end
-                        s.path = scriptDir + "/serve-#{type}.sh"
-                        s.args = [site["map"], site["to"], site["port"] ||= "80", site["ssl"] ||= "443", site["php"] ||= "7.2", params ||= "", site["zray"] ||= "false", http]
-
-                        if site["zray"] == 'true'
-                            config.vm.provision "shell" do |s|
-                                s.inline = "ln -sf /opt/zray/gui/public " + site["to"] + "/ZendServer"
-                            end
-                        else
-                            config.vm.provision "shell" do |s|
-                                s.inline = "rm -rf " + site["to"] + "/ZendServer"
-                            end
-                        end
-                    end
-
-                    if site["type"] == "apache"
-                        config.vm.provision "shell" do |s|
-                            s.path = scriptDir + "/serve-proxy.sh"
-                            s.args = [
-                                site["map"],
-                                "81",
-                                "80",
-                                "443",
-                                http
-                            ]
-                        end
-                    end
-
-                    # Configure The Cron Schedule
-                    if (site.has_key?("schedule"))
-                        config.vm.provision "shell" do |s|
-                            s.name = "Creating Schedule"
-
-                            if (site["schedule"])
-                                s.path = scriptDir + "/cron-schedule.sh"
-                                s.args = [site["map"].tr('^A-Za-z0-9', ''), site["to"]]
-                            else
-                                s.inline = "rm -f /etc/cron.d/$1"
-                                s.args = [site["map"].tr('^A-Za-z0-9', '')]
-                            end
-                        end
-                    else
-                        config.vm.provision "shell" do |s|
-                            s.name = "Checking for old Schedule"
-                            s.inline = "rm -f /etc/cron.d/$1"
-                            s.args = [site["map"].tr('^A-Za-z0-9', '')]
-                        end
-                    end
-                else
-                    if (site["function"] == 'profiler')
-                        siteProfiler = site["map"];
-                    end
-                    if (site["function"] == 'search')
-                        siteSearch = site["map"];
-                    end
-                    if (site["function"] == 'pma')
-                        sitePma = site["map"];
-                    end
-                    if (site["function"] == 'rabbit')
-                        siteRabbit = site["map"];
-                    end
-                    if (site["function"] == 'kibana')
-                        siteKibana = site["map"];
-                    end
-                    if (site["function"] == 'mail')
-                        siteMail = site["map"];
-                    end
-                    if (site["function"] == 'cockpit')
-                        siteCockpit = site["map"];
-                    end
-                    if (site["function"] == 'ui')
-                        siteUi = site["map"];
-                    end
-                    if (site["function"] == 'build')
-                        siteBuild = site["map"];
-                    end
-                    if ( site["function"] == 'startpage' )
-                        siteStart = site["map"];
-                    end
-                    if ( site["function"] == 'statsd' )
-                        siteStatsd = site["map"];
-                    end
-                    if ( site["function"] == 'php56' )
-                        sitePhp56 = site["map"];
-                    end
-                    if ( site["function"] == 'php70' )
-                        sitePhp70 = site["map"];
-                    end
-                    if ( site["function"] == 'php71' )
-                        sitePhp71 = site["map"];
-                    end
-                    if ( site["function"] == 'php72' )
-                        sitePhp72 = site["map"];
-                    end
-                end
             end
         end
 
@@ -547,51 +412,6 @@ class VagrantVM
             end
         end
 
-        # Configure All Of The Configured Databases
-        if settings.has_key?("databases")
-            settings["databases"].each do |db|
-                if db["type"] == "mysql"
-                    if settings.has_key?("mariadb") && settings["mariadb"]
-                        config.vm.provision "shell" do |s|
-                            s.name = "Creating MySQL Database: " + db["name"]
-                            s.path = scriptDir + "/create-mysql.sh"
-                            s.args = [db["name"]]
-                        end
-                    end
-                end
-
-                if db["type"] == "pgsql"
-                    if settings.has_key?("postgresql") && settings["postgresql"]
-                        config.vm.provision "shell" do |s|
-                            s.name = "Creating Postgres Database: " + db["name"]
-                            s.path = scriptDir + "/create-postgres.sh"
-                            s.args = [db["name"]]
-                        end
-                    end
-                end
-
-                if db["type"] == "mongodb"
-                    if settings.has_key?("mongodb") && settings["mongodb"]
-                        config.vm.provision "shell" do |s|
-                            s.name = "Creating Mongo Database: " + db["name"]
-                            s.path = scriptDir + "/create-mongo.sh"
-                            s.args = [db["name"]]
-                        end
-                    end
-                end
-
-                if settings.has_key?("couchdb") && settings["couchdb"]
-                    if db["type"] == "couchdb"
-                        config.vm.provision "shell" do |s|
-                            s.name = "Creating Couch Database: " + db["name"]
-                            s.path = scriptDir + "/create-couch.sh"
-                            s.args = [db["name"]]
-                        end
-                    end
-                end
-            end
-        end
-
         #Install Composer
         config.vm.provision "shell" do |s|
             s.path = scriptDir + "/install-composer.sh"
@@ -620,11 +440,6 @@ class VagrantVM
 
         if settings.has_key?("ngrok") && settings["ngrok"] == true
             # Add config file for ngrok
-            config.vm.provision "shell" do |s|
-                s.path = scriptDir + "/create-ngrok.sh"
-                s.args = [settings["ip"]]
-                s.privileged = false
-            end
             config.vm.provision "shell" do |s|
                 s.path = scriptDir + "/install-ngrok.sh"
                 s.privileged = true
@@ -1030,24 +845,231 @@ class VagrantVM
             end
         end
 
-
-        config.vm.provision "shell" do |s|
-            s.name = "Saving Site Configuration"
-            s.path = scriptDir + "/save_sites.sh"
-            s.args = [jsonSites]
-        end
-
         config.vm.provision "shell" do |s|
             s.inline = "/vagrant/bin/chown-home.sh"
             s.privileged = false
         end
 
+
+
+    end
+    def VagrantVM.configure(config, settings)
+
+        scriptDir = File.dirname(__FILE__)
+
+        jsonSites = settings.to_json;
+
+        siteProfiler = "profiler." + settings["name"]
+        siteSearch = "search." + settings["name"]
+        sitePma = "pma." + settings["name"]
+        siteRabbit = "rabbit." + settings["name"]
+        siteKibana = "kibana." + settings["name"]
+        siteMail = "mail." + settings["name"]
+        siteCockpit = "cockpit." + settings["name"]
+        siteUi = "ui." + settings["name"]
+        siteBuild = "build." + settings["name"]
+        siteStart = settings["name"]
+        siteStatsd = "statsd." + settings['name']
+        siteInfo56 = 'info56.' + settings['name']
+        siteInfo70 = 'info70.' + settings['name']
+        siteInfo71 = 'info71.' + settings['name']
+        siteInfo72 = 'info72.' + settings['name']
+
+        #nginx / apache2 configs
+
+        #clear nginx confs
+        config.vm.provision "shell" do |s|
+            s.path = scriptDir + "/clear-nginx.sh"
+        end
+
+        if settings.include? 'sites'
+            settings["sites"].each do |site|
+
+                if (site.has_key?("type") && site['type'] != "ignore")
+
+                    if (settings.has_key?("serverHttp") && settings["serverHttp"] == true) or (site.has_key?("serverHttp") && site["serverHttp"] == true)
+                        http = 1
+                    else
+                        http = 0
+                    end
+
+                    # Create SSL certificate
+                    config.vm.provision "shell" do |s|
+                        s.name = "Creating Certificate: " + site["map"]
+                        s.path = scriptDir + "/create-certificate.sh"
+                        s.args = [site["map"]]
+                    end
+
+                    type = site["type"] ||= "laravel"
+
+                    if (type == "symfony")
+                        type = "symfony2"
+                    end
+
+                    config.vm.provision "shell" do |s|
+                        s.name = "Creating Site: " + site["map"]
+                        if site.include? 'params'
+                            params = "("
+                            site["params"].each do |param|
+                                params += " [" + param["key"] + "]=" + param["value"]
+                            end
+                            params += " )"
+                        end
+                        s.path = scriptDir + "/serve-#{type}.sh"
+                        s.args = [site["map"], site["to"], site["port"] ||= "80", site["ssl"] ||= "443", site["php"] ||= "7.2", params ||= "", site["zray"] ||= "false", http]
+
+                        if site["zray"] == 'true'
+                            config.vm.provision "shell" do |s|
+                                s.inline = "ln -sf /opt/zray/gui/public " + site["to"] + "/ZendServer"
+                            end
+                        else
+                            config.vm.provision "shell" do |s|
+                                s.inline = "rm -rf " + site["to"] + "/ZendServer"
+                            end
+                        end
+                    end
+
+                    if site["type"] == "apache"
+                        config.vm.provision "shell" do |s|
+                            s.path = scriptDir + "/serve-proxy.sh"
+                            s.args = [
+                                site["map"],
+                                "81",
+                                "80",
+                                "443",
+                                http
+                            ]
+                        end
+                    end
+
+                    # Configure The Cron Schedule
+                    if (site.has_key?("schedule"))
+                        config.vm.provision "shell" do |s|
+                            s.name = "Creating Schedule"
+
+                            if (site["schedule"])
+                                s.path = scriptDir + "/cron-schedule.sh"
+                                s.args = [site["map"].tr('^A-Za-z0-9', ''), site["to"]]
+                            else
+                                s.inline = "rm -f /etc/cron.d/$1"
+                                s.args = [site["map"].tr('^A-Za-z0-9', '')]
+                            end
+                        end
+                    else
+                        config.vm.provision "shell" do |s|
+                            s.name = "Checking for old Schedule"
+                            s.inline = "rm -f /etc/cron.d/$1"
+                            s.args = [site["map"].tr('^A-Za-z0-9', '')]
+                        end
+                    end
+                else
+                    if (site["function"] == 'profiler')
+                        siteProfiler = site["map"];
+                    end
+                    if (site["function"] == 'search')
+                        siteSearch = site["map"];
+                    end
+                    if (site["function"] == 'pma')
+                        sitePma = site["map"];
+                    end
+                    if (site["function"] == 'rabbit')
+                        siteRabbit = site["map"];
+                    end
+                    if (site["function"] == 'kibana')
+                        siteKibana = site["map"];
+                    end
+                    if (site["function"] == 'mail')
+                        siteMail = site["map"];
+                    end
+                    if (site["function"] == 'cockpit')
+                        siteCockpit = site["map"];
+                    end
+                    if (site["function"] == 'ui')
+                        siteUi = site["map"];
+                    end
+                    if (site["function"] == 'build')
+                        siteBuild = site["map"];
+                    end
+                    if ( site["function"] == 'startpage' )
+                        siteStart = site["map"];
+                    end
+                    if ( site["function"] == 'statsd' )
+                        siteStatsd = site["map"];
+                    end
+                    if ( site["function"] == 'php56' )
+                        sitePhp56 = site["map"];
+                    end
+                    if ( site["function"] == 'php70' )
+                        sitePhp70 = site["map"];
+                    end
+                    if ( site["function"] == 'php71' )
+                        sitePhp71 = site["map"];
+                    end
+                    if ( site["function"] == 'php72' )
+                        sitePhp72 = site["map"];
+                    end
+                end
+            end
+        end
+        #configure ngrok
+        config.vm.provision "shell" do |s|
+            s.path = scriptDir + "/create-ngrok.sh"
+            s.args = [settings["ip"]]
+            s.privileged = false
+        end
+
+        # Configure All Of The Configured Databases
+        if settings.has_key?("databases")
+            settings["databases"].each do |db|
+                if db["type"] == "mysql"
+                    if settings.has_key?("mariadb") && settings["mariadb"]
+                        config.vm.provision "shell" do |s|
+                            s.name = "Creating MySQL Database: " + db["name"]
+                            s.path = scriptDir + "/create-mysql.sh"
+                            s.args = [db["name"]]
+                        end
+                    end
+                end
+
+                if db["type"] == "pgsql"
+                    if settings.has_key?("postgresql") && settings["postgresql"]
+                        config.vm.provision "shell" do |s|
+                            s.name = "Creating Postgres Database: " + db["name"]
+                            s.path = scriptDir + "/create-postgres.sh"
+                            s.args = [db["name"]]
+                        end
+                    end
+                end
+
+                if db["type"] == "mongodb"
+                    if settings.has_key?("mongodb") && settings["mongodb"]
+                        config.vm.provision "shell" do |s|
+                            s.name = "Creating Mongo Database: " + db["name"]
+                            s.path = scriptDir + "/create-mongo.sh"
+                            s.args = [db["name"]]
+                        end
+                    end
+                end
+
+                if settings.has_key?("couchdb") && settings["couchdb"]
+                    if db["type"] == "couchdb"
+                        config.vm.provision "shell" do |s|
+                            s.name = "Creating Couch Database: " + db["name"]
+                            s.path = scriptDir + "/create-couch.sh"
+                            s.args = [db["name"]]
+                        end
+                    end
+                end
+            end
+        end
+        config.vm.provision "shell" do |s|
+            s.name = "Saving Site Configuration"
+            s.path = scriptDir + "/save_sites.sh"
+            s.args = [jsonSites]
+        end
         config.vm.provision "shell" do |s|
             s.inline = "/vagrant/bin/restartWeb.sh"
             s.privileged = false
         end
-
-
-
     end
 end

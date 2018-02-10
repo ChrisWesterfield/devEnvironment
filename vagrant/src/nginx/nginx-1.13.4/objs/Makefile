@@ -2230,7 +2230,7 @@ manpage:	objs/nginx.8
 objs/nginx.8:	man/nginx.8 objs/ngx_auto_config.h
 	sed -e "s|%%PREFIX%%|/usr/share/nginx|" \
 		-e "s|%%PID_PATH%%|/var/run/nginx.pid|" \
-		-e "s|%%CONF_PATH%%|/vagrant/etc/nginx/nginx.conf|" \
+		-e "s|%%CONF_PATH%%|/etc/nginx/nginx.conf|" \
 		-e "s|%%ERROR_LOG_PATH%%|/var/log/nginx/error.log|" \
 		< man/nginx.8 > $@
 
@@ -2244,39 +2244,39 @@ install:	build install_perl_modules
 			'$(DESTDIR)/usr/sbin/nginx.old'
 	cp objs/nginx '$(DESTDIR)/usr/sbin/nginx'
 
-	test -d '$(DESTDIR)/vagrant/etc/nginx' \
-		|| mkdir -p '$(DESTDIR)/vagrant/etc/nginx'
+	test -d '$(DESTDIR)/etc/nginx' \
+		|| mkdir -p '$(DESTDIR)/etc/nginx'
 
-	cp conf/koi-win '$(DESTDIR)/vagrant/etc/nginx'
-	cp conf/koi-utf '$(DESTDIR)/vagrant/etc/nginx'
-	cp conf/win-utf '$(DESTDIR)/vagrant/etc/nginx'
+	cp conf/koi-win '$(DESTDIR)/etc/nginx'
+	cp conf/koi-utf '$(DESTDIR)/etc/nginx'
+	cp conf/win-utf '$(DESTDIR)/etc/nginx'
 
-	test -f '$(DESTDIR)/vagrant/etc/nginx/mime.types' \
-		|| cp conf/mime.types '$(DESTDIR)/vagrant/etc/nginx'
-	cp conf/mime.types '$(DESTDIR)/vagrant/etc/nginx/mime.types.default'
+	test -f '$(DESTDIR)/etc/nginx/mime.types' \
+		|| cp conf/mime.types '$(DESTDIR)/etc/nginx'
+	cp conf/mime.types '$(DESTDIR)/etc/nginx/mime.types.default'
 
-	test -f '$(DESTDIR)/vagrant/etc/nginx/fastcgi_params' \
-		|| cp conf/fastcgi_params '$(DESTDIR)/vagrant/etc/nginx'
+	test -f '$(DESTDIR)/etc/nginx/fastcgi_params' \
+		|| cp conf/fastcgi_params '$(DESTDIR)/etc/nginx'
 	cp conf/fastcgi_params \
-		'$(DESTDIR)/vagrant/etc/nginx/fastcgi_params.default'
+		'$(DESTDIR)/etc/nginx/fastcgi_params.default'
 
-	test -f '$(DESTDIR)/vagrant/etc/nginx/fastcgi.conf' \
-		|| cp conf/fastcgi.conf '$(DESTDIR)/vagrant/etc/nginx'
-	cp conf/fastcgi.conf '$(DESTDIR)/vagrant/etc/nginx/fastcgi.conf.default'
+	test -f '$(DESTDIR)/etc/nginx/fastcgi.conf' \
+		|| cp conf/fastcgi.conf '$(DESTDIR)/etc/nginx'
+	cp conf/fastcgi.conf '$(DESTDIR)/etc/nginx/fastcgi.conf.default'
 
-	test -f '$(DESTDIR)/vagrant/etc/nginx/uwsgi_params' \
-		|| cp conf/uwsgi_params '$(DESTDIR)/vagrant/etc/nginx'
+	test -f '$(DESTDIR)/etc/nginx/uwsgi_params' \
+		|| cp conf/uwsgi_params '$(DESTDIR)/etc/nginx'
 	cp conf/uwsgi_params \
-		'$(DESTDIR)/vagrant/etc/nginx/uwsgi_params.default'
+		'$(DESTDIR)/etc/nginx/uwsgi_params.default'
 
-	test -f '$(DESTDIR)/vagrant/etc/nginx/scgi_params' \
-		|| cp conf/scgi_params '$(DESTDIR)/vagrant/etc/nginx'
+	test -f '$(DESTDIR)/etc/nginx/scgi_params' \
+		|| cp conf/scgi_params '$(DESTDIR)/etc/nginx'
 	cp conf/scgi_params \
-		'$(DESTDIR)/vagrant/etc/nginx/scgi_params.default'
+		'$(DESTDIR)/etc/nginx/scgi_params.default'
 
-	test -f '$(DESTDIR)/vagrant/etc/nginx/nginx.conf' \
-		|| cp conf/nginx.conf '$(DESTDIR)/vagrant/etc/nginx/nginx.conf'
-	cp conf/nginx.conf '$(DESTDIR)/vagrant/etc/nginx/nginx.conf.default'
+	test -f '$(DESTDIR)/etc/nginx/nginx.conf' \
+		|| cp conf/nginx.conf '$(DESTDIR)/etc/nginx/nginx.conf'
+	cp conf/nginx.conf '$(DESTDIR)/etc/nginx/nginx.conf.default'
 
 	test -d '$(DESTDIR)/var/run' \
 		|| mkdir -p '$(DESTDIR)/var/run'

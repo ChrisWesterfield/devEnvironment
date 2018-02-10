@@ -74,8 +74,8 @@ block="server {
         deny all;
     }
 
-    ssl_certificate     /vagrant/etc/ssl/site/$1.crt;
-    ssl_certificate_key /vagrant/etc/ssl/site/$1.key;
+    ssl_certificate     /etc/ssl/site/$1.crt;
+    ssl_certificate_key /etc/ssl/site/$1.key;
 }
 "
 

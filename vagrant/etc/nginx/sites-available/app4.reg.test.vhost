@@ -1,0 +1,48 @@
+server {
+    
+    listen 443 ssl http2;
+    server_name app4.reg.test;
+    root "/application/new/public";
+
+    index index.html index.htm index.php;
+
+    charset utf-8;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /robots.txt  { access_log off; log_not_found off; }
+
+    access_log off;
+    error_log  /vagrant/log/app4.reg.test-ssl-error.log error;
+
+    sendfile off;
+
+    client_max_body_size 100m;
+
+    # DEV
+    location ~ ^/index\.php(/|$) {
+        fastcgi_split_path_info ^(.+\.php)(/.*)$;
+        fastcgi_pass 127.0.0.1:9072;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        
+
+        fastcgi_intercept_errors off;
+        fastcgi_buffer_size 512k;
+        fastcgi_buffers 4 1024k;
+        fastcgi_busy_buffers_size 1024k;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+
+    
+
+    ssl_certificate     /vagrant/etc/nginx/ssl/site/app4.reg.test.crt;
+    ssl_certificate_key /vagrant/etc/nginx/ssl/site/app4.reg.test.key;
+}
+

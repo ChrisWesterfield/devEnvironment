@@ -65,10 +65,10 @@ sudo ./configure \
 sudo make -j `cat /proc/cpuinfo | grep processor | wc -l`
 
 sudo make install
+sudo rm -Rf /etc/nginx/
+sudo tar -xzf /vagrant/nginx-etc.tgz  -C /etc
+sudo /usr/sbin/service nginx restart
 
 sudo cp /vagrant/src/nginx/nginx.service /lib/systemd/system/nginx.service
 sudo systemctl daemon-reload
 sudo systemctl enable nginx.service
-sudo rm -Rf /etc/nginx/
-tar xzf /vagrant/nginx-etc.tgz  -C /etc/nginx
-sudo /usr/sbin/service nginx restart
