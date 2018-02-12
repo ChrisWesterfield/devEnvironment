@@ -2,7 +2,7 @@
 export DEBIAN_FRONTEND=noninteractive
 
 listenHttp=""
-if $5 == 1
+if [ $5 ]
 then
     listenHttp="listen ${3:-80};"
 fi

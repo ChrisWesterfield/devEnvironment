@@ -11,7 +11,7 @@ if [ -n "$5" ]; then
     done
 fi
 listenHttp=""
-if $6 == 1
+if [ $6 ]
 then
     listenHttp="listen ${3:-80};"
 fi

@@ -5,6 +5,7 @@ then
     echo "Logstash already installed."
     exit 0
 fi
+sudo /usr/bin/env bash /vagrant/bin/fix.dns.sh
 touch /home/vagrant/.logstash
 sudo curl https://artifacts.elastic.co/downloads/logstash/logstash-6.1.1.deb > logstash.deb
 sudo dpkg -i /home/vagrant/logstash.deb

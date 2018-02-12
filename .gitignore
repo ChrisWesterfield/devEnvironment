@@ -9,3 +9,8 @@ vagrant/log/*.log
 config.yaml
 .DS_Store
 vagrant/config.json
+vagrant/ssl
+application/
+vagrant/after.sh
+vagrant/aliases
+.vagrant/

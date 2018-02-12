@@ -309,4 +309,17 @@ if(file_exists($masterHome.'statsd'))
     $tmp[] = [];
     $tmp[] = [];
 }
+
+if(file_exists($masterHome.'darkstat'))
+{
+    $tmp[] = [
+        'name'        => 'Darkstat',
+        'port'        => '667',
+        'description' => 'Darkstat Server',
+        'db'          => false,
+    ];
+    $tmp[] = [];
+    $tmp[] = [];
+    $tmp[] = [];
+}
 return $tmp;

@@ -24,7 +24,7 @@ phpV="${5//.}"
 
 
 listenHttp=""
-if $8 == 1
+if [ $6 ]
 then
     listenHttp="listen ${3:-80};"
 fi

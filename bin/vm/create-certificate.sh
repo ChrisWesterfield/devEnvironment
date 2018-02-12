@@ -15,6 +15,7 @@ if [ ! -d "$PATH_SSL/ca" ]
 then
     mkdir   "$PATH_SSL/ca"
 fi
+
 if [ ! -d "$PATH_SSL/site" ]
 then
     mkdir   "$PATH_SSL/site"
@@ -103,6 +104,16 @@ then
         -key "$PATH_ROOT_KEY" \
         -x509 -new -extensions v3_ca -days 3650 -sha256 \
         -out "$PATH_ROOT_CRT" 2>/dev/null
+
+    if [ ! -d /vagrant/ssl ]
+    then
+        mkdir /vagrant/ssl
+    fi
+
+    cp $PATH_ROOT_CNF /vagrant/ssl/vagrant.cnf
+    cp $PATH_ROOT_CRT /vagrant/ssl/vagrant.crt
+    cp $PATH_ROOT_KEY /vagrant/ssl/vagrant.key
+    cp $PATH_SSL/ca/vagrant.sl /vagrant/ssl/vagrant.sl
 fi
 
 # Only generate a certificate if there isn't one already there.
