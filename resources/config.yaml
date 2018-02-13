@@ -83,6 +83,10 @@ sites:
       type: ignore
       function: phpinfo
       desc: "PHP Info 5.6"
+    - map: darkstat.vm
+      type: ignore
+      function: darkstat
+      desc: "DarkStat"
 
 #Features
 php72: true

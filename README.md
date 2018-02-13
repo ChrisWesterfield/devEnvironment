@@ -61,6 +61,73 @@ Other Virtualisation Software or Windows
 
 vagrant(.exe) ssh
 
+## List of Integrated Sites (if Option is enabled)
+
+Each Site needs to be added to sites. If not added, but enabled the default value will be choosen:
+
+SITE.YOURDOMAIN
+
+    - map: vm
+      type: ignore
+      function: startpage
+      desc: "Startpage"
+    - map: profiler.vm
+      type: ignore
+      function: profiler
+      desc: "Profiler Server"
+    - map: pma.vm
+      type: ignore
+      function: pma
+      desc: "PHP MyAdmin Server"
+    - map: rabbit.vm
+      type: ignore
+      function: rabbit
+      desc: "Rabbit MQ Server"
+    - map: search.vm
+      type: ignore
+      function: search
+      desc: "Elastic Search Server"
+    - map: kibana.vm
+      type: ignore
+      function: kibana
+      desc: "Kibana Server"
+    - map: mail.vm
+      type: ignore
+      function: mail
+      desc: "Mail Server"
+    - map: cockpit.vm
+      type: ignore
+      function: cockpit
+      desc: "Cockpit"
+    - map: ui.vm
+      type: ignore
+      function: ui
+      desc: "Docker UI Server"
+    - map: build.vm
+      type: ignore
+      function: build
+      desc: "Build Server"
+    - map: info72.vm
+      type: ignore
+      function: phpinfo
+      desc: "PHP Info 7.2"
+    - map: info71.vm
+      type: ignore
+      function: phpinfo
+      desc: "PHP Info 7.1"
+    - map: info70.vm
+      type: ignore
+      function: phpinfo
+      desc: "PHP Info 7.0"
+    - map: info56.vm
+      type: ignore
+      function: phpinfo
+      desc: "PHP Info 5.6"
+    - map: darkstat.vm
+      type: ignore
+      function: darkstat
+      desc: "DarkStat"
+      
 ## List of Options
 
 ### Install Mailhog
@@ -148,6 +215,9 @@ nginx: true
 apache2: true
 ### Yarn JS Tools
 yarn: true
+### DarkStat
+darkstat: true
+
 ### Serve Pages as http
 to allow pages to be sent also by http or not:
 
