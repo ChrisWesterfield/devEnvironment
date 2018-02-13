@@ -10,8 +10,7 @@ then
 fi
 
 touch /home/vagrant/.elasticsearch
-sudo /usr/bin/env bash /vagrant/bin/fix.bin.sh
-
+sudo /usr/bin/env bash /vagrant/bin/fix.dns.sh
 # Install Java 8
 
 sudo add-apt-repository -y ppa:webupd8team/java

@@ -16,7 +16,7 @@ if [ -f /home/vagrant/.php71 ]
 then
 sed -i '/env\[.*/,+1d' /etc/php/7.1/fpm/pool.d/www.conf
 fi
-if [ -f /home/vagrant/.php72]
+if [ -f /home/vagrant/.php72 ]
 then
 sed -i '/env\[.*/,+1d' /etc/php/7.2/fpm/pool.d/www.conf
 fi

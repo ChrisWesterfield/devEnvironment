@@ -6,7 +6,7 @@ then
     exit 0
 fi
 touch /home/vagrant/.kibana
-sudo /usr/bin/env bash /vagrant/bin/fix.bin.sh
+sudo /usr/bin/env bash /vagrant/bin/fix.dns.sh
 
 cd /home/vagrant
 sudo curl https://artifacts.elastic.co/downloads/kibana/kibana-6.1.1-amd64.deb > kibana.deb

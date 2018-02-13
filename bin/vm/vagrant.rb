@@ -25,6 +25,7 @@ class VagrantVM
         siteInfo70 = 'info70.' + settings['name']
         siteInfo71 = 'info71.' + settings['name']
         siteInfo72 = 'info72.' + settings['name']
+        siteDarkstat = 'darkstat.' + settings['name']
 
         # Allow SSH Agent Forward from The Box
         config.ssh.forward_agent = true
@@ -151,12 +152,14 @@ class VagrantVM
 
         # Configure to use bash instead of sh
         config.vm.provision "shell" do |s|
+            s.name = "Configuring Bash"
             s.privileged = true
             s.inline = "echo \"dash dash/sh boolean false\" | sudo debconf-set-selections && sudo dpkg-reconfigure -f noninteractive dash"
         end
 
         #Configure BASHRC
         config.vm.provision "shell" do |s|
+            s.name = "Configuring Profile"
             s.path = scriptDir + "/configure-profile.sh"
         end
 
@@ -206,12 +209,14 @@ class VagrantVM
 
         #Prepare Environment
         config.vm.provision "shell" do |s|
+            s.name = "Preparing Environment"
             s.path = scriptDir + "/prepare-vm.sh"
         end
 
         # Install All The Configured Nginx Sites
         if settings.has_key?("nginx") && settings["nginx"] == true
             config.vm.provision "shell" do |s|
+                s.name = "Install Nginx"
                 s.path = scriptDir + "/install-nginx.sh"
             end
         end
@@ -223,6 +228,7 @@ class VagrantVM
                 apache2php=settings["apache2php"]
             end
             config.vm.provision "shell" do |s|
+                s.name = "Installing Apache2"
                 s.path = scriptDir + "/install-apache2.sh"
                 s.args = [ apache2php ]
             end
@@ -259,6 +265,7 @@ class VagrantVM
         # Install PHP7.1 If Necessary
         if settings.has_key?("php72") && settings["php72"] == true
             config.vm.provision "shell" do |s|
+                s.name = "Installing PHP7.2"
                 s.path = scriptDir + "/install-php7.2.sh"
             end
         end
@@ -266,6 +273,7 @@ class VagrantVM
         #Install PHP
         if settings.has_key?("php") && settings["php"] == true
             config.vm.provision "shell" do |s|
+                s.name = "Installing PHP Plugins"
                 s.path = scriptDir + "/install-php.sh"
             end
         end
@@ -287,32 +295,38 @@ class VagrantVM
         if settings.has_key?("variables")
             settings["variables"].each do |var|
                 config.vm.provision "shell" do |s|
+                    s.name = "Provision PHP 5.6 Pool"
                     s.inline = "echo \"\nenv[$1] = '$2'\" >> /vagrant/etc/php/5.6/fpm/pool.d/www.conf"
                     s.args = [var["key"], var["value"]]
                 end
 
                 config.vm.provision "shell" do |s|
+                    s.name = "Provision PHP 7.0 Pool"
                     s.inline = "echo \"\nenv[$1] = '$2'\" >> /etc/php/7.0/fpm/pool.d/www.conf"
                     s.args = [var["key"], var["value"]]
                 end
 
                 config.vm.provision "shell" do |s|
+                    s.name = "Provision PHP 7.1 Pool"
                     s.inline = "echo \"\nenv[$1] = '$2'\" >> /etc/php/7.1/fpm/pool.d/www.conf"
                     s.args = [var["key"], var["value"]]
                 end
 
                 config.vm.provision "shell" do |s|
+                    s.name = "Provision PHP 7.2 Pool"
                     s.inline = "echo \"\nenv[$1] = '$2'\" >> /etc/php/7.2/fpm/pool.d/www.conf"
                     s.args = [var["key"], var["value"]]
                 end
 
                 config.vm.provision "shell" do |s|
-                    s.inline = "echo \"\n# Set Homestead Environment Variable\nexport $1=$2\" >> /home/vagrant/.profile"
+                    s.name = "Setting Vagrant Environmental Variables"
+                    s.inline = "echo \"\n# Set Vagrant Environment Variable\nexport $1=$2\" >> /home/vagrant/.profile"
                     s.args = [var["key"], var["value"]]
                 end
             end
 
             config.vm.provision "shell" do |s|
+                s.name = "restarting Services"
                 s.inline = "service php5.6-fpm restart; service php7.0-fpm restart; service php7.1-fpm restart; service php7.2-fpm restart;"
             end
         end
@@ -330,6 +344,7 @@ class VagrantVM
         # Install MariaDB If Necessary
         if settings.has_key?("mariadb") && settings["mariadb"] == true
             config.vm.provision "shell" do |s|
+                s.name = "Installing Maria DB"
                 s.path = scriptDir + "/install-maria.sh"
             end
         end
@@ -337,6 +352,7 @@ class VagrantVM
         # Install MariaDB If Necessary
         if settings.has_key?("mariadb") && settings["mariadb"] == true && settings.has_key?("mariadbMultiMaster") && settings["mariadbMultiMaster"] == true && settings.has_key?("mariadbMultiMasterCount")
             config.vm.provision "shell" do |s|
+                s.name = "Configuring Master + Slave Servers"
                 s.path = scriptDir + "/configure-masterSlave.sh"
                 s.args = [settings["mariadbMultiMasterCount"]]
             end
@@ -345,6 +361,7 @@ class VagrantVM
         # Install MongoDB If Necessary
         if (settings.has_key?("mongodb") && settings["mongodb"] == true) || (settings.has_key?("xhgui") && settings["xhgui"] == true)
             config.vm.provision "shell" do |s|
+                s.name = "Installing MongoDB"
                 s.path = scriptDir + "/install-mongo.sh"
             end
         end
@@ -352,6 +369,7 @@ class VagrantVM
         # Install CouchDB If Necessary
         if settings.has_key?("couchdb") && settings["couchdb"] == true
             config.vm.provision "shell" do |s|
+                s.name = "Installing CouchDB"
                 s.path = scriptDir + "/install-couch.sh"
             end
         end
@@ -366,20 +384,6 @@ class VagrantVM
                     s.path = scriptDir + "/install-elasticsearch5.sh"
                 end
             end
-            config.vm.provision "shell" do |s|
-                s.path = scriptDir + "/serve-proxy.sh"
-                s.args = [
-                    siteSearch,
-                    "9200",
-                    "80",
-                    "443"
-                ]
-            end
-            config.vm.provision "shell" do |s|
-                s.name = "Creating Certificate: " + siteSearch
-                s.path = scriptDir + "/create-certificate.sh"
-                s.args = [siteSearch]
-            end
         end
 
         # Install Kibana If Necessary
@@ -387,20 +391,6 @@ class VagrantVM
             config.vm.provision "shell" do |s|
                 s.name = "Installing Kibana"
                 s.path = scriptDir + "/install-kibana.sh"
-            end
-            config.vm.provision "shell" do |s|
-                s.path = scriptDir + "/serve-proxy.sh"
-                s.args = [
-                    siteKibana,
-                    "5601",
-                    "80",
-                    "443"
-                ]
-            end
-            config.vm.provision "shell" do |s|
-                s.name = "Creating Certificate: " + siteKibana
-                s.path = scriptDir + "/create-certificate.sh"
-                s.args = [siteKibana]
             end
         end
 
@@ -414,6 +404,7 @@ class VagrantVM
 
         #Install Composer
         config.vm.provision "shell" do |s|
+            s.name = "Installing Composer"
             s.path = scriptDir + "/install-composer.sh"
             s.privileged = true
         end
@@ -428,6 +419,7 @@ class VagrantVM
         # Configure Blackfire.io
         if settings.has_key?("blackfire") && settings["blackfire"] == true
             config.vm.provision "shell" do |s|
+                s.name = "Installing Blackfire"
                 s.path = scriptDir + "/blackfire.sh"
                 s.args = [
                     settings["blackfire"][0]["id"],
@@ -441,6 +433,7 @@ class VagrantVM
         if settings.has_key?("ngrok") && settings["ngrok"] == true
             # Add config file for ngrok
             config.vm.provision "shell" do |s|
+                s.name = "Installing NGROK"
                 s.path = scriptDir + "/install-ngrok.sh"
                 s.privileged = true
             end
@@ -475,20 +468,6 @@ class VagrantVM
             config.vm.provision "shell" do |s|
                 s.name = "Installing MailHog"
                 s.path = scriptDir + "/install-mailhog.sh"
-            end
-            config.vm.provision "shell" do |s|
-                s.path = scriptDir + "/serve-proxy.sh"
-                s.args = [
-                    siteMail,
-                    "8025",
-                    "80",
-                    "443"
-                ]
-            end
-            config.vm.provision "shell" do |s|
-                s.name = "Creating Certificate: " + siteMail
-                s.path = scriptDir + "/create-certificate.sh"
-                s.args = [siteMail]
             end
         end
 
@@ -530,20 +509,6 @@ class VagrantVM
                 s.name = "Installing RabbitMQ"
                 s.path = scriptDir + "/install-rabbitmq.sh"
             end
-            config.vm.provision "shell" do |s|
-                s.path = scriptDir + "/serve-proxy.sh"
-                s.args = [
-                    siteRabbit,
-                    "15672",
-                    "80",
-                    "443"
-                ]
-            end
-            config.vm.provision "shell" do |s|
-                s.name = "Creating Certificate: " + siteRabbit
-                s.path = scriptDir + "/create-certificate.sh"
-                s.args = [siteRabbit]
-            end
         end
 
         # Configuring If Necessary PHPMyAdmin
@@ -551,20 +516,6 @@ class VagrantVM
             config.vm.provision "shell" do |s|
                 s.name = "Configuring PHPMyAdmin"
                 s.path = scriptDir + "/configure-pma.sh"
-            end
-            config.vm.provision "shell" do |s|
-                s.path = scriptDir + "/serve-pma.sh"
-                s.args = [
-                    sitePma,
-                    "80",
-                    "443",
-                    "7.2"
-                ]
-            end
-            config.vm.provision "shell" do |s|
-                s.name = "Creating Certificate: " + sitePma
-                s.path = scriptDir + "/create-certificate.sh"
-                s.args = [sitePma]
             end
         end
 
@@ -574,80 +525,34 @@ class VagrantVM
                 s.name = "Configuring XHGui"
                 s.path = scriptDir + "/configure-xhgui.sh"
             end
-            config.vm.provision "shell" do |s|
-                s.path = scriptDir + "/serve-xhgui.sh"
-                s.args = [
-                    siteProfiler,
-                    "80",
-                    "443",
-                    "7.2"
-                ]
-            end
-            config.vm.provision "shell" do |s|
-                s.name = "Creating Certificate: " + siteProfiler
-                s.path = scriptDir + "/create-certificate.sh"
-                s.args = [siteProfiler]
-            end
-        end
-
-        config.vm.provision "shell" do |s|
-            s.path = scriptDir + "/serve-statamic.sh"
-            s.args = [
-                siteStart,
-                "/vagrant/system",
-                "80",
-                "443",
-                "7.2"
-            ]
-            config.vm.provision "shell" do |s|
-                s.name = "Creating Certificate: " + siteStart
-                s.path = scriptDir + "/create-certificate.sh"
-                s.args = [siteStart]
-            end
         end
 
         if settings.has_key?("php72") && settings["php72"] == true
             config.vm.provision "shell" do |s|
-                s.path = scriptDir + "/serve-statamic.sh"
-                s.args = [
-                    siteInfo72,
-                    "/vagrant/system/php72",
-                    "80",
-                    "443",
-                    "7.2"
-                ]
-            end
-            config.vm.provision "shell" do |s|
-                s.name = "Creating Certificate: " + siteInfo72
-                s.path = scriptDir + "/create-certificate.sh"
-                s.args = [siteInfo72]
+                s.name = "enable PHP7.2-FPM"
+                s.inline = "/usr/bin/env systemctl"
+                s.privileged = true
+                s.args = ["enable", "php7.2-fpm"]
             end
         else
             config.vm.provision "shell" do |s|
-                s.inline = "sudo systemctl"
+                s.name = "Disabling PHP7.2-FPM"
+                s.inline = "/usr/bin/env systemctl"
                 s.privileged = true
-                s.args["disable", "php7.2-fpm"]
+                s.args = ["disable", "php7.2-fpm"]
             end
         end
         if settings.has_key?("php71") && settings["php71"] == true
             config.vm.provision "shell" do |s|
-                s.path = scriptDir + "/serve-statamic.sh"
-                s.args = [
-                    siteInfo71,
-                    "/vagrant/system/php71",
-                    "80",
-                    "443",
-                    "7.1"
-                ]
-            end
-            config.vm.provision "shell" do |s|
-                s.name = "Creating Certificate: " + siteInfo71
-                s.path = scriptDir + "/create-certificate.sh"
-                s.args = [siteInfo71]
+                s.name = "enable PHP7.1-FPM"
+                s.inline = "/usr/bin/env systemctl"
+                s.privileged = true
+                s.args = ["enable", "php7.1-fpm"]
             end
         else
             config.vm.provision "shell" do |s|
-                s.inline = "sudo systemctl"
+                s.name = "Disabling PHP7.1-FPM"
+                s.inline = "/usr/bin/env systemctl"
                 s.privileged = true
                 s.args = ["disable", "php7.1-fpm"]
             end
@@ -655,23 +560,15 @@ class VagrantVM
 
         if settings.has_key?("php70") && settings["php70"] == true
             config.vm.provision "shell" do |s|
-                s.path = scriptDir + "/serve-statamic.sh"
-                s.args = [
-                    siteInfo70,
-                    "/vagrant/system/php70",
-                    "80",
-                    "443",
-                    "7.0"
-                ]
-            end
-            config.vm.provision "shell" do |s|
-                s.name = "Creating Certificate: " + siteInfo70
-                s.path = scriptDir + "/create-certificate.sh"
-                s.args = [siteInfo70]
+                s.name = "enable PHP7.0-FPM"
+                s.inline = "/usr/bin/env systemctl"
+                s.privileged = true
+                s.args = ["enable", "php7.0-fpm"]
             end
         else
             config.vm.provision "shell" do |s|
-                s.inline = "sudo systemctl"
+                s.name = "Disabling PHP7.0-FPM"
+                s.inline = "/usr/bin/env systemctl"
                 s.privileged = true
                 s.args = ["disable", "php7.0-fpm"]
             end
@@ -679,23 +576,15 @@ class VagrantVM
 
         if settings.has_key?("php56") && settings["php56"] == true
             config.vm.provision "shell" do |s|
-                s.path = scriptDir + "/serve-statamic.sh"
-                s.args = [
-                    siteInfo56,
-                    "/vagrant/system/php56",
-                    "80",
-                    "443",
-                    "5.6"
-                ]
-            end
-            config.vm.provision "shell" do |s|
-                s.name = "Creating Certificate: " + siteInfo56
-                s.path = scriptDir + "/create-certificate.sh"
-                s.args = [siteInfo56]
+                s.name = "enable PHP5.6-FPM"
+                s.inline = "/usr/bin/env systemctl"
+                s.privileged = true
+                s.args = ["enable", "php5.6-fpm"]
             end
         else
             config.vm.provision "shell" do |s|
-                s.inline = "sudo systemctl"
+                s.name = "Disabling PHP5.6-FPM"
+                s.inline = "/usr/bin/env systemctl"
                 s.privileged = true
                 s.args = ["disable", "php5.6-fpm"]
             end
@@ -707,20 +596,6 @@ class VagrantVM
                 s.name = "Install Docker Environment"
                 s.path = scriptDir + "/install-docker.sh"
             end
-            config.vm.provision "shell" do |s|
-                s.path = scriptDir + "/serve-proxy.sh"
-                s.args = [
-                    siteUi,
-                    "8020",
-                    "80",
-                    "443"
-                ]
-            end
-            config.vm.provision "shell" do |s|
-                s.name = "Creating Certificate: " + siteUi
-                s.path = scriptDir + "/create-certificate.sh"
-                s.args = [siteUi]
-            end
         end
 
         # Install If Necessary Cockpit
@@ -728,20 +603,6 @@ class VagrantVM
             config.vm.provision "shell" do |s|
                 s.name = "Install Cockpit Environment"
                 s.path = scriptDir + "/install-cockpit.sh"
-            end
-            config.vm.provision "shell" do |s|
-                s.name = "Creating Certificate: " + siteCockpit
-                s.path = scriptDir + "/create-certificate.sh"
-                s.args = [siteCockpit]
-            end
-            config.vm.provision "shell" do |s|
-                s.path = scriptDir + "/serve-proxy.sh"
-                s.args = [
-                    siteCockpit,
-                    "9090",
-                    "80",
-                    "443"
-                ]
             end
         end
 
@@ -751,20 +612,6 @@ class VagrantVM
                 s.name = "Install Statsd Environment"
                 s.path = scriptDir + "/install-statsd.sh"
             end
-            config.vm.provision "shell" do |s|
-                s.path = scriptDir + "/serve-grafana.sh"
-                s.args = [
-                    siteStatsd,
-                    "8082",
-                    "80",
-                    "443"
-                ]
-            end
-            config.vm.provision "shell" do |s|
-                s.name = "Creating Certificate: " + siteStatsd
-                s.path = scriptDir + "/create-certificate.sh"
-                s.args = [siteStatsd]
-            end
         end
 
         # Install If Necessary Jenkins
@@ -772,20 +619,6 @@ class VagrantVM
             config.vm.provision "shell" do |s|
                 s.name = "Install Jenkins Environment"
                 s.path = scriptDir + "/install-jenkins.sh"
-            end
-            config.vm.provision "shell" do |s|
-                s.path = scriptDir + "/serve-proxy.sh"
-                s.args = [
-                    siteBuild,
-                    "8080",
-                    "80",
-                    "443"
-                ]
-            end
-            config.vm.provision "shell" do |s|
-                s.name = "Creating Certificate: " + siteBuild
-                s.path = scriptDir + "/create-certificate.sh"
-                s.args = [siteBuild]
             end
         end
 
@@ -845,7 +678,15 @@ class VagrantVM
             end
         end
 
+        if settings.has_key?("darkstat") && settings["darkstat"] == true
+            config.vm.provision "shell" do |s|
+                s.name = "Installing Yarn"
+                s.path = scriptDir + "/install-darkstat.sh"
+            end
+        end
+
         config.vm.provision "shell" do |s|
+            s.name = "Fixing Home Directory"
             s.inline = "/vagrant/bin/chown-home.sh"
             s.privileged = false
         end
@@ -874,6 +715,7 @@ class VagrantVM
         siteInfo70 = 'info70.' + settings['name']
         siteInfo71 = 'info71.' + settings['name']
         siteInfo72 = 'info72.' + settings['name']
+        siteDarkstat = 'darkstat.' + settings['name']
 
         #nginx / apache2 configs
 
@@ -1013,6 +855,7 @@ class VagrantVM
         end
         #configure ngrok
         config.vm.provision "shell" do |s|
+            s.name = "Creating NGROK Config"
             s.path = scriptDir + "/create-ngrok.sh"
             s.args = [settings["ip"]]
             s.privileged = false
@@ -1062,6 +905,291 @@ class VagrantVM
                 end
             end
         end
+
+        # Install Elasticsearch If Necessary
+        if settings.has_key?("elasticsearch") && settings["elasticsearch"]
+            config.vm.provision "shell" do |s|
+                s.name = "Installing Web Host Elasticsearch"
+                s.path = scriptDir + "/serve-proxy.sh"
+                s.args = [
+                    siteSearch,
+                    "9200",
+                    "80",
+                    "443"
+                ]
+            end
+            config.vm.provision "shell" do |s|
+                s.name = "Creating Certificate: " + siteSearch
+                s.path = scriptDir + "/create-certificate.sh"
+                s.args = [siteSearch]
+            end
+        end
+        if settings.has_key?("kibana") && settings["kibana"] == true
+            config.vm.provision "shell" do |s|
+                s.name = "Configure Kibana Proxy"
+                s.path = scriptDir + "/serve-proxy.sh"
+                s.args = [
+                    siteKibana,
+                    "5601",
+                    "80",
+                    "443"
+                ]
+            end
+            config.vm.provision "shell" do |s|
+                s.name = "Creating Certificate: " + siteKibana
+                s.path = scriptDir + "/create-certificate.sh"
+                s.args = [siteKibana]
+            end
+        end
+        # Install MailHog If Necessary
+        if settings.has_key?("mailhog") && settings["mailhog"] == true
+            config.vm.provision "shell" do |s|
+                s.name = "Creating MailHog  Proxy"
+                s.path = scriptDir + "/serve-proxy.sh"
+                s.args = [
+                    siteMail,
+                    "8025",
+                    "80",
+                    "443"
+                ]
+            end
+            config.vm.provision "shell" do |s|
+                s.name = "Creating Certificate: " + siteMail
+                s.path = scriptDir + "/create-certificate.sh"
+                s.args = [siteMail]
+            end
+        end
+        # Install RabbitMQ If Necessary
+        if settings.has_key?("rabbitmq") && settings["rabbitmq"] == true
+            config.vm.provision "shell" do |s|
+                s.name = "Installing Host for RabbitMQ"
+                s.path = scriptDir + "/serve-proxy.sh"
+                s.args = [
+                    siteRabbit,
+                    "15672",
+                    "80",
+                    "443"
+                ]
+            end
+            config.vm.provision "shell" do |s|
+                s.name = "Creating Certificate: " + siteRabbit
+                s.path = scriptDir + "/create-certificate.sh"
+                s.args = [siteRabbit]
+            end
+        end
+        if settings.has_key?("mariadb") && settings["mariadb"] == true && settings.has_key?("phpma") && settings["phpma"] == true
+            config.vm.provision "shell" do |s|
+                s.name = "Creating Host for phpMyAdmin"
+                s.path = scriptDir + "/serve-pma.sh"
+                s.args = [
+                    sitePma,
+                    "80",
+                    "443",
+                    "7.2"
+                ]
+            end
+            config.vm.provision "shell" do |s|
+                s.name = "Creating Certificate: " + sitePma
+                s.path = scriptDir + "/create-certificate.sh"
+                s.args = [sitePma]
+            end
+        end
+        # Configuring If Necessary XHGui
+        if settings.has_key?("xhgui") && settings["xhgui"] == true
+            config.vm.provision "shell" do |s|
+                s.name = "Installing XHGui Host"
+                s.path = scriptDir + "/serve-xhgui.sh"
+                s.args = [
+                    siteProfiler,
+                    "80",
+                    "443",
+                    "7.2"
+                ]
+            end
+            config.vm.provision "shell" do |s|
+                s.name = "Creating Certificate: " + siteProfiler
+                s.path = scriptDir + "/create-certificate.sh"
+                s.args = [siteProfiler]
+            end
+        end
+
+        config.vm.provision "shell" do |s|
+            s.path = scriptDir + "/serve-statamic.sh"
+            s.name = "Installing Host for System Start Site"
+            s.args = [
+                siteStart,
+                "/vagrant/system",
+                "80",
+                "443",
+                "7.2"
+            ]
+            config.vm.provision "shell" do |s|
+                s.name = "Creating Certificate: " + siteStart
+                s.path = scriptDir + "/create-certificate.sh"
+                s.args = [siteStart]
+            end
+        end
+        if settings.has_key?("php72") && settings["php72"] == true
+            config.vm.provision "shell" do |s|
+                s.name = "Installing Host Site for PHP7.2 phpinfo"
+                s.path = scriptDir + "/serve-statamic.sh"
+                s.args = [
+                    siteInfo72,
+                    "/vagrant/system/php72",
+                    "80",
+                    "443",
+                    "7.2"
+                ]
+            end
+            config.vm.provision "shell" do |s|
+                s.name = "Creating Certificate: " + siteInfo72
+                s.path = scriptDir + "/create-certificate.sh"
+                s.args = [siteInfo72]
+            end
+        end
+        if settings.has_key?("php71") && settings["php71"] == true
+            config.vm.provision "shell" do |s|
+                s.name = "Installing Host Site for PHP7.1 phpinfo"
+                s.path = scriptDir + "/serve-statamic.sh"
+                s.args = [
+                    siteInfo71,
+                    "/vagrant/system/php71",
+                    "80",
+                    "443",
+                    "7.1"
+                ]
+            end
+            config.vm.provision "shell" do |s|
+                s.name = "Creating Certificate: " + siteInfo71
+                s.path = scriptDir + "/create-certificate.sh"
+                s.args = [siteInfo71]
+            end
+        end
+        if settings.has_key?("php70") && settings["php70"] == true
+            config.vm.provision "shell" do |s|
+                s.name = "Installing Host Site for PHP7.0 phpinfo"
+                s.path = scriptDir + "/serve-statamic.sh"
+                s.args = [
+                    siteInfo70,
+                    "/vagrant/system/php70",
+                    "80",
+                    "443",
+                    "7.0"
+                ]
+            end
+            config.vm.provision "shell" do |s|
+                s.name = "Creating Certificate: " + siteInfo70
+                s.path = scriptDir + "/create-certificate.sh"
+                s.args = [siteInfo70]
+            end
+        end
+        if settings.has_key?("php56") && settings["php56"] == true
+            config.vm.provision "shell" do |s|
+                s.name = "Installing Host Site for PHP5.6 phpinfo"
+                s.path = scriptDir + "/serve-statamic.sh"
+                s.args = [
+                    siteInfo56,
+                    "/vagrant/system/php56",
+                    "80",
+                    "443",
+                    "5.6"
+                ]
+            end
+            config.vm.provision "shell" do |s|
+                s.name = "Creating Certificate: " + siteInfo56
+                s.path = scriptDir + "/create-certificate.sh"
+                s.args = [siteInfo56]
+            end
+        end
+        # Install If Necessary Docker
+        if settings.has_key?("docker") && settings["docker"] == true
+            config.vm.provision "shell" do |s|
+                s.name = "Installing Docker Gui Site"
+                s.path = scriptDir + "/serve-proxy.sh"
+                s.args = [
+                    siteUi,
+                    "8020",
+                    "80",
+                    "443"
+                ]
+            end
+            config.vm.provision "shell" do |s|
+                s.name = "Creating Certificate: " + siteUi
+                s.path = scriptDir + "/create-certificate.sh"
+                s.args = [siteUi]
+            end
+        end
+        if settings.has_key?("cockpit") && settings["cockpit"] == true
+            config.vm.provision "shell" do |s|
+                s.name = "Creating Certificate: " + siteCockpit
+                s.path = scriptDir + "/create-certificate.sh"
+                s.args = [siteCockpit]
+            end
+            config.vm.provision "shell" do |s|
+                s.name = "Installing Cockpit Environment Site"
+                s.path = scriptDir + "/serve-proxy.sh"
+                s.args = [
+                    siteCockpit,
+                    "9090",
+                    "80",
+                    "443"
+                ]
+            end
+        end
+        # Install If Necessary Statsd
+        if settings.has_key?("statsd") && settings["statsd"] == true
+            config.vm.provision "shell" do |s|
+                s.name = "Installing statsd Site"
+                s.path = scriptDir + "/serve-grafana.sh"
+                s.args = [
+                    siteStatsd,
+                    "8082",
+                    "80",
+                    "443"
+                ]
+            end
+            config.vm.provision "shell" do |s|
+                s.name = "Creating Certificate: " + siteStatsd
+                s.path = scriptDir + "/create-certificate.sh"
+                s.args = [siteStatsd]
+            end
+        end
+        # Install If Necessary Jenkins
+        if settings.has_key?("jenkins") && settings["jenkins"] == true
+            config.vm.provision "shell" do |s|
+                s.name = "Installing Jenkins Site"
+                s.path = scriptDir + "/serve-proxy.sh"
+                s.args = [
+                    siteBuild,
+                    "8080",
+                    "80",
+                    "443"
+                ]
+            end
+            config.vm.provision "shell" do |s|
+                s.name = "Creating Certificate: " + siteBuild
+                s.path = scriptDir + "/create-certificate.sh"
+                s.args = [siteBuild]
+            end
+        end
+        if settings.has_key?("darkstat") && settings["darkstat"] == true
+            config.vm.provision "shell" do |s|
+                s.name = "Installing DarkStat Site"
+                s.path = scriptDir + "/serve-proxy.sh"
+                s.args = [
+                    siteDarkstat,
+                    "667",
+                    "80",
+                    "443"
+                ]
+            end
+            config.vm.provision "shell" do |s|
+                s.name = "Creating Certificate: " + siteDarkstat
+                s.path = scriptDir + "/create-certificate.sh"
+                s.args = [siteDarkstat]
+            end
+        end
+
         config.vm.provision "shell" do |s|
             s.name = "Saving Site Configuration"
             s.path = scriptDir + "/save_sites.sh"

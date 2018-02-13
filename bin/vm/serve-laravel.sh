@@ -21,7 +21,7 @@ else configureZray=""
 fi
 
 listenHttp=""
-if $8 == 1
+if [ $8 ]
 then
     listenHttp="listen ${3:-80};"
 fi

@@ -10,14 +10,14 @@ touch /home/vagrant/.statsd
 
 cd /usr/src
 
-apt-get install git python-virtualenv python-dev
+apt-get install git python-virtualenv python-dev -y
 virtualenv /opt/graphite
 source /opt/graphite/bin/activate
 pip install https://github.com/graphite-project/ceres/tarball/master
 pip install whisper
 pip install carbon
 
-apt-get install libcairo2-dev
+apt-get install libcairo2-dev -y
 cd /opt/graphite
 git clone https://github.com/graphite-project/graphite-web.git
 cd graphite-web
@@ -26,7 +26,7 @@ python setup.py install
 pip install -r requirements.txt
 django-admin.py syncdb --settings=graphite.settings --pythonpath=/opt/graphite/webapp
 
-apt-get install nodejs
+apt-get install nodejs -y
 cd /opt/
 git clone https://github.com/etsy/statsd.git
 
