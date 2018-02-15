@@ -54,6 +54,7 @@
 </ul>
 <ul class="nav flex-column">
     <li><h4>Tools</h4></li>
+    <li class="nav-item"><a href="process.php">Process List</a></li>
     <?php
     foreach($utilities as $app)
     {

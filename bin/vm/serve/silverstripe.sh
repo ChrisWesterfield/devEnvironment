@@ -23,9 +23,16 @@ fi
 phpV="${5//.}"
 
 listenHttp=""
-if [ $6 ]
+if [ $8 ]
 then
     listenHttp="listen ${3:-80};"
+fi
+
+if [ $phpV == "custome" ]
+then
+    LISTEN=$9
+else
+    LISTEN="127.0.0.1:90$phpV;"
 fi
 
 block="server {
@@ -60,7 +67,7 @@ block="server {
 
     location ~ /framework/.*(main|rpc|tiny_mce_gzip)\.php$ {
         fastcgi_keep_conn on;
-        fastcgi_pass 127.0.0.1:90$phpV;
+        fastcgi_pass $LISTEN;
         fastcgi_index  index.php;
         fastcgi_param  SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
         include        fastcgi_params;
@@ -107,7 +114,7 @@ block="server {
 
     location ~ \.php$ {
         fastcgi_keep_conn on;
-        fastcgi_pass 127.0.0.1:90$phpV;
+        fastcgi_pass $LISTEN;
         fastcgi_index  index.php;
         fastcgi_param  SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
         include        fastcgi_params;

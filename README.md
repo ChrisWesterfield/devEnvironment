@@ -90,6 +90,57 @@ If you choose mysql you can also specify an user for which two different permiss
 
 User Type read has only select Permission on the database (used for master/slave environments)
 
+## PHP-FPM Configuration
+
+This release includes the capability of configuring additional FPM Processes According to Project Requriements
+
+
+    fpm:
+      - name: demo
+        version: "7.2"
+        listen: 127.0.0.1:9001
+        pm: dynamic
+        max_spare: 16
+        min_spare: 4
+        start_process: 4
+        max_children: 32
+        max_ram: 512M
+        xdebug: true
+        
+Properties:
+### name
+Required. Should not contain Empty Space or Special Caracters(", ', ...)
+### version
+String of the PHP Version
+
+Possible Values
+* "7.2"
+* "7.1"
+* "7.0"
+* "5.6"
+###listen: 
+Listening Port for PHP-FPM
+
+Either use an Path  (/run/php......)
+
+or an IP with Port.
+Best Practise is to use the local host IP 127.0.0.1 (recommended!)
+
+pm: Choose one of the PM Models (ondemand, static, dynamic (default))
+
+The Models ondemand and static only are configured over the parameter *max_children*
+### max_spare + min_spare
+Min and Max Spare Processes
+### start_process
+Start Number of Processes
+### max_children
+Maximum Number of Processes
+### max_ram
+Maximum Ammount of Ram for Process
+### xdebug
+enable or disable xdebug
+ 
+
 ## List of Integrated Sites (if Option is enabled)
 
 Each Site needs to be added to sites. If not added, but enabled the default value will be choosen:
@@ -157,6 +208,45 @@ SITE.YOURDOMAIN
       function: darkstat
       desc: "DarkStat"
       
+### Website Config
+
+Parameters:
+
+### map
+URL of the site
+### type
+Environment for Configuration
+* apache2
+* elgg
+* laravel
+* pimcore
+* proxy
+* silverstripe
+* spa
+* statmic / PHP Pages
+* symfony2
+* symfony4
+
+The Additional ones (xhgui, pma are for internal use only)
+### to
+Target Directory in Filesystem
+### desc
+###php **
+PHP Version default: 7.2
+Description of site within Start Menu (Text)
+### function*
+Internal handling of Pages
+Should be set to app
+###zray*
+enable or disable ZRAY (zray: true)
+###fpm* | **
+Custom FPM Server from the FPM list
+If no one exist you should define an PHP Value
+
+=>* optional
+
+=>** fpm overwrite php Version Usage. 
+
 ## List of Options
 
 ### Install Mailhog
@@ -263,4 +353,4 @@ serverHttp: true
 ## Known Issues
 
 ## Untestet
-Apache
+Apache Setup

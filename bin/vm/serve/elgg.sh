@@ -29,6 +29,13 @@ then
     listenHttp="listen ${3:-80};"
 fi
 
+if [ $phpV == "custome" ]
+then
+    LISTEN=$9
+else
+    LISTEN="127.0.0.1:90$phpV"
+fi
+
 
 block="server {
     $listenHttp
@@ -84,13 +91,13 @@ block="server {
     location ~ \.php$ {
         try_files \$uri @elgg;
         fastcgi_index index.php;
-        fastcgi_pass 127.0.0.1:90$phpV;
+        fastcgi_pass $LISTEN;
         fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
         include /vagrant/etc/nginx/fastcgi_params;
     }
 
     location @elgg {
-        fastcgi_pass 127.0.0.1:90$phpV;
+        fastcgi_pass $LISTEN;
 
         include /etc/nginx/fastcgi_params;
         fastcgi_param SCRIPT_FILENAME \$document_root/index.php;

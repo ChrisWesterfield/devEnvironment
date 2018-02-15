@@ -20,18 +20,25 @@ location /ZendServer {
 else configureZray=""
 fi
 
-phpV="${5//.}"
-
 listenHttp=""
-if [ $6 ]
+if [ $8 ]
 then
     listenHttp="listen ${3:-80};"
+fi
+
+phpV="${5//.}"
+
+if [ $phpV == "custome" ]
+then
+    LISTEN=$9
+else
+    LISTEN="127.0.0.1:90$phpV;"
 fi
 
 block="server {
     $listenHttp
     listen ${4:-443} ssl http2;
-    server_name $1;
+    server_name .$1;
     root \"$2\";
 
     index index.html index.htm index.php;
@@ -42,20 +49,22 @@ block="server {
         try_files \$uri \$uri/ /index.php?\$query_string;
     }
 
+    $configureZray
+
     location = /favicon.ico { access_log off; log_not_found off; }
     location = /robots.txt  { access_log off; log_not_found off; }
 
     access_log off;
-    error_log  /vagrant/log/$1-ssl-error.log error;
+    error_log  /var/log/nginx/$1-error.log error;
 
     sendfile off;
 
     client_max_body_size 100m;
 
-    # DEV
-    location ~ ^/index\.php(/|\$) {
-        fastcgi_split_path_info ^(.+\.php)(/.*)\$;
-        fastcgi_pass 127.0.0.1:90$phpV;
+    location ~ \.php$ {
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass $LISTEN;
+        fastcgi_index index.php;
         include fastcgi_params;
         fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
         $paramsTXT
@@ -63,13 +72,14 @@ block="server {
         fastcgi_intercept_errors off;
         fastcgi_buffer_size 16k;
         fastcgi_buffers 4 16k;
+        fastcgi_connect_timeout 300;
+        fastcgi_send_timeout 300;
+        fastcgi_read_timeout 300;
     }
 
     location ~ /\.ht {
         deny all;
     }
-
-    $configureZray
 
     ssl_certificate     /etc/ssl/site/$1.crt;
     ssl_certificate_key /etc/ssl/site/$1.key;

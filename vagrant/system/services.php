@@ -3,30 +3,34 @@ declare(strict_types=1);
 $cfg['host'] = '127.0.0.1';
 $tmp = [];
 $masterHome = '/home/vagrant/.';
+$masterConfig = json_decode(file_get_contents(__DIR__.'/../config.json'), true);
 if(file_exists($masterHome.'maria'))
 {
     if(file_exists($masterHome.'mariaMultiMaster'))
     {
         $sCount = 1;
         $tmp[] = [
-            'name'        => 'MySQL Master',
+            'name'        => 'MariaDB Master',
             'host'        => '127.0.0.1',
             'port'        => '3306',
-            'description' => 'MySQL DB',
+            'description' => 'MariaDB',
             'db'          => true,
         ];
-        $count = file_get_contents($masterHome.'mariaMultiMasterSlaves');
-        for($i=0;$i<$count;$i++)
+        if(array_key_exists('mariadbMultiMasterCount', $masterConfig) && $masterConfig['mariadbMultiMasterCount'] > 0)
         {
-            $sCount++;
-            $tmp[] = [
-                'name'        => 'MySQL Slave',
-                'host'        => '127.0.0.1',
-                'port'        => '330'.(7+$i),
-                'description' => 'MySQL DB',
-                'db'          => true,
-            ];
+            for($i=0;$i<$masterConfig['mariadbMultiMasterCount'];$i++)
+            {
+                $tmp[] = [
+                    'name'        => 'MariaDB Slave'.$sCount,
+                    'host'        => '127.0.0.1',
+                    'port'        => '330'.(7+$i),
+                    'description' => 'MariaDB Slave Server ('.'330'.(7+$i).')',
+                    'db'          => true,
+                ];
+                $sCount++;
+            }
         }
+
         if($sCount%2 > 0)
         {
             $tmp[] = [];
@@ -49,13 +53,13 @@ if(file_exists($masterHome.'maria'))
 if(file_exists($masterHome.'nginx'))
 {
     $tmp[] = [
-        'name'        => 'NginX Web Server',
+        'name'        => 'NginX Web',
         'port'        => '80',
         'description' => 'NginX Web Server HTTP',
         'db'          => false,
     ];
     $tmp[] = [
-        'name'        => 'NginX Web Server',
+        'name'        => 'NginX Web',
         'port'        => '443',
         'description' => 'NginX Web Server HTTPS',
         'db'          => false,
@@ -63,6 +67,67 @@ if(file_exists($masterHome.'nginx'))
     $tmp[] = [];
     $tmp[] = [];
 }
+
+$subConfig = [];
+if(array_key_exists('php72', $masterConfig))
+{
+    $subConfig[] = [
+        'name'        => 'PHP-FPM-7.2',
+        'port'        => '9072',
+        'description' => 'Application Server PHP7.2 - www',
+        'db'          => false,
+    ];
+}
+if(array_key_exists('php71', $masterConfig))
+{
+    $subConfig[] = [
+        'name'        => 'PHP-FPM-7.1',
+        'port'        => '9071',
+        'description' => 'Application Server PHP7.1 - www',
+        'db'          => false,
+    ];
+}
+if(array_key_exists('php70', $masterConfig))
+{
+    $subConfig[] = [
+        'name'        => 'PHP-FPM-7.0',
+        'port'        => '9070',
+        'description' => 'Application Server PHP7.0 - www',
+        'db'          => false,
+    ];
+}
+if(array_key_exists('php56', $masterConfig))
+{
+    $subConfig[] = [
+        'name'        => 'PHP-FPM-5.6',
+        'port'        => '9056',
+        'description' => 'Application Server PHP5.6 - www',
+        'db'          => false,
+    ];
+}
+
+if(array_key_exists('fpm',$masterConfig)) {
+    foreach ($masterConfig['fpm'] as $config)
+    {
+        if(array_key_exists('listen', $config) && strpos($config['listen'], '127.0.0.1:')!==false)
+        $subConfig[] = [
+            'name'        => 'PHP-FPM-'.$config['version'],
+            'port'        => str_replace('127.0.0.1:','',$config['listen']),
+            'description' => 'Application Server PHP'.$config['version'].' '.$config['name'],
+            'db'          => false,
+        ];
+    }
+}
+
+if(count($subConfig)%2 === 1)
+{
+    $subConfig[]=[];
+}
+$subConfig[]=[];
+$subConfig[]=[];
+
+$tmp = array_merge($tmp, $subConfig);
+
 
 if(file_exists($masterHome.'postgresql'))
 {
@@ -262,7 +327,7 @@ if(file_exists($masterHome.'rabbitmq'))
         'db'          => false,
     ];
     $tmp[] = [
-        'name'        => 'Rabbit MQ Admin',
+        'name'        => 'Admin',
         'port'        => '15672',
         'description' => 'Rabbit MQ Admin Server',
         'db'          => false,

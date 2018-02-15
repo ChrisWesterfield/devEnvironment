@@ -33,7 +33,7 @@ foreach($json['sites'] as $site)
         <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">MJR.ONE</a>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
-                <a class="nav-link" href="https://bit.mjr.one/projects/PUBLIC/repos/developmentenvironment-v3/browse">check Dev Environment</a>
+                <a class="nav-link" href="https://bit.mjr.one/projects/PUBLIC/repos/developmentenvironment-v3/browse">Bit Bucket for Project</a>
             </li>
         </ul>
     </nav>

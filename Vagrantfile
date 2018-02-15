@@ -33,7 +33,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         abort "vagrant settings file not found in #{confDir}"
     end
 
+    VagrantVM.box(config, settings)
     VagrantVM.install(config, settings)
+    VagrantVM.ngrok(config, settings)
+    VagrantVM.database(config, settings)
     VagrantVM.configure(config, settings)
 
     if File.exist? afterScriptPath then
