@@ -30,7 +30,8 @@ sudo apt-get install -y  \
     nmap \
     iotop \
     iftop \
-    ufw
+    ufw \
+    pv
 
 sudo add-apt-repository ppa:ondrej/php
 sudo apt-get update

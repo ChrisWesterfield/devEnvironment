@@ -35,3 +35,5 @@ DAYLOG=\"--daylog darkstat.log\"
 
 systemctl start darkstat
 /lib/systemd/systemd-sysv-install enable darkstat
+systemctl enable darkstat
+service darkstat restart

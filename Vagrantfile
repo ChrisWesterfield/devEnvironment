@@ -52,12 +52,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.trigger.before :halt do
         info "Stoping Environment"
         run_remote "bash /vagrant/bin/stopTasks.sh"
+        run_remote "/usr/bin/env bash /vagrant/bin/dbExport.sh"
+        run_remote "/usr/bin/env bash /vagrant/bin/mongoExport.sh"
     end
 
     config.trigger.after :up do
         info "Starting Environment"
         run_remote "/usr/bin/env sudo resolvconf -u"
+        run_remote "/usr/bin/env bash /vagrant/bin/stopMySQL.sh"
+        run_remote "/usr/bin/env bash /vagrant/bin/fixDb.sh"
+        run_remote "/usr/bin/env bash /vagrant/bin/restartDb.sh"
         run_remote "/usr/bin/env bash /vagrant/bin/startTasks.sh"
         run_remote "/usr/bin/env bash /vagrant/bin/fix.dns.sh"
+        run_remote "/usr/bin/env bash /vagrant/bin/restartWeb.sh"
     end
 end

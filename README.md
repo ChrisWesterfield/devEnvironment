@@ -61,6 +61,35 @@ Other Virtualisation Software or Windows
 
 vagrant(.exe) ssh
 
+## Database Config
+
+Example config:
+
+    databases:
+        - name: application
+          type: mysql
+          user:
+              - name: application
+                password: 123
+                type: write
+              - name: application
+                password: 123
+                type: read
+
+for each database there are 4 types valid:
+
+1. mysql
+2. pgsql
+3. couchdb
+4. mongodb
+
+If you choose mysql you can also specify an user for which two different permission sets can be specified
+
+1. write
+2. read
+
+User Type read has only select Permission on the database (used for master/slave environments)
+
 ## List of Integrated Sites (if Option is enabled)
 
 Each Site needs to be added to sites. If not added, but enabled the default value will be choosen:

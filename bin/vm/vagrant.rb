@@ -871,6 +871,20 @@ class VagrantVM
                             s.path = scriptDir + "/create-mysql.sh"
                             s.args = [db["name"]]
                         end
+                        if db.has_key?("user")
+                            db["user"].each do |user|
+                                if user.has_key?("type")
+                                    permission=user["type"]
+                                else
+                                    permission="write"
+                                end
+                                config.vm.provision "shell" do |s|
+                                    s.name = "Creating MySQL Database: " + db["name"]
+                                    s.path = scriptDir + "/create-mysqlUser.sh"
+                                    s.args = [db["name"], user["name"], user["password"], permission ]
+                                end
+                            end
+                        end
                     end
                 end
 
