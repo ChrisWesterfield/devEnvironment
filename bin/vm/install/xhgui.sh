@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-if [ ! -f /home/vagrant/.xhgui ]
+if [ -f /home/vagrant/.xhgui ]
 then
-    echo "XHGUI already configured"
+    echo "XHGUI already installed."
     exit 0
 fi
 touch /home/vagrant/.xhgui

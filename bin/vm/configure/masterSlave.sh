@@ -4,7 +4,7 @@ export DEBIAN_FRONTEND=noninteractive
 
 if [ -f /home/vagrant/.mariaMultiMaster ]
 then
-    echo "MariaDB already configured as MySQL Multi Master"
+    echo "MariaDB already configured as MySQL Master + Slave"
     exit 0
 fi
 touch /home/vagrant/.mariaMultiMaster

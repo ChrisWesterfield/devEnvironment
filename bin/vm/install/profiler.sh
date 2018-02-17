@@ -25,7 +25,7 @@ if [ -f /home/vagrant/.php72 ]
 then
     sudo make clean
     sudo phpize7.2
-    sudo ./configure
+    sudo ./configure --with-php-config=/usr/bin/php-config7.2
     sudo make
     sudo make install
     sudo ln -s /vagrant/etc/php/profiler.7.2.ini /etc/php/7.2/fpm/conf.d/20-profiler.ini
@@ -35,8 +35,10 @@ fi
 if [ -f /home/vagrant/.php71 ]
 then
     sudo make clean
+    sudo rm configure.ac -f
+    sudo rm configure.in -f
     sudo phpize7.1
-    sudo ./configure
+    sudo ./configure --with-php-config=/usr/bin/php-config7.1
     sudo make
     sudo make install
     sudo ln -s /vagrant/etc/php/profiler.7.1.ini /etc/php/7.1/fpm/conf.d/20-profiler.ini
@@ -46,8 +48,10 @@ fi
 if [ -f /home/vagrant/.php70 ]
 then
     sudo make clean
+    sudo rm configure.ac -f
+    sudo rm configure.in -f
     sudo phpize7.0
-    sudo ./configure
+    sudo ./configure --with-php-config=/usr/bin/php-config7.1
     sudo make
     sudo make install
     sudo ln -s /vagrant/etc/php/profiler.7.0.ini /etc/php/7.0/fpm/conf.d/20-profiler.ini

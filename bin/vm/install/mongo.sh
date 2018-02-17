@@ -79,11 +79,28 @@ then
     make clean > /dev/null
     make >/dev/null 2>&1
     sudo make install
-    sudo chmod 644 /usr/lib/php/20160303/mongodb.so
+    sudo chmod 644 /usr/lib/php/20170718/mongodb.so
     sudo bash -c "echo 'extension=mongodb.so' > /etc/php/7.2/mods-available/mongo.ini"
     sudo ln -s /etc/php/7.2/mods-available/mongo.ini /etc/php/7.2/cli/conf.d/20-mongo.ini
     sudo ln -s /etc/php/7.2/mods-available/mongo.ini /etc/php/7.2/fpm/conf.d/20-mongo.ini
     sudo service php7.2-fpm restart
 fi
 
-mongo admin --eval "db.createUser({user:'homestead',pwd:'secret',roles:['root']})"
+mongo admin --eval "db.createUser({user:'vagrant',pwd:'123',roles:['root']})"
+
+
+if [ -f /home/vagrant/.php56 ]
+then
+    cd /usr/src
+    sudo git clone https://github.com/mongodb/mongo-php-driver-legacy.git mongodb-legacy
+    cd mongodb-legacy
+    sudo phpize5.6
+    sudo ./configure --with-php-config=/usr/bin/php-config5.6
+    sudo make
+    sudo make install
+    sudo bash -c "echo 'extension=mongo.so' > /etc/php/5.6/mods-available/mongo-legacy.ini"
+    sudo ln -s /etc/php/5.6/mods-available/mongo-legacy.ini /etc/php/5.6/cli/conf.d/20-mongo-legacy.ini
+    sudo ln -s /etc/php/5.6/mods-available/mongo-legacy.ini /etc/php/5.6/fpm/conf.d/20-mongo-legacy.ini
+    sudo service php5.6-fpm restart
+fi
+

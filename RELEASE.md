@@ -1,3 +1,18 @@
+# 4.2
+* added beanstalkd Admin Console install script
+* bug fix for xhgui installer
+* motd screen update
+* removed homestead console command as it was of no use for the current project.
+* added munin
+* moved features to property features in config.yaml
+* fixed an bug in enablin and disabling FPM Services
+* general cleanup
+* added couddb ui page
+* added php Mongo DB Admin Installation
+* added setting default php version
+* several minor bug fixes
+* updates on documentation file
+* added Installer for HHVM
 # 4.1
 * removed phpmyadmin from bundle
 * removed xhgui from bundle

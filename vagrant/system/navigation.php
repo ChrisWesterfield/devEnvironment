@@ -15,6 +15,10 @@
         }
         else if($site['type']==='ignore')
         {
+            if($site['function']==='couchDbUi')
+            {
+                $site['map'] = $site['map'].'/_utils';
+            }
             $utilities[] = $site;
         }
         else
