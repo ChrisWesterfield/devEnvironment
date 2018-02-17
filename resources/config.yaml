@@ -87,6 +87,10 @@ sites:
       type: ignore
       function: darkstat
       desc: "DarkStat"
+    - map: errbit.vm
+      type: ignore
+      function: errbit
+      desc: "Errbit"
 
 #Features
 php72: true

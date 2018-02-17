@@ -150,6 +150,7 @@ class VagrantVM
         siteInfo71 = 'info71.' + settings['name']
         siteInfo72 = 'info72.' + settings['name']
         siteDarkstat = 'darkstat.' + settings['name']
+        siteErrbit = 'errbit.'+settings['name']
 
 
         # Configure to use bash instead of sh
@@ -376,7 +377,7 @@ class VagrantVM
         config.vm.provision "shell" do |s|
             s.name = "Update Composer"
             s.inline = "sudo /usr/local/bin/composer self-update --no-progress && sudo chown -R vagrant:vagrant /home/vagrant/.composer/"
-            s.privileged = false
+            s.privileged = true
         end
 
         # Configure Blackfire.io
@@ -478,7 +479,8 @@ class VagrantVM
         if settings.has_key?("mariadb") && settings["mariadb"] == true && settings.has_key?("phpma") && settings["phpma"] == true
             config.vm.provision "shell" do |s|
                 s.name = "Configuring PHPMyAdmin"
-                s.path = scriptDir + "/configure/pma.sh"
+                s.path = scriptDir + "/install/phpmyadmin.sh"
+                s.privileged = false
             end
         end
 
@@ -486,7 +488,8 @@ class VagrantVM
         if settings.has_key?("xhgui") && settings["xhgui"] == true
             config.vm.provision "shell" do |s|
                 s.name = "Configuring XHGui"
-                s.path = scriptDir + "/configure/xhgui.sh"
+                s.path = scriptDir + "/install/xhgui.sh"
+                s.privileged = false
             end
         end
 
@@ -648,6 +651,28 @@ class VagrantVM
             end
         end
 
+        if settings.has_key?("errbit") && settings["errbit"] == true
+            config.vm.provision "shell" do |s|
+                s.name = "Installing Errbit"
+                s.path = scriptDir + "/install/errbit.sh"
+                s.args = [ siteErrbit, settings['name'] ]
+            end
+        end
+
+        if settings.has_key?("wpcli") && settings["wpcli"] == true
+            config.vm.provision "shell" do |s|
+                s.name = "Installing WordPress CLI"
+                s.path = scriptDir + "/install/wpcli.sh"
+            end
+        end
+
+        if settings.has_key?("flyway") && settings["flyway"] == true
+            config.vm.provision "shell" do |s|
+                s.name = "Installing FlyWay"
+                s.path = scriptDir + "/install/flyway.sh"
+            end
+        end
+
         config.vm.provision "shell" do |s|
             s.name = "Fixing Home Directory"
             s.inline = "/vagrant/bin/chown-home.sh"
@@ -658,6 +683,7 @@ class VagrantVM
 
     end
     def VagrantVM.ngrok(config, settings)
+        scriptDir = File.dirname(__FILE__)
         #configure ngrok
         config.vm.provision "shell" do |s|
             s.name = "Creating NGROK Config"
@@ -667,7 +693,7 @@ class VagrantVM
         end
     end
     def VagrantVM.database(config, settings)
-
+        scriptDir = File.dirname(__FILE__)
         # Configure All Of The Configured Databases
         if settings.has_key?("databases")
             settings["databases"].each do |db|
@@ -749,6 +775,7 @@ class VagrantVM
         siteInfo71 = 'info71.' + settings['name']
         siteInfo72 = 'info72.' + settings['name']
         siteDarkstat = 'darkstat.' + settings['name']
+        siteErrbit = 'errbit.'+settings['name']
 
         #nginx / apache2 configs
 
@@ -1154,6 +1181,11 @@ setName = phpfpm["name"]
         end
         if settings.has_key?("mariadb") && settings["mariadb"] == true && settings.has_key?("phpma") && settings["phpma"] == true
             config.vm.provision "shell" do |s|
+                s.name ="Configuring PHPMyAdmin"
+                s.path = scriptDir + "/configure/phpmyadmin.sh"
+                s.privileged = false
+            end
+            config.vm.provision "shell" do |s|
                 s.name = "Creating Host for phpMyAdmin"
                 s.path = scriptDir + "/serve/pma.sh"
                 s.args = [
@@ -1347,6 +1379,8 @@ setName = phpfpm["name"]
                 s.args = [siteBuild]
             end
         end
+
+        #darkstat
         if settings.has_key?("darkstat") && settings["darkstat"] == true
             config.vm.provision "shell" do |s|
                 s.name = "Installing DarkStat Site"
@@ -1362,6 +1396,25 @@ setName = phpfpm["name"]
                 s.name = "Creating Certificate: " + siteDarkstat
                 s.path = scriptDir + "/create/certificate.sh"
                 s.args = [siteDarkstat]
+            end
+        end
+
+        #errbit
+        if settings.has_key?("errbit") && settings["errbit"] == true
+            config.vm.provision "shell" do |s|
+                s.name = "Installing Errbit Site"
+                s.path = scriptDir + "/serve/proxy.sh"
+                s.args = [
+                    siteErrbit,
+                    "8030",
+                    "80",
+                    "443"
+                ]
+            end
+            config.vm.provision "shell" do |s|
+                s.name = "Creating Certificate: " + siteErrbit
+                s.path = scriptDir + "/create/certificate.sh"
+                s.args = [siteErrbit]
             end
         end
 

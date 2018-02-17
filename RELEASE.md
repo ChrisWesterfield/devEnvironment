@@ -1,3 +1,14 @@
+# 4.1
+* removed phpmyadmin from bundle
+* removed xhgui from bundle
+* added install script for phpmyadmin which takes the master/slave config into consideration
+* added install script for xhgui
+* removed phpsysinfo from distribution (without replacement!)
+* fixed an bug that prevented darkstat from booting
+* added errbit installation with nginx configs
+* several bug fixes
+* added wordpress cli installation option
+* added flyway database migration system 
 # 4.0
 * Migrated Version Scheme (X.X)
 * restructured the bin/vm directory

@@ -3,8 +3,8 @@ alias ...="cd ../.."
 
 alias h='cd ~'
 alias c='clear'
-alias a=/application
-alias v=/vagrant
+alias a='cd /application'
+alias v='cd /vagrant'
 alias ls='ls -F --color=always'
 alias dir='dir -F --color=always'
 alias ll='ls -l'
@@ -167,80 +167,8 @@ function flip() {
     sudo bash /vagrant/bin/flip-webserver.sh
 }
 
-function __has_pv() {
-    $(hash pv 2>/dev/null);
-
-    return $?
-}
-
-function __pv_install_message() {
-    if ! __has_pv; then
-        echo $1
-        echo "Install pv with \`sudo apt-get install -y pv\` then run this command again."
-        echo ""
-    fi
-}
-
-function dbexport() {
-    FILE=${1:-/vagrant/db/mysqldump.sql.gz}
-
-    # This gives an estimate of the size of the SQL file
-    # It appears that 80% is a good approximation of
-    # the ratio of estimated size to actual size
-    SIZE_QUERY="select ceil(sum(data_length) * 0.8) as size from information_schema.TABLES"
-
-    __pv_install_message "Want to see export progress?"
-
-    echo "Exporting databases to '$FILE'"
-
-    if __has_pv; then
-        ADJUSTED_SIZE=$(mysql --vertical -uhomestead -psecret -e "$SIZE_QUERY" 2>/dev/null | grep 'size' | awk '{print $2}')
-        HUMAN_READABLE_SIZE=$(numfmt --to=iec-i --suffix=B --format="%.3f" $ADJUSTED_SIZE)
-
-        echo "Estimated uncompressed size: $HUMAN_READABLE_SIZE"
-        mysqldump -uhomestead -psecret --all-databases --skip-lock-tables 2>/dev/null | pv  --size=$ADJUSTED_SIZE | gzip > "$FILE"
-    else
-        mysqldump -uhomestead -psecret --all-databases --skip-lock-tables 2>/dev/null | gzip > "$FILE"
-    fi
-
-    echo "Done."
-}
-
-function dbimport() {
-    FILE=${1:-/vagrant/db/mysqldump.sql.gz}
-
-    __pv_install_message "Want to see import progress?"
-
-    echo "Importing databases from '$FILE'"
-
-    if __has_pv; then
-        pv "$FILE" --progress --eta | zcat | mysql -uhomestead -psecret 2>/dev/null
-    else
-        cat "$FILE" | zcat | mysql -uhomestead -psecret 2>/dev/null
-    fi
-
-    echo "Done."
-}
-
-function mongoexport() {
-    outputdir="/vagrant/db/mongo"
-    if [ ! -d $outputdir ]
-    then mkdir $outputdir
-    fi
-
-    /usr/bin/env mongodump --out $outputdir
-
-    echo "Done."
-}
-
-function mongoimport() {
-    recoverdir="/vagrant/db/mongo"
-    if [ ! -d $outputdir ]
-    then
-        echo "no directory found"
-        exit 0
-    fi
-    /usr/bin/env mongorestore $recoverdir
-
-    echo "Done."
+function jsonValue() {
+    KEY=$1
+    num=$2
+    awk -F"[,:}]" '{for(i=1;i<=NF;i++){if($i~/'$KEY'\042/){print $(i+1)}}}' | tr -d '"' | sed -n ${num}p
 }

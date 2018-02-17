@@ -30,7 +30,7 @@ block="server {
     $listenHttp
     listen ${3:-443} ssl http2;
     server_name $1;
-	root /vagrant/phpmyadmin;
+	root /home/vagrant/phpmyadmin;
 
     index index.html index.htm index.php app_dev.php;
 
@@ -70,7 +70,7 @@ block="server {
     ssl_certificate_key /etc/ssl/site/$1.key;
 
     location ~* ^/(.+\.(jpg|jpeg|gif|css|png|js|ico|html|xml|txt))$ {
-           root /vagrant/phpmyadmin;
+           root /home/vagrant/phpmyadmin;
     }
 }
 "

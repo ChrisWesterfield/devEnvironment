@@ -207,6 +207,10 @@ SITE.YOURDOMAIN
       type: ignore
       function: darkstat
       desc: "DarkStat"
+    - map: errbit.vm
+      type: ignore
+      function: errbit
+      desc: "Errbit"
       
 ### Website Config
 
@@ -336,6 +340,12 @@ apache2: true
 yarn: true
 ### DarkStat
 darkstat: true
+### Errbit
+errbit: true
+### Flyway
+flyway: true
+### wpcli
+wpcli: true
 
 ### Serve Pages as http
 to allow pages to be sent also by http or not:

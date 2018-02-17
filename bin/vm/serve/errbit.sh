@@ -26,37 +26,39 @@ else
     LISTEN="127.0.0.1:90$phpV"
 fi
 
-block="server {
+block="
+upstream unicorn_server {
+ # This is the socket we configured in unicorn.rb
+ server unix:/home/vagrant/errbit/run/errbit.socket
+ fail_timeout=0;
+}
+
+server {
     $listenHttp
     listen ${3:-443} ssl http2;
     server_name $1;
 
-    root   /home/vagrant/xhgui/webroot/;
+    client_max_body_size 4G;
+
+    root   /home/vagrant/errbit/public;
 
     index index.php;
 
     charset utf-8;
 
-    location / {
-        try_files \$uri \$uri/ /index.php?\$args;
-    }
-
-    location = /favicon.ico { access_log off; log_not_found off; }
-    location = /robots.txt  { access_log off; log_not_found off; }
-
     access_log off;
     error_log  /vagrant/log/$1-ssl-error.log error;
 
-    location ~ ^/(.+\.php)$ {
-        fastcgi_split_path_info ^(.+\.php)(/.*)\$;
-        fastcgi_pass $LISTEN;
-        include fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
-        $paramsTXT
+    location / {
 
-        fastcgi_intercept_errors off;
-        fastcgi_buffer_size 16k;
-        fastcgi_buffers 4 16k;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_redirect off;
+
+        if (!-f $request_filename) {
+          proxy_pass http://unicorn_server;
+          break;
+        }
     }
 
     location ~ /\.ht {
@@ -65,10 +67,6 @@ block="server {
 
     ssl_certificate     /etc/ssl/site/$1.crt;
     ssl_certificate_key /etc/ssl/site/$1.key;
-    
-    location ~* ^/(.+\.(jpg|jpeg|gif|css|png|js|ico|html|xml|txt))$ {
-           root /home/vagrant/xhgui/webroot;
-    }
 }
 "
 

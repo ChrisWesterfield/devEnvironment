@@ -55,6 +55,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.trigger.before :halt do
         info "Stoping Environment"
         run_remote "bash /vagrant/bin/stopTasks.sh"
+        run_remote "/usr/bin/env bash /vagrant/bin/stopErrbit.sh"
         run_remote "/usr/bin/env bash /vagrant/bin/dbExport.sh"
         run_remote "/usr/bin/env bash /vagrant/bin/mongoExport.sh"
     end
@@ -67,6 +68,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         run_remote "/usr/bin/env bash /vagrant/bin/restartDb.sh"
         run_remote "/usr/bin/env bash /vagrant/bin/startTasks.sh"
         run_remote "/usr/bin/env bash /vagrant/bin/fix.dns.sh"
+        run_remote "/usr/bin/env bash /vagrant/bin/startErrbit.sh"
+        run_remote "/usr/bin/env bash /vagrant/bin/startDarkstat.sh"
         run_remote "/usr/bin/env bash /vagrant/bin/restartWeb.sh"
     end
 end

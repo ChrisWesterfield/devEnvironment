@@ -30,6 +30,7 @@
         echo '<li class="nav-item"><a href="//'.$app['map'].'">'.(isset($app['desc'])?$app['desc']:$app['map']).'</a></li>';
     }
     ?>
+    <li class="nav-item"><a href="user.php">User Daten</a> </li>
     <li><hr></li>
 </ul>
 <ul class="nav flex-column">
@@ -61,4 +62,3 @@
         echo '<li class="nav-item"><a target="'. ($app['function'] === 'phpinfo'?'_self':'_blank').'" href="//'.$app['map'].'">'.(isset($app['desc'])?$app['desc']:$app['map']).'</a></li>';
     }
     ?>
-    <li class="nav-item"><a href="sys/">PHP Sys Info</a></li>

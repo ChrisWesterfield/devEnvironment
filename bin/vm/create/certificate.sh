@@ -88,32 +88,42 @@ BASE_CNF="
 # Only generate the root certificate when there isn't one already there.
 if [ ! -f $PATH_ROOT_CNF ] || [ ! -f $PATH_ROOT_KEY ] || [ ! -f $PATH_ROOT_CRT ]
 then
-    # Generate an OpenSSL configuration file specifically for this certificate.
-    cnf="
-        ${BASE_CNF}
-        [ req_distinguished_name ]
-        O  = mjrOne
-        C  = DE
-        CN = mjr!one $(hostname) Root CA
-    "
-    echo "$cnf" > $PATH_ROOT_CNF
-
-    # Finally, generate the private key and certificate.
-    openssl genrsa -out "$PATH_ROOT_KEY" 4096 2>/dev/null
-    openssl req -config "$PATH_ROOT_CNF" \
-        -key "$PATH_ROOT_KEY" \
-        -x509 -new -extensions v3_ca -days 3650 -sha256 \
-        -out "$PATH_ROOT_CRT" 2>/dev/null
-
-    if [ ! -d /vagrant/ssl ]
+    #Either recreate the root ca certificate or recover from vagrant directory!
+    if [ -f "/vagrant/ssl/vagrant.cnf" ] && [ -f "/vagrant/ssl/vagrant.crt" ] && [ -f "/vagrant/ssl/vagrant.key" ] && [ -f "/vagrant/ssl/vagrant.srl" ]
     then
-        mkdir /vagrant/ssl
-    fi
+        cp /vagrant/ssl/vagrant.cnf $PATH_ROOT_CNF
+        cp /vagrant/ssl/vagrant.crt $PATH_ROOT_CRT
+        cp /vagrant/ssl/vagrant.key $PATH_ROOT_KEY
+        cp /vagrant/ssl/vagrant.srl $PATH_SSL/ca/vagrant.srl
+    else
+        if [ ! -d "/vagrant/ssl" ]
+        then
+            mkdir /varant/ssl
+        else
+            rm /vagrant/ssl/*
+        fi
+        # Generate an OpenSSL configuration file specifically for this certificate.
+        cnf="
+            ${BASE_CNF}
+            [ req_distinguished_name ]
+            O  = mjrOne
+            C  = DE
+            CN = mjr!one $(hostname) Root CA
+        "
+        echo "$cnf" > $PATH_ROOT_CNF
 
-    cp $PATH_ROOT_CNF /vagrant/ssl/vagrant.cnf
-    cp $PATH_ROOT_CRT /vagrant/ssl/vagrant.crt
-    cp $PATH_ROOT_KEY /vagrant/ssl/vagrant.key
-    cp $PATH_SSL/ca/vagrant.sl /vagrant/ssl/vagrant.sl
+        # Finally, generate the private key and certificate.
+        openssl genrsa -out "$PATH_ROOT_KEY" 4096 2>/dev/null
+        openssl req -config "$PATH_ROOT_CNF" \
+            -key "$PATH_ROOT_KEY" \
+            -x509 -new -extensions v3_ca -days 3650 -sha256 \
+            -out "$PATH_ROOT_CRT" 2>/dev/null
+
+        cp $PATH_ROOT_CNF /vagrant/ssl/vagrant.cnf
+        cp $PATH_ROOT_CRT /vagrant/ssl/vagrant.crt
+        cp $PATH_ROOT_KEY /vagrant/ssl/vagrant.key
+        cp $PATH_SSL/ca/vagrant.srl /vagrant/ssl/vagrant.srl
+    fi
 fi
 
 # Only generate a certificate if there isn't one already there.
