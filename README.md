@@ -492,6 +492,15 @@ serverHttp: true
 **if this option is enabled an entry for http transfer will be added and the http port not ignored in the settings!**
 
 ## Known Issues
+### MySQL Master/Slave not starting
+This is an known issue and still under investigation.
+To fix this execute the following commands:
+
+    stopMySQL.sh
+    fixDb.sh
+    startMySQL.sh
+    
+It currently seems that the master/slave configs sometime fail to boot. The three workaround Scripts fix this issue currently temporary by stopping all Master/Slave Servers (if some are still up and running) starts the debian mysql server and stops it. Afterwards with the last script the master/slave servers are started.
 
 ## Untestet
 Apache Setup

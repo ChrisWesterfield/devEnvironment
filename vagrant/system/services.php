@@ -16,9 +16,9 @@ if(file_exists($masterHome.'maria'))
             'description' => 'MariaDB',
             'db'          => true,
         ];
-        if(array_key_exists('mariadbMultiMasterCount', $masterConfig) && $masterConfig['mariadbMultiMasterCount'] > 0)
+        if(array_key_exists('mariadbMultiMasterCount', $masterConfig['features']) && $masterConfig['features']['mariadbMultiMasterCount'] > 0)
         {
-            for($i=0;$i<$masterConfig['mariadbMultiMasterCount'];$i++)
+            for($i=0;$i<$masterConfig['features']['mariadbMultiMasterCount'];$i++)
             {
                 $tmp[] = [
                     'name'        => 'MariaDB Slave'.$sCount,
