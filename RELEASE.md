@@ -1,3 +1,6 @@
+# 4.2.1
+* minor bug fix with services.php in system start page
+* added known issue for mysql server
 # 4.2
 * added beanstalkd Admin Console install script
 * bug fix for xhgui installer
