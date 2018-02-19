@@ -31,7 +31,8 @@ sudo apt-get install -y  \
     iotop \
     iftop \
     ufw \
-    pv
+    pv \
+    bc
 
 sudo add-apt-repository ppa:ondrej/php
 sudo apt-get update

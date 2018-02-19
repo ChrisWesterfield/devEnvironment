@@ -1,3 +1,14 @@
+# 4.3
+* fixed an bug during master / slave server setup
+* several bug fixes
+* added netdata service (optional feature)
+# 4.2.2
+* Bug fix for phpmyadmin
+* fix master slave script
+* fix php-fpm for all versions
+* fix installation script for all php-fpm versions
+* fixed errbit install script
+* modified vm preperation script
 # 4.2.1
 * minor bug fix with services.php in system start page
 * added known issue for mysql server

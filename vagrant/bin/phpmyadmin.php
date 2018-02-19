@@ -45,9 +45,9 @@ $cfg[\'Servers\'][$i][\'pdf_pages\'] = \'pma__pdf_pages\';
 $cfg[\'Servers\'][$i][\'savedsearches\'] = \'pma__savedsearches\';
 $cfg[\'Servers\'][$i][\'central_columns\'] = \'pma__central_columns\';
 $cfg[\'Servers\'][$i][\'export_templates\'] = \'pma__export_templates\';';
-if(array_key_exists('mariadbMultiMasterCount', $config))
+if(array_key_exists('mariadbMultiMasterCount', $config['features']))
 {
-    for($i=0;$i<$config['mariadbMultiMasterCount'];$i++)
+    for($i=0;$i<$config['features']['mariadbMultiMasterCount'];$i++)
     {
         $port = 7+$i;
         if($port<10)

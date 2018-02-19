@@ -383,8 +383,18 @@ if(file_exists($masterHome.'darkstat'))
         'description' => 'Darkstat Server',
         'db'          => false,
     ];
-    $tmp[] = [];
-    $tmp[] = [];
+}
+if(file_exists($masterHome.'netdata'))
+{
+    $tmp[] = [
+        'name'        => 'NetData',
+        'port'        => '19999',
+        'description' => 'Netdata Server',
+        'db'          => false,
+    ];
+}
+else
+{
     $tmp[] = [];
 }
 return $tmp;

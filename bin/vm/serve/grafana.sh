@@ -10,11 +10,11 @@ if [ -n "$5" ]; then
         fastcgi_param ${element} ${params[$element]};"
     done
 fi
-listenHttp=""
 if [ $6 ]
 then
     listenHttp="listen ${3:-80};"
 fi
+listenHttp=""
 
 block="server {
     listen ${3:-80};

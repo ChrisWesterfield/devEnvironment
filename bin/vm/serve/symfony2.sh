@@ -23,11 +23,11 @@ fi
 phpV="${5//.}"
 
 
-listenHttp=""
 if [ $8 ]
 then
     listenHttp="listen ${3:-80};"
 fi
+listenHttp=""
 
 if [ $phpV == "custome" ]
 then

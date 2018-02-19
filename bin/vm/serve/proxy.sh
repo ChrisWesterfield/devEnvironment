@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 export DEBIAN_FRONTEND=noninteractive
 
-listenHttp=""
 if [ $5 ]
 then
     listenHttp="listen ${3:-80};"
 fi
+listenHttp=""
 
 block="server {
     $listenHttp

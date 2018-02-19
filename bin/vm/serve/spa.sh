@@ -11,11 +11,11 @@ if [ -n "$6" ]; then
    done
 fi
 
-listenHttp=""
 if [ $6 ]
 then
     listenHttp="listen ${3:-80};"
 fi
+listenHttp=""
 
 block="server {
     $listenHttp

@@ -231,6 +231,10 @@ SITE.YOURDOMAIN
       type: ignore
       function: phpmda
       desc: "PHP MongoDB Admin"
+    - map: "netdata.dev.test"
+      type: ignore
+      function: netdata
+      desc: "Netdata"
       
 ### Website Config
 
@@ -477,6 +481,11 @@ Install PHP Mongo DB Admin
 HipHop VM installation
 
     hhvm: true
+
+### NetDAta
+Install Netdata Server Software
+
+    netdata: true
 
 ### Serve Pages as http
 to allow pages to be sent also by http or not:

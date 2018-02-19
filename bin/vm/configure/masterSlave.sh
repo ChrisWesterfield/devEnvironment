@@ -11,7 +11,7 @@ touch /home/vagrant/.mariaMultiMaster
 
 DB=${1:-2};
 
-echo DB > /home/vagrant/.mariaMultiMasterSlaves
+echo "$DB" > /home/vagrant/.mariaMultiMasterSlaves
 
 sudo service mysql stop
 
@@ -59,6 +59,7 @@ sudo systemctl enable mysqld@1
 mysqladmin -u root password 123 -h 127.0.0.1 -P 3306
 mysql -uroot -p123 -h 127.0.0.1 -P 3306 -e "GRANT ALL PRIVILEGES ON *.* TO root@'%' IDENTIFIED BY '123';"
 MasterPosition=$(mysql -u root -p123 -h 127.0.0.1 -P 3306 -e "show master status \G" | awk '/Position/  {print $2}')
+MASTERFILE=$(mysql -u root -p123 -h 127.0.0.1 -P 3306 -e "show master status \G" | awk '/File/  {print $2}')
 
 for (( c=0; c<$DB ; c++ ))
 do
@@ -89,7 +90,7 @@ do
     sudo systemctl enable mysqld@$FIG
     mysqladmin -u root password 123 -h 127.0.0.1 -P $PORT
     mysql -uroot -p123 -h 127.0.0.1 -P $PORT -e "GRANT ALL PRIVILEGES ON *.* TO root@'%' IDENTIFIED BY '123';"
-    mysql -uroot -p123 -h 127.0.0.1 -P $PORT -e "CHANGE MASTER TO MASTER_HOST='127.0.0.1', MASTER_PORT=3306,MASTER_USER='root', MASTER_PASSWORD='123', MASTER_LOG_FILE='mysql-bin.000001', MASTER_LOG_POS=  $MasterPosition;"
+    mysql -uroot -p123 -h 127.0.0.1 -P $PORT -e "CHANGE MASTER TO MASTER_HOST='127.0.0.1', MASTER_PORT=3306,MASTER_USER='root', MASTER_PASSWORD='123', MASTER_LOG_FILE='$MASTERFILE', MASTER_LOG_POS=$MasterPosition;"
     mysql -uroot -p123 -h 127.0.0.1 -P $PORT -e "START SLAVE;"
     mysql -uroot -p123 -h 127.0.0.1 -P $PORT -e "SHOW SLAVE STATUS\G;"
 done

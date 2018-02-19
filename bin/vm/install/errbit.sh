@@ -88,6 +88,8 @@ SMTP_USERNAME=error@localhost
 SMTP_PASSWORD=123
 EMAIL_DELIVERY_METHOD=\":smtp\"
 " > /home/vagrant/errbit/.env
+sudo chown vagrant:vagrant /home/vagrant/errbit
+sudo chmod 0777 /home/vagrant/errbit/run
 
 RAILS_ENV=production bundle exec rake assets:precompile
 RAILS_ENV=production bundle exec rake errbit:bootstrap > /home/vagrant/errbit.install.log

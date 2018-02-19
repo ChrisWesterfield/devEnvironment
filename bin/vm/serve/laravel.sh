@@ -20,11 +20,11 @@ location /ZendServer {
 else configureZray=""
 fi
 
-listenHttp=""
 if [ $8 ]
 then
     listenHttp="listen ${3:-80};"
 fi
+listenHttp=""
 
 phpV="${5//.}"
 

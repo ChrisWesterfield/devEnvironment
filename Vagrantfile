@@ -38,8 +38,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     VagrantVM.ngrok(config, settings)
     VagrantVM.database(config, settings)
     VagrantVM.configure(config, settings)
-    VagrantVM.upgradeSystem(config)
-    config.vm.provision :reload
+    #VagrantVM.upgradeSystem(config)
+    #config.vm.provision :reload
 
     if File.exist? afterScriptPath then
         config.vm.provision "shell", path: afterScriptPath, privileged: false, keep_color: true

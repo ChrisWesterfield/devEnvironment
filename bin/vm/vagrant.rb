@@ -156,6 +156,7 @@ class VagrantVM
         siteMunin = 'munin.' + settings['name']
         siteCouchDB = 'couch'+settings['name']
         sitePhpMDa = 'phpmda'+settings['name']
+        siteNetdata = 'netdata'+settings['name']
 
         features = settings["features"]
 
@@ -720,6 +721,14 @@ class VagrantVM
             end
         end
 
+        if features.has_key?("netdata") && features["netdata"] == true
+            config.vm.provision "shell" do |s|
+                s.name = "Installing NetData"
+                s.path = scriptDir + "/install/netdata.sh"
+                s.privileged = false
+            end
+        end
+
         config.vm.provision "shell" do |s|
             s.name = "Fixing Home Directory"
             s.inline = "/vagrant/bin/chown-home.sh"
@@ -831,6 +840,7 @@ class VagrantVM
         siteMunin = 'munin.'+settings['name']
         siteCouchDB = 'couch'+settings['name']
         sitePhpMDa = 'phpmda'+settings['name']
+        siteNetdata = 'netdata'+settings['name']
         features = settings["features"]
 
         #nginx / apache2 configs
@@ -1177,6 +1187,9 @@ class VagrantVM
                     if ( site["function"] == 'phpmda' )
                         sitePhpMDa = site["map"];
                     end
+                    if ( site["function"] == 'netdata' )
+                        siteNetdata = site["map"];
+                    end
                 end
             end
         end
@@ -1520,8 +1533,8 @@ class VagrantVM
                 s.path = scriptDir + "/serve/html.sh"
                 s.args = [
                     siteMunin,
-                    "80",
                     "443",
+                    "80",
                     "/home/vagrant/munin",
                 ]
             end
@@ -1564,6 +1577,23 @@ class VagrantVM
                 s.name = "Creating Certificate: " + sitePhpMDa
                 s.path = scriptDir + "/create/certificate.sh"
                 s.args = [sitePhpMDa]
+            end
+        end
+        if features.has_key?("netdata") && features["netdata"] == true
+            config.vm.provision "shell" do |s|
+                s.name = "Installing Netdata Site"
+                s.path = scriptDir + "/serve/proxy.sh"
+                s.args = [
+                    siteNetdata,
+                    "19999",
+                    "80",
+                    "443"
+                ]
+            end
+            config.vm.provision "shell" do |s|
+                s.name = "Creating Certificate: " + siteNetdata
+                s.path = scriptDir + "/create/certificate.sh"
+                s.args = [siteNetdata]
             end
         end
 
