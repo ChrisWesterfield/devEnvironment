@@ -16,3 +16,7 @@ if [ -f /home/vagrant/.php56 ]
 then
     sudo /usr/bin/env service php5.6-fpm restart
 fi
+if [ -f /home/vagrant/.hhvm ]
+then
+    sudo /usr/bin/env service hhvm restart
+fi

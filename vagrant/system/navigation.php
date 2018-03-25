@@ -15,6 +15,10 @@
         }
         else if($site['type']==='ignore')
         {
+            if($site['function']==='couchDbUi')
+            {
+                $site['map'] = $site['map'].'/_utils';
+            }
             $utilities[] = $site;
         }
         else
@@ -30,6 +34,7 @@
         echo '<li class="nav-item"><a href="//'.$app['map'].'">'.(isset($app['desc'])?$app['desc']:$app['map']).'</a></li>';
     }
     ?>
+    <li class="nav-item"><a href="user.php">User Daten</a> </li>
     <li><hr></li>
 </ul>
 <ul class="nav flex-column">
@@ -54,10 +59,10 @@
 </ul>
 <ul class="nav flex-column">
     <li><h4>Tools</h4></li>
+    <li class="nav-item"><a href="process.php">Process List</a></li>
     <?php
     foreach($utilities as $app)
     {
         echo '<li class="nav-item"><a target="'. ($app['function'] === 'phpinfo'?'_self':'_blank').'" href="//'.$app['map'].'">'.(isset($app['desc'])?$app['desc']:$app['map']).'</a></li>';
     }
     ?>
-    <li class="nav-item"><a href="sys/">PHP Sys Info</a></li>

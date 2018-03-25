@@ -14,3 +14,8 @@ application/
 vagrant/after.sh
 vagrant/aliases
 .vagrant/
+.idea/
+vagrant/src/nginx/nginx-1.13.4/Makefile
+vagrant/src/nginx/nginx-1.13.4/objs/
+vagrant/db/mongo/
+vagrant/db/mysqldump.sql.gz

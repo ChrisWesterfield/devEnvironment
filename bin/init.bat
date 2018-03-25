@@ -1,9 +1,5 @@
 @echo off
 
-vagrant.exe plugin install vagrant-triggers
-vagrant.exe plugin install vagrant-reload
-vagrant.exe plugin install vagrant-hostsupdater
-
 if ["%~1"]==[""] (
     copy /-y ../resources\config.yaml ../config.yaml
 )
