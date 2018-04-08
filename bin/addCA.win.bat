@@ -1,1 +1,1 @@
-certutil -addstore -f "ROOT" ./../vagrant/ssl/vagrant.crt
+certutil -addstore -f "ROOT" ./../vagrant/etc/ssl/vagrant.crt

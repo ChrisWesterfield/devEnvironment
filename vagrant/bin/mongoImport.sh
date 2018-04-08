@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-recoverdir="/vagrant/db/mongo"
+recoverdir="/home/vagrant/base/db/mongo"
 if [ ! -d $outputdir ]
 then
     echo "no directory found"

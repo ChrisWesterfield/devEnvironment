@@ -1,3 +1,12 @@
+# 5.0
+* Complete Rebuild from Scratch as we ran into several issues that could not be resolved as fast as required!
+* removed all Packages except Basic stuff during initial Provisioning
+* Added new System Command (System page === startpage of the System)
+* Added several commands that where part of the origin package
+* Added Remove Scripts for all Packaes
+* Added Support for MySQL 5.6, MySQL 5.7, MySQL 8
+* Reduced the Time Consumed during installation and provisioning.
+* Moved the System Scripts to its own repository
 # 4.3
 * fixed an bug during master / slave server setup
 * several bug fixes

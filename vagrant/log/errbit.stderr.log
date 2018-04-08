@@ -1,0 +1,17 @@
+I, [2018-03-30T15:33:26.077646 #14051]  INFO -- : Refreshing Gem list
+I, [2018-03-30T15:33:29.595529 #14051]  INFO -- : listening on addr=/home/vagrant/errbit/run/errbit.socket fd=10
+I, [2018-03-30T15:33:29.596040 #14051]  INFO -- : listening on addr=127.0.0.1:8030 fd=11
+I, [2018-03-30T15:33:29.599135 #14054]  INFO -- : worker=0 spawned pid=14054
+I, [2018-03-30T15:33:29.599721 #14054]  INFO -- : worker=0 ready
+I, [2018-03-30T15:33:29.602709 #14057]  INFO -- : worker=1 spawned pid=14057
+I, [2018-03-30T15:33:29.603394 #14057]  INFO -- : worker=1 ready
+I, [2018-03-30T15:33:29.604830 #14060]  INFO -- : worker=2 spawned pid=14060
+I, [2018-03-30T15:33:29.605522 #14060]  INFO -- : worker=2 ready
+I, [2018-03-30T15:33:29.606785 #14051]  INFO -- : master process ready
+I, [2018-03-30T15:33:29.607515 #14063]  INFO -- : worker=3 spawned pid=14063
+I, [2018-03-30T15:33:29.608041 #14063]  INFO -- : worker=3 ready
+I, [2018-03-30T15:33:58.679279 #14051]  INFO -- : reaped #<Process::Status: pid 14054 exit 0> worker=0
+I, [2018-03-30T15:33:58.679657 #14051]  INFO -- : reaped #<Process::Status: pid 14057 exit 0> worker=1
+I, [2018-03-30T15:33:58.679926 #14051]  INFO -- : reaped #<Process::Status: pid 14060 exit 0> worker=2
+I, [2018-03-30T15:33:58.680216 #14051]  INFO -- : reaped #<Process::Status: pid 14063 exit 0> worker=3
+I, [2018-03-30T15:33:58.680532 #14051]  INFO -- : master complete

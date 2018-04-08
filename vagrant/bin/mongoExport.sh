@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-    outputdir="/vagrant/db/mongo"
+    outputdir="/home/vagrant/base/db/mongo"
     if [ ! -d $outputdir ]
     then mkdir $outputdir
     fi

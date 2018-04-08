@@ -11,67 +11,58 @@ require 'yaml'
 VAGRANTFILE_API_VERSION ||= "2"
 confDir = $confDir ||= File.expand_path(File.dirname(__FILE__))
 
-vagrantYamlPath = confDir + "/config.yaml"
-afterScriptPath = confDir + "/after.sh"
-aliasesPath = confDir + "/aliases"
+vagrantYamlPath = confDir + "/vagrant/etc/config.yaml"
+afterScriptPath = confDir + "/vagrant/etc/after.sh"
+aliasesPath = confDir + "/vagrant/etc/aliases"
+
 
 require File.expand_path(File.dirname(__FILE__) + '/bin/vm/vagrant.rb')
 
 Vagrant.require_version '>= 1.9.0'
 
-Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-    if File.exist? aliasesPath then
-        config.vm.provision "file", source: aliasesPath, destination: "/tmp/bash_aliases"
-        config.vm.provision "shell" do |s|
-            s.inline = "awk '{ sub(\"\r$\", \"\"); print }' /tmp/bash_aliases > /home/vagrant/.bash_aliases"
-        end
-    end
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+Vagrant.configure("2") do |config|
+      if File.exist? aliasesPath then
+          config.vm.provision "file", source: aliasesPath, destination: "/tmp/bash_aliases"
+          config.vm.provision "shell" do |s|
+              s.inline = "awk '{ sub(\"\r$\", \"\"); print }' /tmp/bash_aliases > /home/vagrant/.bash_aliases"
+          end
+      end
+      if File.exist? vagrantYamlPath then
+          settings = YAML::load(File.read(vagrantYamlPath))
+      else
+          abort "vagrant settings file not found in #{confDir}"
+      end
 
-    if File.exist? vagrantYamlPath then
-        settings = YAML::load(File.read(vagrantYamlPath))
-    else
-        abort "vagrant settings file not found in #{confDir}"
-    end
-
-    VagrantVM.box(config, settings)
-    VagrantVM.install(config, settings)
-    VagrantVM.ngrok(config, settings)
-    VagrantVM.database(config, settings)
-    VagrantVM.configure(config, settings)
-    #VagrantVM.upgradeSystem(config)
-    #config.vm.provision :reload
-
-    if File.exist? afterScriptPath then
-        config.vm.provision "shell", path: afterScriptPath, privileged: false, keep_color: true
-    end
-
-    if Vagrant.has_plugin?('vagrant-hostsupdater')
+      if Vagrant.has_plugin?('vagrant-hostsupdater')
         config.hostsupdater.aliases = settings['sites'].map { |site| site['map'] }
-    elsif Vagrant.has_plugin?('vagrant-hostmanager')
+      elsif Vagrant.has_plugin?('vagrant-hostmanager')
         config.hostmanager.enabled = true
         config.hostmanager.manage_host = true
         config.hostmanager.aliases = settings['sites'].map { |site| site['map'] }
-    end
+      end
+      VagrantVM.box(config, settings)
+      VagrantVM.folders(config, settings)
+      VagrantVM.install(config, settings)
+      Vagrant.configure("2") do |config|
+            config.vm.provision "shell", path: "/home/vagrant/base/bin/upgrade.sh"
+      end
+      VagrantVM.mjrone(config, settings)
+      config.vm.provision :reload
 
-    #triggers
-    config.trigger.before :halt do
-        info "Stoping Environment"
-        run_remote "bash /vagrant/bin/stopTasks.sh"
-        run_remote "/usr/bin/env bash /vagrant/bin/stopErrbit.sh"
-        run_remote "/usr/bin/env bash /vagrant/bin/dbExport.sh"
-        run_remote "/usr/bin/env bash /vagrant/bin/mongoExport.sh"
-    end
+      #triggers
+      config.trigger.before :halt do
+          info "Stoping Environment and Doing Backups"
+          run_remote "/usr/bin/env bash /home/vagrant/base/bin/dbExport.sh"
+          run_remote "/usr/bin/env bash /home/vagrant/base/bin/mongoExport.sh"
+      end
 
     config.trigger.after :up do
         info "Starting Environment"
-        run_remote "/usr/bin/env sudo resolvconf -u"
-        run_remote "/usr/bin/env bash /vagrant/bin/stopMySQL.sh"
-        run_remote "/usr/bin/env bash /vagrant/bin/fixDb.sh"
-        run_remote "/usr/bin/env bash /vagrant/bin/restartDb.sh"
-        run_remote "/usr/bin/env bash /vagrant/bin/startTasks.sh"
-        run_remote "/usr/bin/env bash /vagrant/bin/fix.dns.sh"
-        run_remote "/usr/bin/env bash /vagrant/bin/startErrbit.sh"
-        run_remote "/usr/bin/env bash /vagrant/bin/startDarkstat.sh"
-        run_remote "/usr/bin/env bash /vagrant/bin/restartWeb.sh"
+        run_remote "/usr/bin/env bash /home/vagrant/base/bin/restartNginx.sh"
+        run_remote "/usr/bin/env bash /home/vagrant/base/bin/setSystemCtl.sh"
     end
 end
