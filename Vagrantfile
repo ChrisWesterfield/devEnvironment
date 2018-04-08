@@ -37,12 +37,14 @@ Vagrant.configure("2") do |config|
           abort "vagrant settings file not found in #{confDir}"
       end
 
-      if Vagrant.has_plugin?('vagrant-hostsupdater')
-        config.hostsupdater.aliases = settings['sites'].map { |site| site['map'] }
-      elsif Vagrant.has_plugin?('vagrant-hostmanager')
-        config.hostmanager.enabled = true
-        config.hostmanager.manage_host = true
-        config.hostmanager.aliases = settings['sites'].map { |site| site['map'] }
+      if (settings.has_key?("sites") and settings["sites"].count() > 0)
+          if Vagrant.has_plugin?('vagrant-hostsupdater')
+            config.hostsupdater.aliases = settings['sites'].map { |site| site['map'] }
+          elsif Vagrant.has_plugin?('vagrant-hostmanager')
+            config.hostmanager.enabled = true
+            config.hostmanager.manage_host = true
+            config.hostmanager.aliases = settings['sites'].map { |site| site['map'] }
+          end
       end
       VagrantVM.box(config, settings)
       VagrantVM.folders(config, settings)
@@ -56,8 +58,8 @@ Vagrant.configure("2") do |config|
       #triggers
       config.trigger.before :halt do
           info "Stoping Environment and Doing Backups"
-          run_remote "/usr/bin/env bash /home/vagrant/base/bin/dbExport.sh"
-          run_remote "/usr/bin/env bash /home/vagrant/base/bin/mongoExport.sh"
+          #run_remote "/usr/bin/env bash /home/vagrant/base/bin/dbExport.sh"
+     run_remote "/usr/bin/env bash /home/vagrant/base/bin/mongoExport.sh"
       end
 
     config.trigger.after :up do
