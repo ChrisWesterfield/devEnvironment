@@ -41,7 +41,7 @@ or for Windows
     
 **Note:** on Windows the adding might not work. In this case you need to install the certificate manually.
 
-**Note 2:** On Firefox for Windows the Certificate must be installed manually!
+**Note 2:** On Firefox the Certificate must be installed manually as Firefox has it's own Certificate Registry and does not use the OS builtin routines!!
 
 ### 6. enter vagrant environment
 
@@ -65,451 +65,334 @@ On Root Lvl Config:
 
     defaultPhp: "7.2"
 
-## Database Config
-
-Example config:
-
-    databases:
-        - name: application
-          type: mysql
-          user:
-              - name: application
-                password: 123
-                type: write
-              - name: application
-                password: 123
-                type: read
-
-for each database there are 4 types valid:
-
-    1. mysql
-    2. pgsql
-    3. couchdb
-    4. mongodb
-
-If you choose mysql you can also specify an user for which two different permission sets can be specified
-
-    1. write
-    2. read
-
-User Type read has only select Permission on the database (used for master/slave environments)
-
-## PHP-FPM Configuration
-
-This release includes the capability of configuring additional FPM Processes According to Project Requriements
-
-
-    fpm:
-      - name: demo
-        version: "7.2"
-        listen: 127.0.0.1:9001
-        pm: dynamic
-        max_spare: 16
-        min_spare: 4
-        start_process: 4
-        max_children: 32
-        max_ram: 512M
-        xdebug: true
-        
-Properties:
-### name
-Required. Should not contain Empty Space or Special Caracters(", ', ...)
-### version
-String of the PHP Version
-
-Possible Values
-    * "7.2"
-    * "7.1"
-    * "7.0"
-    * "5.6"
-###listen: 
-Listening Port for PHP-FPM
-
-Either use an Path  (/run/php......)
-
-or an IP with Port.
-Best Practise is to use the local host IP 127.0.0.1 (recommended!)
-
-pm: Choose one of the PM Models (ondemand, static, dynamic (default))
-
-The Models ondemand and static only are configured over the parameter *max_children*
-### max_spare + min_spare
-Min and Max Spare Processes
-### start_process
-Start Number of Processes
-### max_children
-Maximum Number of Processes
-### max_ram
-Maximum Ammount of Ram for Process
-### xdebug
-enable or disable xdebug
- 
-
-## List of Integrated Sites (if Option is enabled)
-
-Each Site needs to be added to sites. If not added, but enabled the default value will be choosen:
-
-SITE.YOURDOMAIN
-
-    - map: vm
-      type: ignore
-      function: startpage
-      desc: "Startpage"
-    - map: profiler.vm
-      type: ignore
-      function: profiler
-      desc: "Profiler Server"
-    - map: pma.vm
-      type: ignore
-      function: pma
-      desc: "PHP MyAdmin Server"
-    - map: rabbit.vm
-      type: ignore
-      function: rabbit
-      desc: "Rabbit MQ Server"
-    - map: search.vm
-      type: ignore
-      function: search
-      desc: "Elastic Search Server"
-    - map: kibana.vm
-      type: ignore
-      function: kibana
-      desc: "Kibana Server"
-    - map: mail.vm
-      type: ignore
-      function: mail
-      desc: "Mail Server"
-    - map: cockpit.vm
-      type: ignore
-      function: cockpit
-      desc: "Cockpit"
-    - map: ui.vm
-      type: ignore
-      function: ui
-      desc: "Docker UI Server"
-    - map: build.vm
-      type: ignore
-      function: build
-      desc: "Build Server"
-    - map: info72.vm
-      type: ignore
-      function: phpinfo
-      desc: "PHP Info 7.2"
-    - map: info71.vm
-      type: ignore
-      function: phpinfo
-      desc: "PHP Info 7.1"
-    - map: info70.vm
-      type: ignore
-      function: phpinfo
-      desc: "PHP Info 7.0"
-    - map: info56.vm
-      type: ignore
-      function: phpinfo
-      desc: "PHP Info 5.6"
-    - map: darkstat.vm
-      type: ignore
-      function: darkstat
-      desc: "DarkStat"
-    - map: errbit.vm
-      type: ignore
-      function: errbit
-      desc: "Errbit"
-    - map: bda.vm
-      type: ignore
-      function: beanstalkdAdmin
-      desc: "Beanstalkd Admin"
-    - map: munin.vm
-      type: ignore
-      function: munin
-      desc: "Munin"
-    - map: "couch.vm"
-      type: ignore
-      function: couchDbUi
-      desc: "Couch DB UI"
-    - map: "phpmda.vm"
-      type: ignore
-      function: phpmda
-      desc: "PHP MongoDB Admin"
-    - map: "netdata.dev.test"
-      type: ignore
-      function: netdata
-      desc: "Netdata"
-      
-### Website Config
-
-Parameters:
-
-### map
-URL of the site
-### type
-Environment for Configuration
-
-    * apache2
-    * elgg
-    * laravel
-    * pimcore
-    * proxy
-    * silverstripe
-    * spa
-    * statmic / PHP Pages
-    * symfony2
-    * symfony4
-
-The Additional ones (xhgui, pma are for internal use only)
-### to
-Target Directory in Filesystem
-### desc
-###php **
-PHP Version default: 7.2
-Description of site within Start Menu (Text)
-### function*
-Internal handling of Pages
-Should be set to app
-###zray*
-enable or disable ZRAY (zray: true)
-###fpm* | **
-Custom FPM Server from the FPM list
-If no one exist you should define an PHP Value
-
-=>* optional
-
-=>** fpm overwrite php Version Usage. 
-
-## List of Features
-You can install any of the following features. They need to reside under the flag features:
-
-    features:
-        php72: true
-        
-
-### Install Mailhog
-Install Mailhog
-
-    mailhog: true
-### Install nodejs
-Install NodeJS
-
-    nodejs: true
-### Install PHP 5.6
-Install PHP 5.6
-
-    php56: true
-### Install PHP 7.0
-Install PHP 7.0
-
-    php70: true
-### Install PHP 7.1
-Install Php 7.1
-
-    php71: true
-### Install PHP 7.2
-Install PHP 7.2
-
-    php72: true
-### Install PHP Tools for Development (should be enabled on last run if futher php tools are required)
-Install PHP Tools
-
-    php: true
-### Install Redis
-Install Redis and PHP Extension
-
-    redis: true
-### Install Memcached
-Install Memcache and PHP Extensions
-
-    memcache: true
-### Install Java Open JDK 8 (JRE + JDK)
-Install Java 8 JDK
-
-    java: true
-### Install Ant
-Install Ant Build Tools
-
-    ant: true
-### Install supervisorD
-Install SuperVisorD
-
-    supervisor: true
-### Install PHP My Admin (enable it)
-Install PHP MyAdmin
-
-    phpma: true
-### Install Profiler (xhprof/tideways profiler)
-Install Tideways / xhprof Profiler
-
-    profiler: true
-### Install xhgui for xhprof/tideways Profiler
-Install XHGui Profiler Frontend
-
-    xhgui: true
-### Install MariaDB
-Istall MariaDB MySQL Server
-
-    mariadb: true
-### Install Master/Slave Config
-Enables The Master Slave Environment in MariaDB Mysql Server
-
-    mariadbMultiMaster: true
-    mariadbMultiMasterCount: 2
-
-**this example configures 1 Master 2 Slaves**
-### Install elasticsearch
-Install Elastic Search Server
-
-    elasticsearch: true
-
-or
-
-    elasticsearch: 5
-
-or
-
-    elasticsearch: 6
-### Install kibana
-Install Kibana 
-
-    kibana: true
-### Install logstash
-Install logstash
-
-    logstash: true
-### Install couchdb
-Install CouchDB
-
-    couchdb: true
-
-### Enable CoudDB Ui
-Enables the builtin CouchDB Admin UI
-
-    couchdbui: true
-### Install mongodb
-Install MongoDB
-
-_(Is also triggerd if Installing XHGUI or Errbit)_
-
-    mongodb: true
-### Install rabbitmq
-Install RabbitMQ + RabbitMQ Admin Plugin
-
-    rabbitmq: true
-### Install cockpit
-Install Cockpit Server Admin
-
-    cockpit: true
-### Install statsd
-Install Statsd System
-
-    statsd: true
-### Install PostgreSQL
-Install PostgreSQL Server
-
-    postgresql:true
-### Install Zend Z-Ray Standalone
-Install Zend ZRay Standalone
-
-    zray: true
-### Install SqLite
-Install SQLite
-
-    sqlite: true
-### Install Oh My ZSH
-Install Oh My ZSH Shell Extension
-
-    ohmyzsh: true
-### Install beanstalkd
-Install Beanstalkd Queue Server
-
-    beanstalkd: true
-### Beanstalkd Admin
-Install Web Admin Tool for Beanstalkd
-
-    beanstalkdadmin: true
-### Install ngrok:
-Install Webserver Proxy NGrok
-
-    ngrok: true
-### Install Jenkins
-Install Jenkins Build Server
-
-    jenkins: true
-### Install PHP QA Tools
-Install PHP QA Tools
-
-    qatools: true
-### Install Blackfire
-Install Blackfire 
-
-    blackfire: true
-### Install nginx
-Install Nginx Web Server
-
-    nginx: true
-### Install Apache2
-Install Apache2 Web Server
-
-    apache2: true
-### Yarn JS Tools
-Install Yarn JS
-
-    yarn: true
-### DarkStat
-Install Dark Stat
-
-    darkstat: true
-### Errbit
-Install Errbit error Tracker
-
-    errbit: true
-### Flyway
-Install Flyway Database Migration Tool
-
-    flyway: true
-### wpcli
-Install Wordpress Cli
-
-    wpcli: true
-### munin
-Install Munin
-
-    munin: true
-### PHP MongoDB Admin
-Install PHP Mongo DB Admin
-
-    phpmda: true
-### HHVM
-HipHop VM installation
-
-    hhvm: true
-
-### NetDAta
-Install Netdata Server Software
-
-    netdata: true
-
-### Serve Pages as http
-to allow pages to be sent also by http or not:
-
-either Site configuration:
-
-serverHttp: true
-
-global Configuration
-
-serverHttp: true
-
-**if this option is enabled an entry for http transfer will be added and the http port not ignored in the settings!**
-
-## Known Issues
-### MySQL Master/Slave not starting
-This is an known issue and still under investigation.
-To fix this execute the following commands:
-
-    stopMySQL.sh
-    fixDb.sh
-    startMySQL.sh
+## System Command Extension
+This release includes an System Command Environment.
+This tool basicly sets the Environment up and installs features.
+
+    $system
+    Symfony 4.0.8 (kernel: src, env: dev, debug: true)
     
-It currently seems that the master/slave configs sometime fail to boot. The three workaround Scripts fix this issue currently temporary by stopping all Master/Slave Servers (if some are still up and running) starts the debian mysql server and stops it. Afterwards with the last script the master/slave servers are started.
+    Usage:
+      command [options] [arguments]
+    
+    Options:
+      -h, --help            Display this help message
+      -q, --quiet           Do not output any message
+      -V, --version         Display this application version
+          --ansi            Force ANSI output
+          --no-ansi         Disable ANSI output
+      -n, --no-interaction  Do not ask any interactive question
+      -e, --env=ENV         The Environment name. [default: "dev"]
+          --no-debug        Switches off debug mode.
+      -v|vv|vvv, --verbose  Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+    
+    Available commands:
+      about                           Displays information about the current project
+      help                            Displays help for a command
+      list                            Lists commands
+     assets
+      assets:install                  Installs bundles web assets under a public directory
+     cache
+      cache:clear                     Clears the cache
+      cache:pool:clear                Clears cache pools
+      cache:pool:prune                Prunes cache pools
+      cache:warmup                    Warms up an empty cache
+     config
+      config:dump-reference           Dumps the default configuration for an extension
+     debug
+      debug:autowiring                Lists classes/interfaces you can use for autowiring
+      debug:config                    Dumps the current configuration for an extension
+      debug:container                 Displays current services for an application
+      debug:event-dispatcher          Displays configured listeners for an application
+      debug:router                    Displays current routes for an application
+      debug:translation               Displays translation messages information
+      debug:twig                      Shows a list of twig functions, filters, globals and tests
+     lint
+      lint:twig                       Lints a template and outputs encountered errors
+      lint:xliff                      Lints a XLIFF file and outputs encountered errors
+      lint:yaml                       Lints a file and outputs encountered errors
+     mjrone
+      mjrone:add:phpfpm               add or remove phpFpm Process
+      mjrone:add:web                  add or remove Site
+      mjrone:configure:masterslave    install or uninstall MasterSlave
+      mjrone:database                 manage database
+      mjrone:install                  Install Packages according to config.yaml.
+      mjrone:ngrok                    Configure Ngrok
+      mjrone:package:ant              install or uninstall Ant
+      mjrone:package:apache2          install or uninstall Apache2
+      mjrone:package:beanstalkd       install or uninstall BeanstalkD
+      mjrone:package:beanstalkdAdmin  install or uninstall BeanstalkdAdmin
+      mjrone:package:blackfire        install or uninstall Blackfire
+      mjrone:package:cockpit          install or uninstall Zray
+      mjrone:package:composer         install or uninstall Composer
+      mjrone:package:couchdb          install or uninstall CouchDB
+      mjrone:package:darkstat         install or uninstall Darkstat
+      mjrone:package:docker           install or uninstall Docker
+      mjrone:package:elastic          install or uninstall Elastic Search 5 or 6
+      mjrone:package:errbit           install or uninstall Errbit
+      mjrone:package:flyway           install or uninstall FlyWay
+      mjrone:package:hhvm             install or uninstall Hhvm
+      mjrone:package:java             install or uninstall Java
+      mjrone:package:jenkins          install or uninstall Jenkins
+      mjrone:package:kibana           install or uninstall Kibana
+      mjrone:package:logstash         install or uninstall Logstash
+      mjrone:package:mailhog          install or uninstall MailHog
+      mjrone:package:maria            install or uninstall Maria
+      mjrone:package:memcached        install or uninstall Memcached
+      mjrone:package:mongo            install or uninstall MongoDb
+      mjrone:package:mongodbadmin     install or uninstall MongoDbAdmin
+      mjrone:package:mongodbphp       install or uninstall MongoDbPhp
+      mjrone:package:munin            install or uninstall Munin
+      mjrone:package:mysql            install or uninstall MySQL
+      mjrone:package:netdata          install or uninstall Netdata
+      mjrone:package:nginx            install or uninstall nginx
+      mjrone:package:ngrok            install or uninstall Ngrok
+      mjrone:package:nodejs           install or uninstall Nodejs
+      mjrone:package:ohmyzsh          install or uninstall OhMyZsh
+      mjrone:package:pgsql            install or uninstall PostgreSQL
+      mjrone:package:php56            install or uninstall PHP Fpm 5.6
+      mjrone:package:php70            install or uninstall PHP Fpm 7.0
+      mjrone:package:php71            install or uninstall PHP Fpm 7.1
+      mjrone:package:php72            install or uninstall PHP Fpm 7.2
+      mjrone:package:phppma           install or uninstall PhpMyAdmin
+      mjrone:package:python           install or uninstall Python
+      mjrone:package:qatools          install or uninstall QaTools
+      mjrone:package:rabbitmq         install or uninstall RabbitMq
+      mjrone:package:redis            install or uninstall Redis
+      mjrone:package:ruby             install or uninstall Ruby
+      mjrone:package:sqlite           install or uninstall Sqlite
+      mjrone:package:statsd           install or uninstall Statsd
+      mjrone:package:supervisor       install or uninstall Supervisor
+      mjrone:package:tideways         install or uninstall Tideways
+      mjrone:package:webdriver        install or uninstall WebDriver
+      mjrone:package:wpcli            install or uninstall WpCli
+      mjrone:package:xdebug           install or uninstall Xdebug
+      mjrone:package:xhgui            install or uninstall XhGui
+      mjrone:package:yarn             install or uninstall Yarn
+      mjrone:package:zray             install or uninstall Zray
+      mjrone:packages:list            lists installed packages
+      mjrone:packages:requirements    lists installed packages
+      mjrone:restart                  Restart Services
+      mjrone:sites:phpfpm             PhpFpm Config to Sites
+      mjrone:sites:web                generate Website Configs for apache and nginx
+     router
+      router:match                    Helps debug routes by simulating a path info match
+     security
+      security:encode-password        Encodes a password.
+     translation
+      translation:update              Updates the translation file
+    [vagrant@vagrant: ~]$
 
-## Untestet
-Apache Setup
+ 
+ mjrone:package installs software packages.
+    
+the option -r removes the package (if no dependencies exist).
+
+
+## Adding/Removing Database and Users
+
+    [vagrant@vagrant: ~]$system mjrone:add:database
+    Usage:
+      mjrone:database [options] [--] <type> [<database>] [<username>]...
+    
+    Arguments:
+      type                       Database type, supported: mysql, pgsql, couchdb, mongodb (name === input)
+      database                   Database to be added
+      username                   Add User to Database (only for mysql and pgsql schema: "<username>,<password>,<type>" type is only supported by mysql (type === read or write) always include < and > for each of the fields! suround the complete username with ")
+    
+    Options:
+      -o, --operation=OPERATION  Operation to be executed (c=create, d=drop, l=list === default) [default: "l"]
+      -h, --help                 Display this help message
+      -q, --quiet                Do not output any message
+      -V, --version              Display this application version
+          --ansi                 Force ANSI output
+          --no-ansi              Disable ANSI output
+      -n, --no-interaction       Do not ask any interactive question
+      -e, --env=ENV              The Environment name. [default: "dev"]
+          --no-debug             Switches off debug mode.
+      -v|vv|vvv, --verbose       Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+    
+    Help:
+      manage database
+
+Example:
+
+    system mjrone:database mysql test "<test><123><read>" "<test2><123><write>" -o c
+    
+This creates an database  test.
+
+Assigns the user test with password 123 and read only permissions
+The User test2 with password 123 and read + write permissions
+
+-o is the option selector
+
+c=create
+
+d=drop
+
+l=list
+
+## Adding php-fpm instance
+
+    [vagrant@vagrant: ~]$system mjrone:add:phpfpm
+    Usage:
+      mjrone:add:phpfpm [options] [--] <name> <version>
+    
+    Arguments:
+      name                                           name of the instance
+      version                                        PhpVersion
+    
+    Options:
+          --maxChildren=MAXCHILDREN                  max Children (default: 16) [default: 16]
+          --maxSpare=MAXSPARE                        max Spare Processes (default: 4) [default: 4]
+          --minSpare=MINSPARE                        min Spare Processes (default: 2) [default: 2]
+          --maxRam=MAXRAM                            Maximum Ram (default: 512M) [default: "512M"]
+          --start=START                              Start Process Count [default: 2]
+          --pm=PM                                    Process Manager (static, dynamic or ondemmand - default: dynamic) [default: "dynamic"]
+          --xdebug                                   enable XDebug
+          --port=PORT                                Prot of Process [default: 9000]
+          --processIdleTimeout=PROCESSIDLETIMEOUT    Process Idle Timeout [default: "10s"]
+          --maxRequests=MAXREQUESTS                  Maximum Ammount of Requests [default: 200]
+          --disableDisplayError=DISABLEDISPLAYERROR  disable Display Errors
+          --disableLogErrors=DISABLELOGERRORS        Disable Logging of Errors
+          --flags=FLAGS                              Php Flags (--flags="ID=VALUE" (multiple values allowed)
+          --values=VALUES                            PHP Values (--values="id=value" (multiple values allowed)
+          --listen=LISTEN                            either 127.0.0.1 or path. Don't use any other IP! [default: "127.0.0.1"]
+      -r, --remove                                   remove package completley
+      -h, --help                                     Display this help message
+      -q, --quiet                                    Do not output any message
+      -V, --version                                  Display this application version
+          --ansi                                     Force ANSI output
+          --no-ansi                                  Disable ANSI output
+      -n, --no-interaction                           Do not ask any interactive question
+      -e, --env=ENV                                  The Environment name. [default: "dev"]
+          --no-debug                                 Switches off debug mode.
+      -v|vv|vvv, --verbose                           Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+    
+    Help:
+      add or remove phpFPM Process
+
+adding an fpm for each of the versions (5.6, 7.0, 7.1, 7.2)
+
+-r removes an fpm process
+
+name needs to be unique
+
+Version can be 5.6, 7.0, 7.1, 7.2
+
+Afterwards (each time or once only, depending on your preferences) you need to execute the command
+
+    system mjrone:sites:phpfpm
+    
+so the pools are created and PHP Process Managers are restarted.
+
+## Adding Web Site
+
+    [vagrant@vagrant: ~]$system mjrone:add:web
+    Usage:
+      mjrone:add:web [options] [--] <map>
+    
+    Arguments:
+      map                                                Url of the Website
+    
+    Options:
+          --type=TYPE                                    Type of Site (Example: Symfony4) [default: "Symfony4"]
+          --description=DESCRIPTION                      Description
+          --to=TO                                        To Path (Path for Site (full Path))
+          --fpm=FPM                                      existing fpm server (default or name of an fpm worker [default: "default"]
+          --https=HTTPS                                  HTTPs Port [default: 443]
+          --http=HTTP                                    HTTP Port
+          --charSet=CHARSET                              Char Set of Nginx [default: "utf-8"]
+          --fcgiParams=FCGIPARAMS                        Fcgi Params (multiple values allowed)
+          --zRay                                         Enable ZRay
+          --clientMaxBodySize=CLIENTMAXBODYSIZE          Client Max Body Size in Mbyte (M) [default: 16]
+          --proxyApp=PROXYAPP                            Port for Proxy App
+          --fcgiBufferSize=FCGIBUFFERSIZE                FCGI Buffer Size [default: "16k"]
+          --fcgiConnectionTimeOut=FCGICONNECTIONTIMEOUT  Fcgi Connection Timeout [default: 300]
+          --fcgiBuffer=FCGIBUFFER                        Fcgi Buffer Size [default: "4 16k"]
+          --fcgiSendTimeOut=FCGISENDTIMEOUT              Fcgi Send Timeout [default: 300]
+          --fcgiReadTimeOut=FCGIREADTIMEOUT              Fcgi Read Timeout [default: 300]
+          --fcgiBusyBufferSize=FCGIBUSYBUFFERSIZE        Fcgi Read Timeout [default: "64k"]
+          --category=CATEGORY                            Category for Site [default: "app"]
+      -r, --remove                                       Remove Size
+      -h, --help                                         Display this help message
+      -q, --quiet                                        Do not output any message
+      -V, --version                                      Display this application version
+          --ansi                                         Force ANSI output
+          --no-ansi                                      Disable ANSI output
+      -n, --no-interaction                               Do not ask any interactive question
+      -e, --env=ENV                                      The Environment name. [default: "dev"]
+          --no-debug                                     Switches off debug mode.
+      -v|vv|vvv, --verbose                               Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+    
+    Help:
+      add or remove Site
+
+Command adds or removes an site from the config file.
+
+the map argument must be unique.
+
+type defines the Type of the used website template. Possible Templates:
+
+* Apache
+* Elgg
+* Errbit*
+* Html
+* Laravel
+* PhpApp
+* PhpMyAdmin*
+* PimCore
+* Proxy
+* SilverStripe
+* Statsd
+* Symfony2
+* Symfony4
+* Xhgui*
+
+The Templates with * are used internaly only.
+
+The Option -zRay requires Zray to be installed
+
+Each time (or finally) the Command 
+
+    system mjrone:sites:web
+    
+needs to be executed to create websites
+
+PimCore + Apache requires an installed apache. The site is available over the url: http://<domain>:81 or via nginx with the created proxy (it will always be created!)
+
+
+## Generate FPM + Web Server Files
+PHP FPM
+
+    system mjrone:sites:phpfpm
+
+Web Server
+
+    [vagrant@vagrant: ~]$system mjrone:sites:web
+    Usage:
+      mjrone:sites:web [options]
+    
+    Options:
+      -a, --ignoreApache    
+      -x, --ignoreNginx     
+      -h, --help            Display this help message
+      -q, --quiet           Do not output any message
+      -V, --version         Display this application version
+          --ansi            Force ANSI output
+          --no-ansi         Disable ANSI output
+      -n, --no-interaction  Do not ask any interactive question
+      -e, --env=ENV         The Environment name. [default: "dev"]
+          --no-debug        Switches off debug mode.
+      -v|vv|vvv, --verbose  Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+    
+    Help:
+      generate Website Configs for apache and nginx
+      
+      
+## Known Issues
+
+## Untested Software
+currently we have tested nginx with several website configs.
+
+Tests will take some time, so please be patient and report us any found details.

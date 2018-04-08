@@ -10,7 +10,7 @@
 # Description:       starts unicorn using start-stop-daemon
 ### END INIT INFO
 
-if [ -f /home/vagrant/.errbit ]
+if [ -f /home/vagrant/.apps/errbit ]
 then
     set -e
 
@@ -19,7 +19,7 @@ then
     # app settings
     USER="vagrant"
     APP_NAME="errbit"
-    APP_ROOT="/home/$USER/errbit"
+    APP_ROOT="/home/vagrant/errbit"
     ENV="production"
 
     # environment settings

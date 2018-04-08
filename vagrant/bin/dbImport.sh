@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-FILE=${1:-/vagrant/db/mysqldump.sql.gz}
+FILE=${1:-/home/vagrant/base/db/mysqldump.sql.gz}
 
 echo "Importing databases from '$FILE'"
 

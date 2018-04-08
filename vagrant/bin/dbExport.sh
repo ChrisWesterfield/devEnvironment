@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-FILE=${1:-/vagrant/db/mysqldump.sql.gz}
+FILE=${1:-/home/vagrant/base/db/mysqldump.sql.gz}
 
 # This gives an estimate of the size of the SQL file
 # It appears that 80% is a good approximation of

@@ -1,0 +1,10 @@
+Overwriting existing field _id in class App.
+Creating scope :page. Overwriting existing method NotificationServices::CampfireService.page.
+Creating scope :page. Overwriting existing method NotificationServices::FlowdockService.page.
+Creating scope :page. Overwriting existing method NotificationServices::GtalkService.page.
+Creating scope :page. Overwriting existing method NotificationServices::HipchatService.page.
+Creating scope :page. Overwriting existing method NotificationServices::HoiioService.page.
+Creating scope :page. Overwriting existing method NotificationServices::HubotService.page.
+Creating scope :page. Overwriting existing method NotificationServices::PushoverService.page.
+Creating scope :page. Overwriting existing method NotificationServices::SlackService.page.
+Creating scope :page. Overwriting existing method NotificationServices::WebhookService.page.

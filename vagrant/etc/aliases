@@ -1,0 +1,33 @@
+alias ..="cd .."
+alias ...="cd ../.."
+
+alias h='cd ~'
+alias c='clear'
+
+alias ls='ls -F --color=always'
+alias dir='dir -F --color=always'
+alias ll='ls -l'
+alias cp='cp -iv'
+alias rm='rm -i'
+alias mv='mv -iv'
+alias grep='grep --color=auto -in'
+alias l='ls -la'
+
+
+alias gl="git clone"
+alias gc="git checkout"
+alias gr="git reset --hard HEAD"
+alias gd="git diff"
+alias gs="git status"
+alias gg="git log"
+alias gb="git rebase"
+alias gt="git tag"
+alias gf="git fetch"
+alias gp="git push"
+alias gm="git push origin master"
+alias go="git remote -vvv"
+
+alias a="cd /home/vagrant/application"
+alias v="cd /home/vagrant/base"
+
+alias system="/home/vagrant/base/system/bin/system"
