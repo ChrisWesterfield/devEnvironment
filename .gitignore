@@ -5,3 +5,5 @@
 /vagrant/db/
 /vagrant/log/*.log
 .DS_Store
+/application
+/vagrant/system

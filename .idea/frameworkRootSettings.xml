@@ -4,15 +4,11 @@
     <option name="typedPaths">
       <list>
         <element elementPath="$PROJECT_DIR$/vagrant/system" typeId="src_directory" />
-        <element elementPath="$PROJECT_DIR$/vagrant/system/public" typeId="web_directory" />
-        <element elementPath="$PROJECT_DIR$/vagrant/system/vendor" typeId="vendor_directory" />
       </list>
     </option>
     <option name="myTypedPaths">
       <list>
         <element elementPath="$PROJECT_DIR$/vagrant/system" typeId="src_directory" />
-        <element elementPath="$PROJECT_DIR$/vagrant/system/public" typeId="web_directory" />
-        <element elementPath="$PROJECT_DIR$/vagrant/system/vendor" typeId="vendor_directory" />
       </list>
     </option>
   </component>
