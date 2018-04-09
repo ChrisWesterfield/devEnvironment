@@ -48,10 +48,10 @@ Vagrant.configure("2") do |config|
       end
       VagrantVM.box(config, settings)
       VagrantVM.folders(config, settings)
-      VagrantVM.install(config, settings)
       Vagrant.configure("2") do |config|
             config.vm.provision "shell", path: "/home/vagrant/base/bin/upgrade.sh"
       end
+      VagrantVM.install(config, settings)
       VagrantVM.mjrone(config, settings)
       config.vm.provision :reload
 

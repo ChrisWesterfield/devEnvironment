@@ -29,5 +29,6 @@ alias go="git remote -vvv"
 
 alias a="cd /home/vagrant/application"
 alias v="cd /home/vagrant/base"
+alias s="cd /home/vagrant/system"
 
-alias system="/home/vagrant/base/system/bin/system"
+alias system="/home/vagrant/system/bin/system"

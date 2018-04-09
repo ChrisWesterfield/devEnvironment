@@ -3,7 +3,10 @@
 * [B] Added missing .env file [fixed][VES-47]
 * [B] Cockpit Installer Outputs zray [fixed][VES-40]
 * [B] Host File Updator Breaks during mjrone:install [fixed][VES-43]
-* [B] Copy of Console File as Symlinks don't work under Windows! [VES-42]
+* [B] Copy of Console File as Symlinks don't work under Windows! [fixed][VES-42]
+* [B] Fixed several Boot Blocking Bugs [fixed][VES-46] 
+* [F] Move System Directory out of the Vagrant Directory due to Issues with the Links and Cache Directory [done][VES-48]
+* [B] Bugfix for Theme Installation in phpmyadmin [fixed][VES-38]
 # 5.0
 * Complete Rebuild from Scratch as we ran into several issues that could not be resolved as fast as required!
 * removed all Packages except Basic stuff during initial Provisioning

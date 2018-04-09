@@ -163,17 +163,17 @@ class VagrantVM
         config.vm.provision "shell" do |s|
             s.privileged = false
             s.name = "Installing System Packages according to config.yaml"
-            s.inline = "/home/vagrant/base/system/bin/system mjrone:install"
+            s.inline = "/home/vagrant/system/system mjrone:install"
         end
         config.vm.provision "shell" do |s|
             s.privileged = false
             s.name = "Creating FPM Pools"
-            s.inline = "/home/vagrant/base/system/bin/system mjrone:sites:phpfpm"
+            s.inline = "/home/vagrant/system/bin/system mjrone:sites:phpfpm"
         end
         config.vm.provision "shell" do |s|
             s.privileged = false
             s.name = "Creating Web Server Config Files"
-            s.inline = "/home/vagrant/base/system/bin/system mjrone:sites:web"
+            s.inline = "/home/vagrant/system/bin/system mjrone:sites:web"
         end
     end
 end
