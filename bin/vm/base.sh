@@ -59,8 +59,8 @@ sudo apt-get install  -y \
 
 [[ -d dir ]] || git clone https://github.com/ChrisWesterfield/mjrOneSystem /home/vagrant/base/system
 
-sudo ln -sf /home/vagrant/base/system/bin/console /home/vagrant/base/system/bin/system
-sudo ln -sf /home/vagrant/base/etc/crontab /etc/cron.d/userVagrant
+cp /home/vagrant/base/system/.env.dist /home/vagrant/base/system/.env
+
 sudo service apparmor stop
 sudo systemctl disable apparmor
 

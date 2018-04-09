@@ -1,0 +1,29 @@
+ip: 192.168.20.20
+memory: 2048
+cpus: 2
+provider: parallels
+authorize: ~/.ssh/id_rsa.pub
+folders:
+    #-
+    #    map: ./application
+    #    to: /home/vagrant/application
+    #    systemType: apps
+    -
+        map: ./vagrant
+        to: /home/vagrant/base
+        systemType: vagrant
+databases: {  }
+name: vagrant.test
+fpm: {  }
+sites: {  }
+features: {  }
+logDir: /home/vagrant/base/log
+systemDir: /home/vagrant/base/system
+vagrantDir: /home/vagrant/base
+requirements: {  }
+blackFire: null
+slaveCount: 0
+usedPorts:
+    - 22
+keys:
+    - ~/.ssh/id_rsa

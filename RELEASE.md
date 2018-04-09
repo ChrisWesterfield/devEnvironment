@@ -1,3 +1,9 @@
+# 5.1
+* [B] Filenames wrong Captials [fixed][VES-45]
+* [B] Added missing .env file [fixed][VES-47]
+* [B] Cockpit Installer Outputs zray [fixed][VES-40]
+* [B] Host File Updator Breaks during mjrone:install [fixed][VES-43]
+* [B] Copy of Console File as Symlinks don't work under Windows! [VES-42]
 # 5.0
 * Complete Rebuild from Scratch as we ran into several issues that could not be resolved as fast as required!
 * removed all Packages except Basic stuff during initial Provisioning
