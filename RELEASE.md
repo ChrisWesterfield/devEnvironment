@@ -8,6 +8,7 @@
 * [F] Move System Directory out of the Vagrant Directory due to Issues with the Links and Cache Directory [done][VES-48]
 * [B] Bugfix for Theme Installation in phpmyadmin [fixed][VES-38]
 * [F] Added Web UI for Package Installation [done][VES-19]
+* [B] Bug during uninstall that prevented the completion of the Process (FPM Remove blocked completion) [fixed][VES-50]
 # 5.0
 * Complete Rebuild from Scratch as we ran into several issues that could not be resolved as fast as required!
 * removed all Packages except Basic stuff during initial Provisioning
