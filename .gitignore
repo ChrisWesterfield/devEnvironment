@@ -1,4 +1,4 @@
-.idea
+/.idea
 /vagrant/etc/config.yaml
 /vagrant/etc/ssl
 /.vagrant
