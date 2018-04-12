@@ -58,8 +58,9 @@ Vagrant.configure("2") do |config|
       #triggers
       config.trigger.before :halt do
           info "Stoping Environment and Doing Backups"
-          #run_remote "/usr/bin/env bash /home/vagrant/base/bin/dbExport.sh"
-     run_remote "/usr/bin/env bash /home/vagrant/base/bin/mongoExport.sh"
+          run_remote "/usr/bin/env bash /home/vagrant/base/bin/dbExport.sh"
+          run_remote "/usr/bin/env bash /home/vagrant/base/bin/pgsqlExport.sh"
+          run_remote "/usr/bin/env bash /home/vagrant/base/bin/mongoExport.sh"
       end
 
     config.trigger.after :up do

@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+if [ -e /home/vagrant/.apps/mysql56 || -e /home/vagrant/.apps/mysql57 || -e /home/vagrant/.apps/mysql8 || -e /home/vagrant/.apps/maria ]
+then
 FILE=${1:-/home/vagrant/base/db/mysqldump.sql.gz}
 
 # This gives an estimate of the size of the SQL file
@@ -14,3 +16,4 @@ echo "Estimated uncompressed size: $HUMAN_READABLE_SIZE"
 mysqldump -uroot -p123 --all-databases -h 127.0.0.1 -P 3306 --skip-lock-tables 2>/dev/null | pv  --size=$ADJUSTED_SIZE | gzip > "$FILE"
 
 echo "Done."
+fi

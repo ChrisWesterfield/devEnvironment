@@ -9,6 +9,11 @@
 * [B] Bugfix for Theme Installation in phpmyadmin [fixed][VES-38]
 * [F] Added Web UI for Package Installation [done][VES-19]
 * [B] Bug during uninstall that prevented the completion of the Process (FPM Remove blocked completion) [fixed][VES-50]
+* [B] Bug fix for nginx (+x for systemD service removed) [fixed][VES-54]
+* [B] Cockpit not starting [fixed][VES-39]
+* [F] Added Cockroackdb 2.0 Support as Service [done][VES-49]
+* [F] Add Feature PgSQL Recover [done][VES-33]
+* [F] Add Feature PgSQL dump [done][VES-32]
 # 5.0
 * Complete Rebuild from Scratch as we ran into several issues that could not be resolved as fast as required!
 * removed all Packages except Basic stuff during initial Provisioning
