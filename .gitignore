@@ -8,3 +8,4 @@
 /application
 /vagrant/system
 /system
+/vagrant/log/*

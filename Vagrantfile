@@ -38,12 +38,16 @@ Vagrant.configure("2") do |config|
       end
 
       if (settings.has_key?("sites") and settings["sites"].count() > 0)
+          hosts = []
+          settings['sites'].each do |k,v|
+                hosts.push(v['map'])
+          end
           if Vagrant.has_plugin?('vagrant-hostsupdater')
-            config.hostsupdater.aliases = settings['sites'].map { |site| site['map'] }
+            config.hostsupdater.aliases = hosts
           elsif Vagrant.has_plugin?('vagrant-hostmanager')
             config.hostmanager.enabled = true
             config.hostmanager.manage_host = true
-            config.hostmanager.aliases = settings['sites'].map { |site| site['map'] }
+            config.hostmanager.aliases = hosts
           end
       end
       VagrantVM.box(config, settings)
