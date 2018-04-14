@@ -6,3 +6,8 @@ sudo apt-get clean
 sudo apt-get -y autoremove
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade
+if [ -d /home/vagrant/system ]
+then
+    cd /home/vagrant/system
+    /usr/bin/git pull origin master
+fi
