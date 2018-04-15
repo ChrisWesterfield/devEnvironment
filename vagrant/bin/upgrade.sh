@@ -9,5 +9,5 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confd
 if [ -d /home/vagrant/system ]
 then
     cd /home/vagrant/system
-    /usr/bin/git pull origin master
+    /usr/bin/git pull origin production
 fi
