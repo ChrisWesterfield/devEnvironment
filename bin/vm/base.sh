@@ -57,7 +57,7 @@ sudo apt-get install  -y \
         php7.2-json \
         php7.2-mbstring
 
-[[ -d dir ]] || git clone https://github.com/ChrisWesterfield/mjrOneSystem /home/vagrant/system
+[[ -d dir ]] || git clone https://github.com/ChrisWesterfield/mjrOneSystem /home/vagrant/system && sudo chown -R vagrant:vagrant /home/vagrant/system && cd /home/vagrant/system && git checkout production
 
 cp /home/vagrant/base/system/.env.dist /home/vagrant/base/system/.env
 
