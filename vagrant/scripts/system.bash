@@ -87,7 +87,7 @@ _system()
             opts="${opts} --operation"
             ;;
             mjrone:add:docker:file)
-            opts="${opts} --net_natme --net_mode --remove"
+            opts="${opts} --net_name --net_mode --remove"
             ;;
             mjrone:add:docker:service)
             opts="${opts} --remove --command --environment --buildContext --buildDockerFile --image --networks --ports --restart --volumes --depends --links --memoryLimit"
@@ -302,8 +302,41 @@ _system()
             mjrone:packages:requirements)
             opts="${opts} "
             ;;
-            mjrone:restart)
-            opts="${opts} --php56 --php70 --php71 --php72 --nginx --rabbitmq --beanstalkd --mailhog --elastic --kibana --logstash --errbit --hhvm --docker --mongo --darkstat --netdata --memcache --redis --postgres --supervisor"
+            mjrone:service:cache)
+            opts="${opts} "
+            ;;
+            mjrone:service:database)
+            opts="${opts} "
+            ;;
+            mjrone:service:docker)
+            opts="${opts} --ui"
+            ;;
+            mjrone:service:elasticStack)
+            opts="${opts} "
+            ;;
+            mjrone:service:errbit)
+            opts="${opts} "
+            ;;
+            mjrone:service:mail)
+            opts="${opts} "
+            ;;
+            mjrone:service:monitoring)
+            opts="${opts} "
+            ;;
+            mjrone:service:nosql)
+            opts="${opts} "
+            ;;
+            mjrone:service:php)
+            opts="${opts} "
+            ;;
+            mjrone:service:queue)
+            opts="${opts} "
+            ;;
+            mjrone:service:supervisor)
+            opts="${opts} "
+            ;;
+            mjrone:service:web)
+            opts="${opts} "
             ;;
             router:match)
             opts="${opts} --method --scheme --host"
@@ -325,7 +358,7 @@ _system()
 
     # completing for a command
     if [[ $cur == $com ]]; then
-        coms="about help list assets:install cache:clear cache:pool:clear cache:pool:prune cache:warmup config:dump-reference debug:autowiring debug:config debug:container debug:event-dispatcher debug:router debug:translation debug:twig lint:twig lint:xliff lint:yaml mjrone:add:database mjrone:add:docker:file mjrone:add:docker:service mjrone:add:phpfpm mjrone:add:web mjrone:configure:mastermaster mjrone:configure:masterslave mjrone:docker:list mjrone:dockerCompose mjrone:generate:docker mjrone:generate:phpfpm mjrone:generate:web mjrone:install mjrone:ngrok mjrone:package:ant mjrone:package:apache2 mjrone:package:autocompleter mjrone:package:beanstalkd mjrone:package:beanstalkdAdmin mjrone:package:blackfire mjrone:package:cockpit mjrone:package:composer mjrone:package:couchdb mjrone:package:darkstat mjrone:package:docker mjrone:package:dockerCompose mjrone:package:dockerui mjrone:package:elastic mjrone:package:errbit mjrone:package:flyway mjrone:package:hhvm mjrone:package:java mjrone:package:jenkins mjrone:package:kibana mjrone:package:logstash mjrone:package:mailhog mjrone:package:maria mjrone:package:memcached mjrone:package:mongo mjrone:package:mongodbadmin mjrone:package:mongodbphp mjrone:package:munin mjrone:package:mysql mjrone:package:netdata mjrone:package:nginx mjrone:package:ngrok mjrone:package:nodejs mjrone:package:ohmyzsh mjrone:package:pgsql mjrone:package:php56 mjrone:package:php70 mjrone:package:php71 mjrone:package:php72 mjrone:package:phpmysql mjrone:package:phppma mjrone:package:python mjrone:package:qatools mjrone:package:rabbitmq mjrone:package:redis mjrone:package:roachdb mjrone:package:ruby mjrone:package:sqlite mjrone:package:statsd mjrone:package:supervisor mjrone:package:tideways mjrone:package:webdriver mjrone:package:wpcli mjrone:package:xdebug mjrone:package:xhgui mjrone:package:yarn mjrone:package:zray mjrone:packages:list mjrone:packages:requirements mjrone:restart router:match security:encode-password translation:update"
+        coms="about help list assets:install cache:clear cache:pool:clear cache:pool:prune cache:warmup config:dump-reference debug:autowiring debug:config debug:container debug:event-dispatcher debug:router debug:translation debug:twig lint:twig lint:xliff lint:yaml mjrone:add:database mjrone:add:docker:file mjrone:add:docker:service mjrone:add:phpfpm mjrone:add:web mjrone:configure:mastermaster mjrone:configure:masterslave mjrone:docker:list mjrone:dockerCompose mjrone:generate:docker mjrone:generate:phpfpm mjrone:generate:web mjrone:install mjrone:ngrok mjrone:package:ant mjrone:package:apache2 mjrone:package:autocompleter mjrone:package:beanstalkd mjrone:package:beanstalkdAdmin mjrone:package:blackfire mjrone:package:cockpit mjrone:package:composer mjrone:package:couchdb mjrone:package:darkstat mjrone:package:docker mjrone:package:dockerCompose mjrone:package:dockerui mjrone:package:elastic mjrone:package:errbit mjrone:package:flyway mjrone:package:hhvm mjrone:package:java mjrone:package:jenkins mjrone:package:kibana mjrone:package:logstash mjrone:package:mailhog mjrone:package:maria mjrone:package:memcached mjrone:package:mongo mjrone:package:mongodbadmin mjrone:package:mongodbphp mjrone:package:munin mjrone:package:mysql mjrone:package:netdata mjrone:package:nginx mjrone:package:ngrok mjrone:package:nodejs mjrone:package:ohmyzsh mjrone:package:pgsql mjrone:package:php56 mjrone:package:php70 mjrone:package:php71 mjrone:package:php72 mjrone:package:phpmysql mjrone:package:phppma mjrone:package:python mjrone:package:qatools mjrone:package:rabbitmq mjrone:package:redis mjrone:package:roachdb mjrone:package:ruby mjrone:package:sqlite mjrone:package:statsd mjrone:package:supervisor mjrone:package:tideways mjrone:package:webdriver mjrone:package:wpcli mjrone:package:xdebug mjrone:package:xhgui mjrone:package:yarn mjrone:package:zray mjrone:packages:list mjrone:packages:requirements mjrone:service:cache mjrone:service:database mjrone:service:docker mjrone:service:elasticStack mjrone:service:errbit mjrone:service:mail mjrone:service:monitoring mjrone:service:nosql mjrone:service:php mjrone:service:queue mjrone:service:supervisor mjrone:service:web router:match security:encode-password translation:update"
 
         COMPREPLY=($(compgen -W "${coms}" -- ${cur}))
         __ltrim_colon_completions "$cur"
