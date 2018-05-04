@@ -60,16 +60,16 @@ Vagrant.configure("2") do |config|
       config.vm.provision :reload
 
       #triggers
-      config.trigger.before :halt do
-          info "Stoping Environment and Doing Backups"
-          run_remote "/usr/bin/env bash /home/vagrant/base/bin/dbExport.sh"
-          run_remote "/usr/bin/env bash /home/vagrant/base/bin/pgsqlExport.sh"
-          run_remote "/usr/bin/env bash /home/vagrant/base/bin/mongoExport.sh"
+      config.trigger.before :halt do |trigger|
+        trigger.run_remote = {inline: "/usr/bin/env bash /home/vagrant/base/bin/dbExport.sh"}
+        trigger.run_remote = {inline: "/usr/bin/env bash /home/vagrant/base/bin/pgsqlExport.sh"}
+        trigger.run_remote = {inline: "/usr/bin/env bash /home/vagrant/base/bin/mongoExport.sh"}
       end
 
-    config.trigger.after :up do
-        info "Starting Environment"
-        run_remote "/usr/bin/env bash /home/vagrant/base/bin/restartNginx.sh"
-        run_remote "/usr/bin/env bash /home/vagrant/base/bin/setSystemCtl.sh"
-    end
+    config.trigger.after :up do |trigger|
+        trigger.name = "Starting"
+        trigger.info = "Executing required scripts"
+        trigger.run_remote = {inline: "/usr/bin/env bash /home/vagrant/base/bin/restartNginx.sh"}
+        trigger.run_remote = {inline: "/usr/bin/env bash /home/vagrant/base/bin/setSystemCtl.sh"}
+      end
 end
