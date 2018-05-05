@@ -12,3 +12,7 @@ if [ -f /home/vagrant/..apps/apache ]
 then
     sudo /usr/bin/env service apache2 restart
 fi
+if [ -f /home/vagrant/.apps/darkstat ]
+then
+    sudo /usr/bin/env service darkstat restart
+fi
