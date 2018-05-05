@@ -21,5 +21,5 @@ printf "${BLE}║${NC} License: ${YEL}MIT Open Source${NC}                      
 printf "${BLE}║${NC} Copyright by: Chris Westerfield <${YEL}chris@mjr.one${NC}>                                                      ${BLE}║${NC}\n"
 printf "${BLE}║${NC} Website: ${YEL}http://www.mjr.one${NC}                                                                          ${BLE}║${NC}\n"
 printf "${BLE}╠══════════════════════════════════════════════════════════════════════════════════════════════════════╣${NC}\n"
-printf "${BLE}║${NC} Version: ${LRD}5.1.3${NC}                                                                                       ${BLE}║${NC}\n"
+printf "${BLE}║${NC} Version: ${LRD}5.2.0${NC}                                                                                       ${BLE}║${NC}\n"
 printf "${BLE}╚══════════════════════════════════════════════════════════════════════════════════════════════════════╝${NC}\n"

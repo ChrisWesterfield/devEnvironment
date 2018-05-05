@@ -1,3 +1,10 @@
+# 5.2.0
+* minor changes
+* version bump
+# 5.1.3
+* bug fixes
+# 5.1.2
+* bug fixes
 # 5.1.1
 Several Bug fixes
 # 5.1
