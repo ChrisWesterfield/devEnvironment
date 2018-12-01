@@ -1,0 +1,31 @@
+authorize: ~/.ssh/id_rsa.pub
+blackFire: null
+cpus: 2
+databases: { }
+dockerCompose: {  }
+features: {  }
+folders:
+  -
+    map: ./vagrant
+    to: /home/vagrant/base
+    systemType: vagrant
+  -
+    map: ./application
+    to: /home/vagrant/application
+    systemType: apps
+fpm: { }
+ip: 192.168.31.42
+keys:
+  - ~/.ssh/id_rsa
+locked: false
+logDir: /home/vagrant/base/log
+masterCount: 1
+memory: 2048
+name: dev.test
+provider: parallels
+requirements:
+sites: { }
+slaveCount: 0
+systemDir: /home/vagrant/base/system
+usedPorts: { }
+vagrantDir: /home/vagrant/base
