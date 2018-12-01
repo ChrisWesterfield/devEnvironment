@@ -163,7 +163,7 @@ class VagrantVM
         config.vm.provision "shell" do |s|
             s.privileged = false
             s.name = "Installing System Packages according to config.yaml"
-            s.inline = "/home/vagrant/system/system mjrone:install"
+            s.inline = "/home/vagrant/system/bin/system mjrone:install"
         end
         config.vm.provision "shell" do |s|
             s.privileged = false
