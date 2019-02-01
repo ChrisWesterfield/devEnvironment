@@ -69,7 +69,8 @@ Vagrant.configure("2") do |config|
     config.trigger.after :up do |trigger|
         trigger.name = "Starting"
         trigger.info = "Executing required scripts"
-        trigger.run_remote = {inline: "/usr/bin/env bash /home/vagrant/base/bin/restartNginx.sh"}
+        trigger.run_remote = {inline: "/usr/bin/env bash /home/vagrant/base/bin/start.errbit.sh"}
+        trigger.run_remote = {inline: "/usr/bin/env bash /home/vagrant/base/bin/start.nginx.sh"}
         trigger.run_remote = {inline: "/usr/bin/env bash /home/vagrant/base/bin/setSystemCtl.sh"}
       end
 end
