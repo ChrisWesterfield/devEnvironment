@@ -24,7 +24,7 @@ then
 
     # environment settings
     PATH="/home/$USER/.rbenv/shims:/home/$USER/.rbenv/bin:$PATH"
-    CMD="cd $APP_ROOT && bundle exec unicorn -c config/unicorn.rb -E $ENV -D"
+    CMD="cd $APP_ROOT && bundle _1.17.3_ exec unicorn -c config/unicorn.rb -E $ENV -D"
     PID="/home/vagrant/errbit/run/errbit.pid"
     OLD_PID="$PID.oldbin"
 

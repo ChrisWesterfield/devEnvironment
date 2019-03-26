@@ -98,3 +98,58 @@ I, [2019-01-07T20:30:02.592390 #13394]  INFO -- : reaped #<Process::Status: pid 
 I, [2019-01-07T20:30:02.592544 #13394]  INFO -- : reaped #<Process::Status: pid 13403 exit 0> worker=2
 I, [2019-01-07T20:30:02.592695 #13394]  INFO -- : reaped #<Process::Status: pid 13406 exit 0> worker=3
 I, [2019-01-07T20:30:02.594796 #13394]  INFO -- : master complete
+I, [2019-03-18T00:19:57.706137 #3166]  INFO -- : Refreshing Gem list
+I, [2019-03-18T00:20:01.212757 #3166]  INFO -- : listening on addr=/home/vagrant/errbit/run/errbit.socket fd=8
+I, [2019-03-18T00:20:01.213112 #3166]  INFO -- : listening on addr=127.0.0.1:8030 fd=9
+I, [2019-03-18T00:20:01.215065 #3174]  INFO -- : worker=0 spawned pid=3174
+I, [2019-03-18T00:20:01.215429 #3174]  INFO -- : worker=0 ready
+I, [2019-03-18T00:20:01.217640 #3177]  INFO -- : worker=1 spawned pid=3177
+I, [2019-03-18T00:20:01.218019 #3177]  INFO -- : worker=1 ready
+I, [2019-03-18T00:20:01.219102 #3180]  INFO -- : worker=2 spawned pid=3180
+I, [2019-03-18T00:20:01.219474 #3180]  INFO -- : worker=2 ready
+I, [2019-03-18T00:20:01.220265 #3166]  INFO -- : master process ready
+W, [2019-03-18T00:20:01.220767 #3166]  WARN -- : grandparent died too soon?: Broken pipe (Errno::EPIPE)
+I, [2019-03-18T00:20:01.220864 #3183]  INFO -- : worker=3 spawned pid=3183
+I, [2019-03-18T00:20:01.221231 #3183]  INFO -- : worker=3 ready
+I, [2019-03-18T00:37:45.318796 #3166]  INFO -- : reloading config_file=config/unicorn.rb
+I, [2019-03-18T00:37:45.355053 #3166]  INFO -- : Refreshing Gem list
+I, [2019-03-18T00:37:45.362297 #3166]  INFO -- : done reloading config_file=config/unicorn.rb
+I, [2019-03-18T00:37:45.363427 #3166]  INFO -- : reaped #<Process::Status: pid 3174 exit 0> worker=0
+I, [2019-03-18T00:37:45.364835 #3166]  INFO -- : reaped #<Process::Status: pid 3177 exit 0> worker=1
+I, [2019-03-18T00:37:45.370252 #3166]  INFO -- : reaped #<Process::Status: pid 3180 exit 0> worker=2
+I, [2019-03-18T00:37:45.371645 #3166]  INFO -- : reaped #<Process::Status: pid 3183 exit 0> worker=3
+I, [2019-03-18T00:37:45.372643 #3166]  INFO -- : master complete
+I, [2019-03-18T00:42:05.830393 #3431]  INFO -- : Refreshing Gem list
+I, [2019-03-18T00:42:09.684842 #3431]  INFO -- : unlinking existing socket=/home/vagrant/errbit/run/errbit.socket
+I, [2019-03-18T00:42:09.685300 #3431]  INFO -- : listening on addr=/home/vagrant/errbit/run/errbit.socket fd=8
+I, [2019-03-18T00:42:09.685469 #3431]  INFO -- : listening on addr=127.0.0.1:8030 fd=9
+I, [2019-03-18T00:42:09.687198 #3434]  INFO -- : worker=0 spawned pid=3434
+I, [2019-03-18T00:42:09.687343 #3434]  INFO -- : worker=0 ready
+I, [2019-03-18T00:42:09.690085 #3437]  INFO -- : worker=1 spawned pid=3437
+I, [2019-03-18T00:42:09.690328 #3437]  INFO -- : worker=1 ready
+I, [2019-03-18T00:42:09.691637 #3440]  INFO -- : worker=2 spawned pid=3440
+I, [2019-03-18T00:42:09.691955 #3440]  INFO -- : worker=2 ready
+I, [2019-03-18T00:42:09.693366 #3431]  INFO -- : master process ready
+I, [2019-03-18T00:42:09.693968 #3443]  INFO -- : worker=3 spawned pid=3443
+I, [2019-03-18T00:42:09.694241 #3443]  INFO -- : worker=3 ready
+I, [2019-03-18T00:43:54.829562 #3431]  INFO -- : reloading config_file=config/unicorn.rb
+I, [2019-03-18T00:43:55.041528 #3431]  INFO -- : Refreshing Gem list
+I, [2019-03-18T00:43:55.047410 #3431]  INFO -- : done reloading config_file=config/unicorn.rb
+I, [2019-03-18T00:43:55.047548 #3431]  INFO -- : reaped #<Process::Status: pid 3434 exit 0> worker=0
+I, [2019-03-18T00:43:55.047609 #3431]  INFO -- : reaped #<Process::Status: pid 3437 exit 0> worker=1
+I, [2019-03-18T00:43:55.047653 #3431]  INFO -- : reaped #<Process::Status: pid 3440 exit 0> worker=2
+I, [2019-03-18T00:43:55.047710 #3431]  INFO -- : reaped #<Process::Status: pid 3443 exit 0> worker=3
+I, [2019-03-18T00:43:55.047963 #3431]  INFO -- : master complete
+I, [2019-03-18T00:49:58.373715 #2938]  INFO -- : Refreshing Gem list
+I, [2019-03-18T00:50:02.285153 #2938]  INFO -- : unlinking existing socket=/home/vagrant/errbit/run/errbit.socket
+I, [2019-03-18T00:50:02.285623 #2938]  INFO -- : listening on addr=/home/vagrant/errbit/run/errbit.socket fd=8
+I, [2019-03-18T00:50:02.285795 #2938]  INFO -- : listening on addr=127.0.0.1:8030 fd=9
+I, [2019-03-18T00:50:02.287650 #3013]  INFO -- : worker=0 spawned pid=3013
+I, [2019-03-18T00:50:02.287806 #3013]  INFO -- : worker=0 ready
+I, [2019-03-18T00:50:02.288901 #3016]  INFO -- : worker=1 spawned pid=3016
+I, [2019-03-18T00:50:02.289081 #3016]  INFO -- : worker=1 ready
+I, [2019-03-18T00:50:02.290901 #3019]  INFO -- : worker=2 spawned pid=3019
+I, [2019-03-18T00:50:02.291086 #3019]  INFO -- : worker=2 ready
+I, [2019-03-18T00:50:02.291757 #2938]  INFO -- : master process ready
+I, [2019-03-18T00:50:02.292180 #3022]  INFO -- : worker=3 spawned pid=3022
+I, [2019-03-18T00:50:02.292352 #3022]  INFO -- : worker=3 ready

@@ -25,52 +25,57 @@ Vagrant.require_version '>= 1.9.0'
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
 Vagrant.configure("2") do |config|
-      if File.exist? aliasesPath then
-          config.vm.provision "file", source: aliasesPath, destination: "/tmp/bash_aliases"
-          config.vm.provision "shell" do |s|
-              s.inline = "awk '{ sub(\"\r$\", \"\"); print }' /tmp/bash_aliases > /home/vagrant/.bash_aliases"
-          end
+    if File.exist? aliasesPath then
+      config.vm.provision "file", source: aliasesPath, destination: "/tmp/bash_aliases"
+      config.vm.provision "shell" do |s|
+          s.inline = "awk '{ sub(\"\r$\", \"\"); print }' /tmp/bash_aliases > /home/vagrant/.bash_aliases"
       end
-      if File.exist? vagrantYamlPath then
-          settings = YAML::load(File.read(vagrantYamlPath))
-      else
-          abort "vagrant settings file not found in #{confDir}"
-      end
+    end
+    if File.exist? vagrantYamlPath then
+      settings = YAML::load(File.read(vagrantYamlPath))
+    else
+      abort "vagrant settings file not found in #{confDir}"
+    end
 
-      if (settings.has_key?("sites") and settings["sites"].count() > 0)
-          hosts = []
-          settings['sites'].each do |k,v|
-                hosts.push(v['map'])
-          end
-          if Vagrant.has_plugin?('vagrant-hostsupdater')
-            config.hostsupdater.aliases = hosts
-          elsif Vagrant.has_plugin?('vagrant-hostmanager')
-            config.hostmanager.enabled = true
-            config.hostmanager.manage_host = true
-            config.hostmanager.aliases = hosts
-          end
+    if (settings.has_key?("sites") and settings["sites"].count() > 0)
+      hosts = []
+      settings['sites'].each do |k,v|
+            hosts.push(v['map'])
       end
-      VagrantVM.box(config, settings)
-      VagrantVM.folders(config, settings)
-      Vagrant.configure("2") do |config|
-            config.vm.provision "shell", path: "/home/vagrant/base/bin/upgrade.sh"
+      if Vagrant.has_plugin?('vagrant-hostsupdater')
+        config.hostsupdater.aliases = hosts
+      elsif Vagrant.has_plugin?('vagrant-hostmanager')
+        config.hostmanager.enabled = true
+        config.hostmanager.manage_host = true
+        config.hostmanager.aliases = hosts
       end
-      VagrantVM.install(config, settings)
-      VagrantVM.mjrone(config, settings)
-      config.vm.provision :reload
+    end
+    VagrantVM.box(config, settings)
+    VagrantVM.folders(config, settings)
+    Vagrant.configure("2") do |config|
+        config.vm.provision "shell", path: "/home/vagrant/base/bin/upgrade.sh"
+    end
+    VagrantVM.install(config, settings)
+    VagrantVM.mjrone(config, settings)
+    config.vm.provision :reload
 
-      #triggers
-      config.trigger.before :halt do |trigger|
+    #triggers
+    config.trigger.before :halt do |trigger|
         trigger.run_remote = {inline: "/usr/bin/env bash /home/vagrant/base/bin/dbExport.sh"}
         trigger.run_remote = {inline: "/usr/bin/env bash /home/vagrant/base/bin/pgsqlExport.sh"}
         trigger.run_remote = {inline: "/usr/bin/env bash /home/vagrant/base/bin/mongoExport.sh"}
-      end
+    end
 
     config.trigger.after :up do |trigger|
-        trigger.name = "Starting"
-        trigger.info = "Executing required scripts"
+    trigger.name = "Starting"
+    trigger.info = "Executing required scripts"
         trigger.run_remote = {inline: "/usr/bin/env bash /home/vagrant/base/bin/start.errbit.sh"}
         trigger.run_remote = {inline: "/usr/bin/env bash /home/vagrant/base/bin/start.nginx.sh"}
         trigger.run_remote = {inline: "/usr/bin/env bash /home/vagrant/base/bin/setSystemCtl.sh"}
-      end
+    end
+    Vagrant.configure("2") do |config|
+        config.vm.provision "shell", path: "/home/vagrant/base/bin/start.errbit.sh", :run => 'always'
+        config.vm.provision "shell", path: "/home/vagrant/base/bin/start.nginx.sh", :run => 'always'
+        config.vm.provision "shell", path: "/home/vagrant/base/bin/setSystemCtl.sh", :run => 'always'
+    end
 end

@@ -11,4 +11,5 @@ source /home/vagrant/base/scripts/git.bash
 export PS1='[\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\] \W$(__git_ps1 " (%s)")]\[\033[00m\]\$ '
 /home/vagrant/base/bin/motd.sh
 alias composer="COMPOSER_MEMORY_LIMIT=-1 /usr/local/bin/composer -vvv --profile"
-source /home/vagrant/application/bin/symfony.autocomplete.bash
+source /home/vagrant/application/login/bin/symfony.autocomplete.bash
+alias bundler='/usr/local/bin/bundler _1.17.3_ '
