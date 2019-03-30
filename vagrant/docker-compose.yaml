@@ -1,0 +1,252 @@
+version: "3"
+###########################################
+# Network                                 #
+###########################################
+networks:
+  spectware:
+###########################################
+# Services                                #
+###########################################
+services:
+  ###########################################
+  # Tools                                   #
+  ###########################################
+  service_mail:
+    image: ${DOCKER_MAILSERVER}
+    volumes:
+      - ${PATH_LOGS}:/var/log
+    networks:
+      spectware:
+        aliases:
+          - mail.service.container.swp.test
+  service_errbit:
+    image: ${DOCKER_ERRBIT}
+    links:
+      - service_mail
+    environment:
+      RACK_ENV: "production"
+      MONGO_URL: "mongodb://${HOSTIP}:27017/errbit"
+      EMAIL_DELIVERY_METHOD: ":smtp"
+      SMTP_SERVER: service_mail
+      SMTP_PORT: 1025
+      ERRBIT_EMAIL_FROM: errbit@swp.test
+      ERRBIT_ADMIN_USER: admin
+      ERRBIT_ADMIN_PASSWORD: 123
+      ERRBIT_ADMIN_EMAIL: admin@swp.test
+    volumes:
+      - ${PATH_LOGS}:/var/log
+    networks:
+      spectware:
+        aliases:
+          - errbit.service.container.swp.test
+  #Visualisation Kibana
+  service_kibana:
+    image: ${DOCKER_KIBANA}
+    volumes:
+      - ${KIBANA_CONFIG_PATH}:/usr/share/kibana/config
+      - ${PATH_LOGS}:/var/log
+    networks:
+      spectware:
+        aliases:
+          - kibana.service.container.swp.test
+  #Log Collector
+  service_logstash:
+    image: ${DOCKER_LOGSTASH}
+    volumes:
+      - ${PATH_CORE}:/var/www:rw
+      - ${PATH_LOGS}:/var/log
+      - ${LOGSTASH_PIPELINE_PATH}:/usr/share/logstash/pipeline
+      - ${LOGSTASH_CONFIG_PATH}:/usr/share/logstash/config
+    networks:
+      spectware:
+        aliases:
+          - logstash.service.container.swp.test
+  service_blackfire:
+    image: ${DOCKER_BLACKFIRE}
+    environment:
+      - BLACKFIRE_SERVER_ID=${BFSERVERID}
+      - BLACKFIRE_SERVER_TOKEN=${BFSERVERTOKEN}
+    networks:
+      spectware:
+  service_xhgui:
+    image: ${DOCKER_XHGUI}
+    volumes:
+      - ${XHGUI_CONFIG_FILE}:/usr/local/src/xhgui/config/config.php
+    networks:
+      spectware:
+        aliases:
+          - xhgui.service.container.swp.test
+  #service_portainer:
+  #  image: ${DOCKER_PORTAINER}
+  #  volumes:
+  #    - ${PORTAINER_SOCKET_PATH}:/var/run/docker.sock
+  #    - ${PORTAINER_STORAGE_PATH}:/data
+  #  ports:
+  #    - ${PORTAINER_HTTP_PORT}:9000
+  #  networks:
+  #    spectware:
+  #      aliases:
+  #        - portainer.service.container.swp.test
+  service_phpmyadmin:
+    image: ${DOCKER_PHPMYADMIN}
+    ports:
+      - ${PHPMYADMIN_HTTP_PORT}:${HTTP_PORT}
+    environment:
+      PMA_HOST: "${PHPMYADMIN_MYSQL_HOST}"
+      PMA_USER: "${PHPMYADMIN_MYSQL_ROOT_USER}"
+      PMA_PASSWORD: "${PHPMYADMIN_MYSQL_ROOT_PASSWORD}"
+      PMA_ABSOLUTE_URI: "${PHPMYADMIN_URI}"
+    networks:
+      spectware:
+        aliases:
+          - pma.service.container.swp.test
+  ###########################################
+  # Login                                   #
+  ###########################################
+  login_nginx:
+    image: ${DOCKER_WEB_APP}
+    volumes:
+      - ${PATH_LOGIN}:/var/www
+      - ${PATH_LOGS}:/var/log
+      - ${NGINX_CONFIG_PATH}login:/etc/nginx/conf.d
+    networks:
+      spectware:
+        aliases:
+          - nginx.login.container.swp.test
+    ports:
+      - ${LOGIN_HTTP_PORT}:${HTTP_PORT}
+    links:
+      - login_fpm
+  login_fpm:
+    image: ${DOCKER_PHP_FPM}
+    environment:
+      PHP_XDEBUG_ENABLED: "${PHP_XDEBUG_ENABLED}"
+      XDEBUG_CONFIG: "remote_host=${PHP_XDEBUG_HOST}"
+      BLACKFIRE_SERVER_ID: "${BFCLIENTID}"
+      BLACKFIRE_SERVER_TOKEN: "${BFCLIENTTOKEN}"
+    volumes:
+      - ${PATH_LOGIN}:/var/www
+      - ${PATH_LOGS}:/var/log
+    networks:
+      spectware:
+        aliases:
+          - fpm.login.container.swp.test
+    links:
+      - login_redis
+      - profiler_redis
+      - service_mail
+  login_redis:
+    networks:
+      spectware:
+        aliases:
+          - redis.login.container.swp.test
+    image: ${DOCKER_REDIS}
+    volumes:
+      - ${PATH_LOGS}:/var/log
+
+  ###########################################
+  # Backend                                 #
+  ###########################################
+  backend_nginx:
+    image: ${DOCKER_WEB_APP}
+    volumes:
+      - ${PATH_BACKEND}:/var/www
+      - ${PATH_LOGS}:/var/log
+      - ${NGINX_CONFIG_PATH}backend:/etc/nginx/conf.d
+    networks:
+      spectware:
+        aliases:
+          - nginx.backend.container.swp.test
+    ports:
+      - ${BACKEND_HTTP_PORT}:${HTTP_PORT}
+    links:
+      - backend_fpm
+  backend_fpm:
+    environment:
+      PHP_XDEBUG_ENABLED: "${PHP_XDEBUG_ENABLED}"
+      XDEBUG_CONFIG: "remote_host=${PHP_XDEBUG_HOST}"
+      BLACKFIRE_SERVER_ID: "${BFCLIENTID}"
+      BLACKFIRE_SERVER_TOKEN: "${BFCLIENTTOKEN}"
+    image: ${DOCKER_PHP_FPM}
+    volumes:
+      - ${PATH_BACKEND}:/var/www
+      - ${PATH_LOGS}:/var/log
+    links:
+      - backend_redis
+      - service_mail
+      - profiler_redis
+      - login_nginx
+    networks:
+      spectware:
+        aliases:
+          - fpm.backend.container.swp.test
+  backend_redis:
+    networks:
+      spectware:
+        aliases:
+          - redis.backend.container.swp.test
+    image: ${DOCKER_REDIS}
+    volumes:
+      - ${PATH_LOGS}:/var/log
+  ###########################################
+  # master Proxy                            #
+  ###########################################
+  profiler_redis:
+    networks:
+      spectware:
+        aliases:
+          - redis.profiler.container.swp.test
+    image: ${DOCKER_REDIS}
+    volumes:
+      - ${PATH_LOGS}:/var/log
+  ###########################################
+  # master Proxy                            #
+  ###########################################
+  webProxy:
+    image: ${DOCKER_PROXY}
+    volumes:
+      - ${PROXY_SYSTEM_PATH}:/var/www
+      - ${PATH_LOGS}:/var/log
+      - ${NGINX_CONFIG_PATH}proxy:/etc/nginx/conf.d
+      - ${PROXY_SSL_PATH}:/etc/ssl/certificates
+      - ${PROXY_MUNIN_PATH}:/var/munin
+    links:
+      - login_nginx
+      - backend_nginx
+      - service_xhgui
+      - service_errbit
+      - service_kibana
+      - service_mail
+      - service_phpmyadmin
+    external_links:
+      - portainer
+    ports:
+      - ${PROXY_HTTP_PORT}:${HTTP_PORT}
+      - ${PROXY_HTTPS_PORT}:${HTTPS_PORT}
+    networks:
+      spectware:
+        aliases:
+          - proxy.container.swp.test
+  ###########################################
+  # phpCLI                                  #
+  ###########################################
+  cli_php:
+    environment:
+      PHP_XDEBUG_ENABLED: "${PHP_XDEBUG_ENABLED}"
+      XDEBUG_CONFIG: "remote_host=${PHP_XDEBUG_HOST}"
+      BLACKFIRE_SERVER_ID: "${BFCLIENTID}"
+      BLACKFIRE_SERVER_TOKEN: "${BFCLIENTTOKEN}"
+    image: ${DOCKER_PHP_CLI}
+    links:
+      - login_redis
+      - backend_redis
+      - service_blackfire
+      - service_mail
+    networks:
+      spectware:
+        aliases:
+          - cli.container.swp.test
+    volumes:
+      - ${PATH_CORE}:/var/www
+      - ${PATH_CORE}:/home/vagrant
+      - ${PATH_LOGS}:/var/log

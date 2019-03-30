@@ -61,21 +61,22 @@ Vagrant.configure("2") do |config|
 
     #triggers
     config.trigger.before :halt do |trigger|
-        trigger.run_remote = {inline: "/usr/bin/env bash /home/vagrant/base/bin/dbExport.sh"}
-        trigger.run_remote = {inline: "/usr/bin/env bash /home/vagrant/base/bin/pgsqlExport.sh"}
-        trigger.run_remote = {inline: "/usr/bin/env bash /home/vagrant/base/bin/mongoExport.sh"}
+        trigger.run_remote = {inline: "/usr/bin/env bash /home/vagrant/base/bin/stop.docker.sh"}
     end
 
     config.trigger.after :up do |trigger|
     trigger.name = "Starting"
     trigger.info = "Executing required scripts"
-        trigger.run_remote = {inline: "/usr/bin/env bash /home/vagrant/base/bin/start.errbit.sh"}
-        trigger.run_remote = {inline: "/usr/bin/env bash /home/vagrant/base/bin/start.nginx.sh"}
-        trigger.run_remote = {inline: "/usr/bin/env bash /home/vagrant/base/bin/setSystemCtl.sh"}
+        trigger.run_remote = {inline: "/usr/bin/env bash /home/vagrant/base/bin/start.docker.sh"}
     end
     Vagrant.configure("2") do |config|
-        config.vm.provision "shell", path: "/home/vagrant/base/bin/start.errbit.sh", :run => 'always'
-        config.vm.provision "shell", path: "/home/vagrant/base/bin/start.nginx.sh", :run => 'always'
-        config.vm.provision "shell", path: "/home/vagrant/base/bin/setSystemCtl.sh", :run => 'always'
+        config.vm.provision "shell", path: "/home/vagrant/base/bin/start.docker.sh", :run => 'always'
     end
+    #Ports
+    config.vm.network "forwarded_port", guest: 80, host: 80
+    config.vm.network "forwarded_port", guest: 443, host: 443
+    config.vm.network "forwarded_port", guest: 8080, host: 8080
+    config.vm.network "forwarded_port", guest: 8443, host: 8443
+    config.vm.network "forwarded_port", guest: 9200, host: 9200
+    config.vm.network "forwarded_port", guest: 9300, host: 9300
 end
